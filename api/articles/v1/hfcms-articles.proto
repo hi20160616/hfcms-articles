@@ -107,5 +107,5 @@ message Article{
   google.protobuf.Timestamp update_time = 5;
   string category_id = 6;
   string user_id = 7;
-  string tag_id = 8;
+  repeated string tag_ids = 8;
 }

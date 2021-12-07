@@ -1,0 +1,15 @@
+{
+  "Debug": true,
+  "Verbose": false,
+  "LogName":"log.txt",
+  "api": {
+    "grpc": {
+      "Addr": "0.0.0.0:8000",
+      "Timeout": "1s"
+    },
+    "http": {
+      "Addr": "0.0.0.0:9000",
+      "Timeout": "1s"
+    }
+  }
+}
