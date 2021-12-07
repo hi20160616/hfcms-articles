@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package hfcms.articles.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
+
+service CategoriesService {
+  rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
+    option (google.api.http) = {
+      get: "/v1/categories"
+    };
+  }
+  rpc GetCategory(GetCategoryRequest) returns (Category) {
+    option (google.api.http) = {
+      get: "/v1/{name=categories/*}"
+    };
+  }
+  rpc CreateCategory(CreateCategoryRequest) returns (Category) {
+    option (google.api.http) = {
+      post: "/v1/categories"
+      body: "category"
+    };
+  }
+  rpc UpdateCategory(UpdateCategoryRequest) returns (Category) {
+    option (google.api.http) = {
+      patch: "/v1/{category.name=categories/*/update}"
+      body: "category"
+    };
+  }
+  rpc DeleteCategory(DeleteCategoryRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=categories/*/delete}"
+    };
+  }
+}
+
+message ListCategoriesRequest {
+  // The parent resource name
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListCategoriesResponse {
+  repeated Category categories = 1;
+  string next_page_token = 2;
+}
+
+message GetCategoryRequest {
+  string name = 1;
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+  Category category = 2;
+}
+
+message UpdateCategoryRequest {
+  Category category = 1;
+}
+
+message DeleteCategoryRequest {
+  string name = 1;
+}
+
+message Category{
+  string name = 1;
+  string category_id = 2;
+  string category_name = 3;
+}

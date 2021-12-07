@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package hfcms.articles.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
+
+service ArticleService {
+  rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=categories/*}/articles"
+      additional_bindings {
+        get: "/v1/{parent=tags/*}/articles"
+      }
+    };
+  }
+  rpc GetArticle(GetArticleRequest) returns (Article) {
+    option (google.api.http) = {
+      // get: "/v1/articles/{article_id}"
+      get: "/v1/{name=articles/*}"
+    };
+  }
+  rpc SearchArticles(SearchArticlesRequest) returns (SearchArticlesResponse) {
+    option (google.api.http) = {
+      // get: "/v1/articles/{keyword}/search"
+      get: "/v1/{name=articles/*/search}"
+    };
+  }
+  rpc CreateArticle(CreateArticleRequest) returns (Article) {
+    option (google.api.http) = {
+      // post: "/v1/categories/*/articles"
+      post: "/v1/{parent=categories/*/articles}"
+      body: "article"
+    };
+  }
+  rpc UpdateArticle(UpdateArticleRequest) returns (Article) {
+    option (google.api.http) = {
+      // patch: "/v1/articles/{article_id}"
+      patch: "/v1/{article.name=articles/*/update}"
+      body: "article"
+    };
+  }
+  rpc DeleteArticle(DeleteArticleRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=articles/*/delete}"
+    };
+  }
+}
+
+message ListArticlesRequest{
+  // The parent resource name
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListArticlesResponse{
+  repeated Article articles = 1;
+  string next_page_token = 2;
+}
+
+message GetArticleRequest {
+  string name = 1;
+  // string article_id = 2;
+}
+
+message SearchArticlesRequest{
+  string name = 1;
+  // string keyword = 2;
+}
+
+message SearchArticlesResponse{
+  repeated Article articles = 1;
+  string next_page_token = 2;
+}
+
+message CreateArticleRequest {
+  string parent = 1;
+  string article_id = 2;
+  Article article = 3;
+}
+
+message UpdateArticleRequest {
+  Article article = 1;
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteArticleRequest {
+  string name = 1;
+}
+
+message Article{
+  string name = 1;
+  string article_id = 2;
+  string title = 3;
+  string content = 4;
+  google.protobuf.Timestamp update_time = 5;
+  string category_id = 6;
+  string user_id = 7;
+  string tag_id = 8;
+}

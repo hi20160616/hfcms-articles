@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package hfcms.articles.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
+
+service TagService {
+  rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {
+    option (google.api.http) = {
+      get: "/v1/tags"
+    };
+  }
+  rpc GetTag(GetTagRequest) returns (Tag) {
+    option (google.api.http) = {
+      get: "/v1/{name=tags/*}"
+    };
+  }
+  rpc CreateTag(CreateTagRequest) returns (Tag) {
+    option (google.api.http) = {
+      post: "/v1/tags"
+      body: "tag"
+    };
+  }
+  rpc UpdateTag(UpdateTagRequest) returns (Tag) {
+    option (google.api.http) = {
+      patch: "/v1/{tag.name=tags/*/update}"
+      body: "tag"
+    };
+  }
+  rpc DeleteTag(DeleteTagRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=tags/*/delete}"
+    };
+  }
+}
+
+message ListTagsRequest{
+  // The parent resource name
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListTagsResponse{
+  repeated Tag tags = 1;
+  string next_page_token = 2;
+}
+
+message GetTagRequest {
+  string name = 1;
+}
+
+message CreateTagRequest {
+  string name = 1;
+  Tag tag = 2;
+}
+
+message UpdateTagRequest {
+  Tag tag = 1;
+}
+
+message DeleteTagRequest {
+  string name = 1;
+}
+
+message Tag{
+  string name = 1;
+  string tag_id = 2;
+  string tag_name = 3;
+}
