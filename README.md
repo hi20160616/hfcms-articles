@@ -45,3 +45,47 @@ protoc --go_out=. --go_opt=paths=source_relative \
     --grpc-gateway_out=. --grpc-gateway_opt=paths=source_relative \
     api/articles/v1/hfcms-tags.proto
 ```
+
+# 2. MariaDB
+Refer: https://hub.docker.com/\_/mariadb
+
+## 2.1. docker
+```
+docker pull mariadb
+docker run --detach --name hfcms-mariadb --env MARIADB_USER=example-user --env MARIADB_PASSWORD=my_cool_secret --env MARIADB_ROOT_PASSWORD=my-secret-pw  mariadb:latest
+
+docker exec -it hfcms-mariadb mysql -u example-user -pmy_cool_secret
+```
+
+MARIADB\_USER=`example-user`
+MARIADB\_PASSWORD=`my_cool_secret`
+MARIADB\_ROOT\_PASSWORD=`my-secret-pw`
+
+## 2.2 mariadb
+
+1.Change root password:
+```
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '[newpassword]';
+```
+2.Create tables:
+Articles
+```
+mysql> DROP TABLE articles;
+mysql> CREATE TABLE articles (id VARCHAR(24) NOT NULL, title VARCHAR(255), content TEXT(65535), category_id VARCHAR(10), user_id BIGINT(8), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
+``` 
+Categories
+```
+mysql> DROP TABLE categories;
+mysql> CREATE TABLE categories (id VARCHAR(10) NOT NULL AUTO_INCREMENT, name VARCHAR(255));
+```
+Tags
+```
+mysql> DROP TABLE tags;
+mysql> CREATE TABLE tags (id BIGINT(8) NOT NULL AUTO_INCREMENT, name VARCHAR(255));
+```
+Attributes
+```
+mysql> DROP TABLE attributes;
+mysql> CREATE TABLE attributes (id BIGINT(16) NOT NULL AUTO_INCREMENT, path VARCHAR(255), description VARCHAR(255), user_id BIGINT(8), article_id VARCHAR(24));
+```
+

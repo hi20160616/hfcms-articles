@@ -20,26 +20,22 @@ service ArticleService {
   }
   rpc GetArticle(GetArticleRequest) returns (Article) {
     option (google.api.http) = {
-      // get: "/v1/articles/{article_id}"
       get: "/v1/{name=articles/*}"
     };
   }
   rpc SearchArticles(SearchArticlesRequest) returns (SearchArticlesResponse) {
     option (google.api.http) = {
-      // get: "/v1/articles/{keyword}/search"
       get: "/v1/{name=articles/*/search}"
     };
   }
   rpc CreateArticle(CreateArticleRequest) returns (Article) {
     option (google.api.http) = {
-      // post: "/v1/categories/*/articles"
       post: "/v1/{parent=categories/*/articles}"
       body: "article"
     };
   }
   rpc UpdateArticle(UpdateArticleRequest) returns (Article) {
     option (google.api.http) = {
-      // patch: "/v1/articles/{article_id}"
       patch: "/v1/{article.name=articles/*/update}"
       body: "article"
     };
@@ -69,12 +65,10 @@ message ListArticlesResponse{
 
 message GetArticleRequest {
   string name = 1;
-  // string article_id = 2;
 }
 
 message SearchArticlesRequest{
   string name = 1;
-  // string keyword = 2;
 }
 
 message SearchArticlesResponse{
