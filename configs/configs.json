@@ -11,5 +11,14 @@
       "Addr": "0.0.0.0:9000",
       "Timeout": "1s"
     }
+  },
+  "database":{
+    "Driver": "mysql",
+    "Source": "udp2mysql:udp2mysqlPasswd@tcp(127.0.0.1:3306)/udp2mysql?loc=Asia%2FShanghai&parseTime=true"
+  },
+  "web":{
+    "Addr": ":80",
+    "Tmpl": "templates"
   }
+
 }

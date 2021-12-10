@@ -1,5 +1,3 @@
-//go:build linux||darwin
-
 package configs
 
 import (
@@ -24,6 +22,14 @@ type Config struct {
 		GRPC api `json:"grpc"`
 		HTTP api `json:"http"`
 	} `json:"api"`
+	Database struct {
+		Driver string `json:"Driver"`
+		Source string `json:"Source"`
+	} `json:"database"`
+	Web struct {
+		Addr string `json:"Addr"`
+		Tmpl string `json:"Tmpl"`
+	} `json:"web"`
 	Err error
 }
 
@@ -33,6 +39,17 @@ type api struct {
 
 func NewConfig(projectName ProjectName) *Config {
 	return setRootPath(&Config{ProjectName: projectName}).load()
+}
+
+func setRootPath(cfg *Config) *Config {
+	cfg.RootPath, cfg.Err = os.Getwd()
+	if cfg.Err != nil {
+		return cfg
+	}
+	if strings.Contains(os.Args[0], ".test") {
+		return rootPath4Test(cfg)
+	}
+	return cfg
 }
 
 func rootPath4Test(cfg *Config) *Config {
@@ -48,6 +65,7 @@ func rootPath4Test(cfg *Config) *Config {
 	for i := 0; i < n; i++ {
 		cfg.RootPath = filepath.Join("../", "./")
 	}
+	cfg.RootPath = filepath.FromSlash(cfg.RootPath)
 	return cfg
 }
 
@@ -72,16 +90,9 @@ func (c *Config) load() *Config {
 	c.Verbose = cfgTemp.Verbose
 	c.LogName = cfgTemp.LogName
 	c.ProjectName = cfgTemp.ProjectName
-	return c
-}
+	c.API = cfgTemp.API
+	c.Database = cfgTemp.Database
+	c.Web = cfgTemp.Web
 
-func setRootPath(cfg *Config) *Config {
-	cfg.RootPath, cfg.Err = os.Getwd()
-	if cfg.Err != nil {
-		return cfg
-	}
-	if strings.Contains(os.Args[0], ".test") {
-		return rootPath4Test(cfg)
-	}
-	return cfg
+	return c
 }
