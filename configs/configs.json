@@ -14,7 +14,7 @@
   },
   "database":{
     "Driver": "mysql",
-    "Source": "udp2mysql:udp2mysqlPasswd@tcp(127.0.0.1:3306)/udp2mysql?loc=Asia%2FShanghai&parseTime=true"
+    "Source": "hfcms_article_user:hfcms_article_user_pwd@tcp(127.0.0.1:3306)/hfcms_articles?loc=Asia%2FShanghai&parseTime=true"
   },
   "web":{
     "Addr": ":80",

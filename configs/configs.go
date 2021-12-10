@@ -63,7 +63,7 @@ func rootPath4Test(cfg *Config) *Config {
 		n = strings.Count(ps[1], string(os.PathSeparator))
 	}
 	for i := 0; i < n; i++ {
-		cfg.RootPath = filepath.Join("../", "./")
+		cfg.RootPath = filepath.Join(cfg.RootPath, "../")
 	}
 	cfg.RootPath = filepath.FromSlash(cfg.RootPath)
 	return cfg
@@ -81,18 +81,9 @@ func (c *Config) load() *Config {
 		}
 		return c
 	}
-	cfgTemp := &Config{}
-	if c.Err = json.Unmarshal(c.Raw, cfgTemp); c.Err != nil {
+	if c.Err = json.Unmarshal(c.Raw, c); c.Err != nil {
 		c.Err = errors.WithMessage(c.Err, "Unmarshal configs.json error")
 		return c
 	}
-	c.Debug = cfgTemp.Debug
-	c.Verbose = cfgTemp.Verbose
-	c.LogName = cfgTemp.LogName
-	c.ProjectName = cfgTemp.ProjectName
-	c.API = cfgTemp.API
-	c.Database = cfgTemp.Database
-	c.Web = cfgTemp.Web
-
 	return c
 }

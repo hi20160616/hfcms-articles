@@ -7,9 +7,11 @@ import (
 
 func TestLoad(t *testing.T) {
 	cfg := &Config{ProjectName: "hfcms-articles"}
-	if err := setRootPath(cfg).load(); err != nil {
-		t.Error(err)
+	if err := setRootPath(cfg).load().Err; err != nil {
+		t.Error(cfg.Err)
+		return
 	}
+	fmt.Println(cfg)
 }
 
 func TestRootPath4Test(t *testing.T) {

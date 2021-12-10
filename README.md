@@ -70,11 +70,11 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '[newpassword]';
 2.Create tables:
 Database
 ```
-CREATE database articles;
-CREATE USER 'articles_user'@localhost IDENTIFIED BY 'articles_user_passwd';
-GRANT ALL PRIVILEGES ON articles.* TO 'articles_user'@localhost;
+CREATE database hfcms_articles;
+CREATE USER 'hfcms_articles_user'@localhost IDENTIFIED BY 'hfcms_articles_user_passwd';
+GRANT ALL PRIVILEGES ON hfcms_articles.* TO 'articles_user'@localhost;
 FLUSH PRIVILEGES;
-USE articles;
+USE hfcms_articles;
 ```
 Articles
 ```
