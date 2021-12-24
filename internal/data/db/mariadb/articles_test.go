@@ -2,6 +2,7 @@ package mariadb
 
 import (
 	"context"
+	"fmt"
 	"testing"
 	"time"
 )
@@ -38,5 +39,21 @@ func TestInsert(t *testing.T) {
 	}
 	if err := c.Articles.Insert(context.Background(), article3); err != nil {
 		t.Error(err)
+	}
+}
+
+func TestListArticles(t *testing.T) {
+	c := NewClient()
+	if c.Err != nil {
+		t.Errorf("%v", c.Err)
+		return
+	}
+	got, err := c.Articles.Query().All(context.Background())
+	if err != nil {
+		t.Errorf("%v", err)
+		return
+	}
+	for _, e := range got.Collection {
+		fmt.Println(e)
 	}
 }
