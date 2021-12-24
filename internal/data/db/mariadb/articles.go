@@ -31,13 +31,13 @@ type ArticleQuery struct {
 }
 
 func (ac *ArticlesClient) Insert(ctx context.Context, article *Article) error {
-	q := "INSERT INTO udp_packets(id, name, title, content, update_time) VALUES(?,?,?,?,?)" +
-		" ON DUPLICATE KEY UPDATE id=?, name=?, title=?, content=?, update_time=?"
+	q := "INSERT INTO articles(id, title, content, update_time, category_id, user_id) VALUES(?,?,?,?,?, ?)" +
+		" ON DUPLICATE KEY UPDATE title=?, content=?, update_time=?, category_id=?, user_id=?"
 	aq := &ArticleQuery{db: ac.db, query: q}
 	_, err := aq.db.Exec(aq.query,
-		article.Id, article.Name, article.Title, article.Content,
+		article.Id, article.Title, article.Content,
 		article.UpdateTime, article.CategoryId, article.UserId,
-		article.Id, article.Name, article.Title, article.Content,
+		article.Title, article.Content,
 		article.UpdateTime, article.CategoryId, article.UserId)
 	if err != nil {
 		return errors.WithMessage(err, "mariadb: Insert error")

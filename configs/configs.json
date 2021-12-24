@@ -14,7 +14,7 @@
   },
   "database":{
     "Driver": "mysql",
-    "Source": "hfcms_article_user:hfcms_article_user_pwd@tcp(127.0.0.1:3306)/hfcms_articles?loc=Asia%2FShanghai&parseTime=true"
+    "Source": "hfcms_articles_user:hfcms_articles_user_passwd@tcp(127.0.0.1:3306)/hfcms_articles?loc=Asia%2FShanghai&parseTime=true"
   },
   "web":{
     "Addr": ":80",

@@ -13,22 +13,19 @@ func TestInsert(t *testing.T) {
 		return
 	}
 	article1 := &Article{
-		Id:         time.Now().Format("20060102150405000") + "0000001",
-		Name:       "test1 name",
+		Id:         time.Now().Format("060102150405.000000") + "00001",
 		Title:      "test1 title",
 		Content:    "test1 content",
 		UpdateTime: time.Now(),
 	}
 	article2 := &Article{
-		Id:         time.Now().Format("20060102150405000") + "0000001",
-		Name:       "test2 name",
+		Id:         time.Now().Format("060102150405.000000") + "00002",
 		Title:      "test2 title",
 		Content:    "test2 content",
 		UpdateTime: time.Now(),
 	}
 	article3 := &Article{
-		Id:         time.Now().Format("20060102150405000") + "0000001",
-		Name:       "test3 name",
+		Id:         time.Now().Format("060102150405.000000") + "00003",
 		Title:      "test3 title",
 		Content:    "test3 content",
 		UpdateTime: time.Now(),
