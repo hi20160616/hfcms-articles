@@ -57,3 +57,30 @@ func TestListArticles(t *testing.T) {
 		fmt.Println(e)
 	}
 }
+
+func TestWhere(t *testing.T) {
+	c := NewClient()
+	if c.Err != nil {
+		t.Errorf("%v", c.Err)
+		return
+	}
+
+	as := [][4]string{
+		{"title", "like", "1"},
+		{"title", "=", "test2 title"},
+	}
+
+	for _, a := range as {
+		fmt.Println("-------------------------------------------")
+		fmt.Println("test where: ", a)
+		got, err := c.Articles.Query().Where(a).All(context.Background())
+		if err != nil {
+			t.Errorf("%v", err)
+			return
+		}
+		for _, e := range got.Collection {
+			fmt.Println(e)
+		}
+		fmt.Println("===========================================")
+	}
+}
