@@ -84,3 +84,36 @@ func TestWhere(t *testing.T) {
 		fmt.Println("===========================================")
 	}
 }
+
+func TestPrepareQuery(t *testing.T) {
+	aq := &ArticleQuery{query: "SELECT * FROM articles"}
+	aq.Where([4]string{"name", "like", "test"})
+	if err := aq.prepareQuery(context.Background()); err != nil {
+		t.Error(err)
+	}
+	fmt.Println(aq.query, aq.args)
+}
+
+func TestUpdateArticle(t *testing.T) {
+	c := NewClient()
+	if c.Err != nil {
+		t.Error(c.Err)
+		return
+	}
+	article := &Article{
+		Id:      "211224161902.97258600003",
+		Title:   "Test title update",
+		Content: "Test content update",
+	}
+	if err := c.Articles.Update(context.Background(), article); err != nil {
+		t.Error(err)
+		return
+	}
+	ps := [4]string{"id", "=", "211224161902.97258600003"}
+	got, err := c.Articles.Query().Where(ps).First(context.Background())
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	fmt.Println(got)
+}
