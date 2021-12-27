@@ -19,7 +19,7 @@ func TestPrepareQuery(t *testing.T) {
 	fmt.Println(qc.query, qc.args)
 }
 
-func TestInsert(t *testing.T) {
+func TestInsertArticle(t *testing.T) {
 	c := NewClient()
 	if c.Err != nil {
 		t.Errorf("%v", c.Err)
@@ -29,18 +29,24 @@ func TestInsert(t *testing.T) {
 		Id:         time.Now().Format("060102150405.000000") + "00001",
 		Title:      "test1 title",
 		Content:    "test1 content",
+		UserId:     1,
+		CategoryId: 1,
 		UpdateTime: time.Now(),
 	}
 	article2 := &Article{
 		Id:         time.Now().Format("060102150405.000000") + "00002",
 		Title:      "test2 title",
 		Content:    "test2 content",
+		UserId:     2,
+		CategoryId: 2,
 		UpdateTime: time.Now(),
 	}
 	article3 := &Article{
 		Id:         time.Now().Format("060102150405.000000") + "00003",
 		Title:      "test3 title",
 		Content:    "test3 content",
+		UserId:     3,
+		CategoryId: 3,
 		UpdateTime: time.Now(),
 	}
 	if err := c.DatabaseClient.InsertArticle(context.Background(), article1); err != nil {
@@ -70,7 +76,7 @@ func TestListArticles(t *testing.T) {
 	}
 }
 
-func TestWhere(t *testing.T) {
+func TestWhereArticle(t *testing.T) {
 	c := NewClient()
 	if c.Err != nil {
 		t.Errorf("%v", c.Err)

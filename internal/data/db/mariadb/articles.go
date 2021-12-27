@@ -35,16 +35,14 @@ type ArticleQuery struct {
 
 func (dc *DatabaseClient) InsertArticle(ctx context.Context, article *Article) error {
 	q := `INSERT INTO articles(
-		id, title, content, update_time, category_id, user_id
-		) VALUES (?, ?, ?, ?, ?, ?)
+		id, title, content, category_id, user_id
+		) VALUES (?, ?, ?, ?, ?)
 		ON DUPLICATE KEY UPDATE
-		title=?, content=?, update_time=?, category_id=?, user_id=?`
+		title=?, content=?, category_id=?, user_id=?`
 	aq := &ArticleQuery{db: dc.db, query: q}
 	_, err := aq.db.Exec(aq.query,
-		article.Id, article.Title, article.Content,
-		article.UpdateTime, article.CategoryId, article.UserId,
-		article.Title, article.Content,
-		article.UpdateTime, article.CategoryId, article.UserId)
+		article.Id, article.Title, article.Content, article.CategoryId, article.UserId,
+		article.Title, article.Content, article.CategoryId, article.UserId)
 	if err != nil {
 		return errors.WithMessage(err, "mariadb: Insert error")
 	}
