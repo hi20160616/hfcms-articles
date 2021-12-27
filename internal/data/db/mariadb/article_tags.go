@@ -12,7 +12,8 @@ import (
 )
 
 type ArticleTag struct {
-	Id, TagId int
+	Id        int64
+	TagId     int
 	ArticleId string
 }
 
@@ -34,8 +35,8 @@ type ArticleTagQuery struct {
 
 func (dc *DatabaseClient) InsertArticleTag(ctx context.Context, articleTag *ArticleTag) error {
 	q := `INSERT INTO article_tags(article_id, tag_id) VALUES (?, ?)`
-	tq := &ArticleTagQuery{db: dc.db, query: q}
-	_, err := tq.db.Exec(tq.query, articleTag.ArticleId, articleTag.TagId)
+	atq := &ArticleTagQuery{db: dc.db, query: q}
+	_, err := atq.db.Exec(atq.query, articleTag.ArticleId, articleTag.TagId)
 	if err != nil {
 		return errors.WithMessage(err, "mariadb: Insert error")
 	}
@@ -44,8 +45,8 @@ func (dc *DatabaseClient) InsertArticleTag(ctx context.Context, articleTag *Arti
 
 func (dc *DatabaseClient) UpdateArticleTag(ctx context.Context, ArticleTag *ArticleTag) error {
 	q := `UPDATE article_tags SET article_id=?, tag_id=? WHERE id=?`
-	tq := &ArticleTagQuery{db: dc.db, query: q}
-	_, err := tq.db.Exec(tq.query, ArticleTag.ArticleId, ArticleTag.TagId,
+	atq := &ArticleTagQuery{db: dc.db, query: q}
+	_, err := atq.db.Exec(atq.query, ArticleTag.ArticleId, ArticleTag.TagId,
 		ArticleTag.Id)
 	if err != nil {
 		return err
@@ -55,8 +56,8 @@ func (dc *DatabaseClient) UpdateArticleTag(ctx context.Context, ArticleTag *Arti
 
 func (dc *DatabaseClient) DeleteArticleTag(ctx context.Context, id string) error {
 	q := `DELETE FROM article_tags WHERE id=?`
-	tq := &ArticleTagQuery{db: dc.db, query: q}
-	_, err := tq.db.Exec(tq.query, id)
+	atq := &ArticleTagQuery{db: dc.db, query: q}
+	_, err := atq.db.Exec(atq.query, id)
 	if err != nil {
 		return err
 	}
@@ -68,7 +69,8 @@ func (dc *DatabaseClient) QueryArticleTag() *ArticleTagQuery {
 }
 
 func mkArticleTag(rows *sql.Rows) (*ArticleTags, error) {
-	var id, tagId int
+	var id int64
+	var tagId int
 	var articleId sql.NullString
 	var articleTags = &ArticleTags{}
 	for rows.Next() {
@@ -89,20 +91,20 @@ func mkArticleTag(rows *sql.Rows) (*ArticleTags, error) {
 	return articleTags, nil
 }
 
-func (tq *ArticleTagQuery) All(ctx context.Context) (*ArticleTags, error) {
-	if err := tq.prepareQuery(ctx); err != nil {
+func (atq *ArticleTagQuery) All(ctx context.Context) (*ArticleTags, error) {
+	if err := atq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
-	rows, err := tq.db.Query(tq.query, tq.args...)
-	// rows, err := tq.db.Query("SELECT * FROM article_tags WHERE title like ?", "%%test%%")
+	rows, err := atq.db.Query(atq.query, atq.args...)
+	// rows, err := atq.db.Query("SELECT * FROM article_tags WHERE title like ?", "%%test%%")
 	if err != nil {
 		return nil, err
 	}
 	return mkArticleTag(rows)
 }
 
-func (tq *ArticleTagQuery) First(ctx context.Context) (*ArticleTag, error) {
-	nodes, err := tq.Limit(1).All(ctx)
+func (atq *ArticleTagQuery) First(ctx context.Context) (*ArticleTag, error) {
+	nodes, err := atq.Limit(1).All(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -113,52 +115,52 @@ func (tq *ArticleTagQuery) First(ctx context.Context) (*ArticleTag, error) {
 }
 
 // ps: {["name", "=", "jack", "and"], ["title", "like", "anything", ""]}
-func (tq *ArticleTagQuery) Where(ps ...[4]string) *ArticleTagQuery {
-	tq.clauses = append(tq.clauses, ps...)
-	return tq
+func (atq *ArticleTagQuery) Where(ps ...[4]string) *ArticleTagQuery {
+	atq.clauses = append(atq.clauses, ps...)
+	return atq
 }
 
-func (tq *ArticleTagQuery) Order(condition string) *ArticleTagQuery {
-	tq.order = condition
-	return tq
+func (atq *ArticleTagQuery) Order(condition string) *ArticleTagQuery {
+	atq.order = condition
+	return atq
 }
 
-func (tq *ArticleTagQuery) Limit(limit int) *ArticleTagQuery {
-	tq.limit = &limit
-	return tq
+func (atq *ArticleTagQuery) Limit(limit int) *ArticleTagQuery {
+	atq.limit = &limit
+	return atq
 }
 
-func (tq *ArticleTagQuery) Offset(offset int) *ArticleTagQuery {
-	tq.offset = &offset
-	return tq
+func (atq *ArticleTagQuery) Offset(offset int) *ArticleTagQuery {
+	atq.offset = &offset
+	return atq
 }
 
-func (tq *ArticleTagQuery) prepareQuery(ctx context.Context) error {
-	if tq.clauses != nil {
-		tq.query += " WHERE "
-		for _, p := range tq.clauses {
-			tq.query += fmt.Sprintf(" %s %s ? %s", p[0], p[1], p[3])
+func (atq *ArticleTagQuery) prepareQuery(ctx context.Context) error {
+	if atq.clauses != nil {
+		atq.query += " WHERE "
+		for _, p := range atq.clauses {
+			atq.query += fmt.Sprintf(" %s %s ? %s", p[0], p[1], p[3])
 			if strings.ToLower(p[1]) == "like" {
 				p[2] = fmt.Sprintf("%%%s%%", p[2])
 			} else {
 				p[2] = fmt.Sprintf("%s", p[2])
 			}
-			tq.args = append(tq.args, p[2])
+			atq.args = append(atq.args, p[2])
 		}
 	}
-	if tq.order != "" {
-		tq.query += " ORDER BY ?"
-		tq.args = append(tq.args, tq.order)
+	if atq.order != "" {
+		atq.query += " ORDER BY ?"
+		atq.args = append(atq.args, atq.order)
 	}
-	if tq.limit != nil {
-		tq.query += " LIMIT ?"
-		a := strconv.Itoa(*tq.limit)
-		tq.args = append(tq.args, a)
+	if atq.limit != nil {
+		atq.query += " LIMIT ?"
+		a := strconv.Itoa(*atq.limit)
+		atq.args = append(atq.args, a)
 	}
-	if tq.offset != nil {
-		tq.query += ", ?"
-		a := strconv.Itoa(*tq.offset)
-		tq.args = append(tq.args, a)
+	if atq.offset != nil {
+		atq.query += ", ?"
+		a := strconv.Itoa(*atq.offset)
+		atq.args = append(atq.args, a)
 	}
 	return nil
 }
