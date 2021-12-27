@@ -10,6 +10,15 @@ import (
 	"github.com/pkg/errors"
 )
 
+func TestPrepareQuery(t *testing.T) {
+	qc := &ArticleQuery{query: "SELECT * FROM articles"}
+	qc.Where([4]string{"name", "like", "test"})
+	if err := qc.prepareQuery(context.Background()); err != nil {
+		t.Error(err)
+	}
+	fmt.Println(qc.query, qc.args)
+}
+
 func TestInsert(t *testing.T) {
 	c := NewClient()
 	if c.Err != nil {
@@ -86,15 +95,6 @@ func TestWhere(t *testing.T) {
 		}
 		fmt.Println("===========================================")
 	}
-}
-
-func TestPrepareQuery(t *testing.T) {
-	aq := &ArticleQuery{query: "SELECT * FROM articles"}
-	aq.Where([4]string{"name", "like", "test"})
-	if err := aq.prepareQuery(context.Background()); err != nil {
-		t.Error(err)
-	}
-	fmt.Println(aq.query, aq.args)
 }
 
 func TestUpdateArticle(t *testing.T) {

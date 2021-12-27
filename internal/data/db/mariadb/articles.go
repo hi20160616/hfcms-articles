@@ -23,14 +23,14 @@ type Articles struct {
 }
 
 type ArticleQuery struct {
-	db         *sql.DB
-	limit      *int
-	offset     *int
-	query      string
-	predicates [][4]string // [ ["name", "=", "jack", "and"], ["title", "like", "anything", ""] ]
-	order      string
-	args       []interface{}
-	keywords   []string
+	db       *sql.DB
+	limit    *int
+	offset   *int
+	query    string
+	clauses  [][4]string // [ ["name", "=", "jack", "and"], ["title", "like", "anything", ""] ]
+	order    string
+	args     []interface{}
+	keywords []string
 }
 
 func (dc *DatabaseClient) InsertArticle(ctx context.Context, article *Article) error {
@@ -102,7 +102,7 @@ func (aq *ArticleQuery) First(ctx context.Context) (*Article, error) {
 
 // ps: {["name", "=", "jack", "and"], ["title", "like", "anything", ""]}
 func (aq *ArticleQuery) Where(ps ...[4]string) *ArticleQuery {
-	aq.predicates = append(aq.predicates, ps...)
+	aq.clauses = append(aq.clauses, ps...)
 	return aq
 }
 
@@ -122,9 +122,9 @@ func (aq *ArticleQuery) Offset(offset int) *ArticleQuery {
 }
 
 func (aq *ArticleQuery) prepareQuery(ctx context.Context) error {
-	if aq.predicates != nil {
+	if aq.clauses != nil {
 		aq.query += " WHERE "
-		for _, p := range aq.predicates {
+		for _, p := range aq.clauses {
 			aq.query += fmt.Sprintf(" %s %s ? %s", p[0], p[1], p[3])
 			if strings.ToLower(p[1]) == "like" {
 				p[2] = fmt.Sprintf("%%%s%%", p[2])
@@ -169,7 +169,7 @@ func mkArticle(rows *sql.Rows) (*Articles, error) {
 	}
 	// TODO: to confirm code below can make sence.
 	if err := rows.Err(); err != nil {
-		return nil, errors.WithMessage(err, "mkUDPPacket error")
+		return nil, errors.WithMessage(err, "mkArticle error")
 	}
 	return articles, nil
 }
