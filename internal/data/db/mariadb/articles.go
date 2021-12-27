@@ -13,9 +13,9 @@ import (
 )
 
 type Article struct {
-	Id, Name, Title, Content, CategoryId string
-	UserId                               int
-	UpdateTime                           time.Time
+	Id, Name, Title, Content string
+	UserId, CategoryId       int
+	UpdateTime               time.Time
 }
 
 type Articles struct {
@@ -33,13 +33,13 @@ type ArticleQuery struct {
 	keywords   []string
 }
 
-func (ac *ArticlesClient) Insert(ctx context.Context, article *Article) error {
+func (dc *DatabaseClient) InsertArticle(ctx context.Context, article *Article) error {
 	q := `INSERT INTO articles(
 		id, title, content, update_time, category_id, user_id
 		) VALUES (?, ?, ?, ?, ?, ?)
 		ON DUPLICATE KEY UPDATE
 		title=?, content=?, update_time=?, category_id=?, user_id=?`
-	aq := &ArticleQuery{db: ac.db, query: q}
+	aq := &ArticleQuery{db: dc.db, query: q}
 	_, err := aq.db.Exec(aq.query,
 		article.Id, article.Title, article.Content,
 		article.UpdateTime, article.CategoryId, article.UserId,
@@ -51,10 +51,10 @@ func (ac *ArticlesClient) Insert(ctx context.Context, article *Article) error {
 	return nil
 }
 
-func (ac *ArticlesClient) Update(ctx context.Context, article *Article) error {
+func (dc *DatabaseClient) UpdateArticle(ctx context.Context, article *Article) error {
 	q := `UPDATE articles SET title=?, content=?, category_id=?, user_id=?
 		WHERE id=?`
-	aq := &ArticleQuery{db: ac.db, query: q}
+	aq := &ArticleQuery{db: dc.db, query: q}
 	_, err := aq.db.Exec(aq.query, article.Title, article.Content,
 		article.CategoryId, article.UserId, article.Id)
 	if err != nil {
@@ -63,9 +63,9 @@ func (ac *ArticlesClient) Update(ctx context.Context, article *Article) error {
 	return nil
 }
 
-func (ac *ArticlesClient) Delete(ctx context.Context, id string) error {
+func (dc *DatabaseClient) DeleteArticle(ctx context.Context, id string) error {
 	q := `DELETE FROM articles WHERE id=?`
-	aq := &ArticleQuery{db: ac.db, query: q}
+	aq := &ArticleQuery{db: dc.db, query: q}
 	_, err := aq.db.Exec(aq.query, id)
 	if err != nil {
 		return err
@@ -73,8 +73,8 @@ func (ac *ArticlesClient) Delete(ctx context.Context, id string) error {
 	return nil
 }
 
-func (ac *ArticlesClient) Query() *ArticleQuery {
-	return &ArticleQuery{db: ac.db, query: "SELECT * FROM articles"}
+func (dc *DatabaseClient) QueryArticle() *ArticleQuery {
+	return &ArticleQuery{db: dc.db, query: "SELECT * FROM articles"}
 }
 
 func (aq *ArticleQuery) All(ctx context.Context) (*Articles, error) {

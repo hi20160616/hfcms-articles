@@ -7,12 +7,12 @@ import (
 )
 
 type Client struct {
-	db       *sql.DB
-	Articles *ArticlesClient
-	Err      error
+	db             *sql.DB
+	DatabaseClient *DatabaseClient
+	Err            error
 }
 
-type ArticlesClient struct {
+type DatabaseClient struct {
 	db *sql.DB
 }
 
@@ -27,5 +27,5 @@ func NewClient() *Client {
 		return &Client{nil, nil, cfg.Err}
 	}
 	db, err := open(cfg)
-	return &Client{db, &ArticlesClient{db}, err}
+	return &Client{db, &DatabaseClient{db}, err}
 }

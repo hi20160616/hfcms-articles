@@ -6,6 +6,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/pkg/errors"
 )
 
 func TestInsert(t *testing.T) {
@@ -32,13 +34,13 @@ func TestInsert(t *testing.T) {
 		Content:    "test3 content",
 		UpdateTime: time.Now(),
 	}
-	if err := c.Articles.Insert(context.Background(), article1); err != nil {
+	if err := c.DatabaseClient.InsertArticle(context.Background(), article1); err != nil {
 		t.Error(err)
 	}
-	if err := c.Articles.Insert(context.Background(), article2); err != nil {
+	if err := c.DatabaseClient.InsertArticle(context.Background(), article2); err != nil {
 		t.Error(err)
 	}
-	if err := c.Articles.Insert(context.Background(), article3); err != nil {
+	if err := c.DatabaseClient.InsertArticle(context.Background(), article3); err != nil {
 		t.Error(err)
 	}
 }
@@ -49,7 +51,7 @@ func TestListArticles(t *testing.T) {
 		t.Errorf("%v", c.Err)
 		return
 	}
-	got, err := c.Articles.Query().All(context.Background())
+	got, err := c.DatabaseClient.QueryArticle().All(context.Background())
 	if err != nil {
 		t.Errorf("%v", err)
 		return
@@ -74,7 +76,7 @@ func TestWhere(t *testing.T) {
 	for _, a := range as {
 		fmt.Println("-------------------------------------------")
 		fmt.Println("test where: ", a)
-		got, err := c.Articles.Query().Where(a).All(context.Background())
+		got, err := c.DatabaseClient.QueryArticle().Where(a).All(context.Background())
 		if err != nil {
 			t.Errorf("%v", err)
 			return
@@ -102,16 +104,16 @@ func TestUpdateArticle(t *testing.T) {
 		return
 	}
 	article := &Article{
-		Id:      "211224161902.97258600003",
+		Id:      "211227122641.15719600002",
 		Title:   "Test title update",
 		Content: "Test content update",
 	}
-	if err := c.Articles.Update(context.Background(), article); err != nil {
+	if err := c.DatabaseClient.UpdateArticle(context.Background(), article); err != nil {
 		t.Error(err)
 		return
 	}
-	ps := [4]string{"id", "=", "211224161902.97258600003"}
-	got, err := c.Articles.Query().Where(ps).First(context.Background())
+	ps := [4]string{"id", "=", article.Id}
+	got, err := c.DatabaseClient.QueryArticle().Where(ps).First(context.Background())
 	if err != nil {
 		t.Error(err)
 		return
@@ -125,21 +127,22 @@ func TestDeleteArticle(t *testing.T) {
 		t.Error(c.Err)
 		return
 	}
-	id := "211224161902.97258600003"
-	if err := c.Articles.Delete(context.Background(), id); err != nil {
+	id := "211227122641.15719600002"
+	if err := c.DatabaseClient.DeleteArticle(context.Background(), id); err != nil {
 		t.Error(err)
 		return
 	}
 
-	ps := [4]string{"id", "=", "211224161902.97258600003"}
-	got, err := c.Articles.Query().Where(ps).First(context.Background())
+	ps := [4]string{"id", "=", id}
+	got, err := c.DatabaseClient.QueryArticle().Where(ps).First(context.Background())
 	if err != nil {
 		if strings.Contains(err.Error(), "Item not found in table") {
 			return
 		}
 		t.Error(err)
 		return
-	} else {
-		fmt.Println("got :", got, "but need nothing!")
+	}
+	if got != nil {
+		t.Error(errors.New("Delete failed."))
 	}
 }
