@@ -63,6 +63,16 @@ func (ac *ArticlesClient) Update(ctx context.Context, article *Article) error {
 	return nil
 }
 
+func (ac *ArticlesClient) Delete(ctx context.Context, id string) error {
+	q := `DELETE FROM articles WHERE id=?`
+	aq := &ArticleQuery{db: ac.db, query: q}
+	_, err := aq.db.Exec(aq.query, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (ac *ArticlesClient) Query() *ArticleQuery {
 	return &ArticleQuery{db: ac.db, query: "SELECT * FROM articles"}
 }

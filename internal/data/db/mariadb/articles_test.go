@@ -3,6 +3,7 @@ package mariadb
 import (
 	"context"
 	"fmt"
+	"strings"
 	"testing"
 	"time"
 )
@@ -116,4 +117,29 @@ func TestUpdateArticle(t *testing.T) {
 		return
 	}
 	fmt.Println(got)
+}
+
+func TestDeleteArticle(t *testing.T) {
+	c := NewClient()
+	if c.Err != nil {
+		t.Error(c.Err)
+		return
+	}
+	id := "211224161902.97258600003"
+	if err := c.Articles.Delete(context.Background(), id); err != nil {
+		t.Error(err)
+		return
+	}
+
+	ps := [4]string{"id", "=", "211224161902.97258600003"}
+	got, err := c.Articles.Query().Where(ps).First(context.Background())
+	if err != nil {
+		if strings.Contains(err.Error(), "Item not found in table") {
+			return
+		}
+		t.Error(err)
+		return
+	} else {
+		fmt.Println("got :", got, "but need nothing!")
+	}
 }
