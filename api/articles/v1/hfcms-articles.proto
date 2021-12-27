@@ -99,7 +99,7 @@ message Article{
   string title = 3;
   string content = 4;
   google.protobuf.Timestamp update_time = 5;
-  string category_id = 6;
-  string user_id = 7;
+  int32 category_id = 6;
+  int32 user_id = 7;
   repeated string tag_ids = 8;
 }

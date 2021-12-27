@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package hfcms.articles.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
+
+service AttributesService {
+  rpc ListAttributes(ListAttributesRequest) returns (ListAttributesResponse) {
+    option (google.api.http) = {
+      get: "/v1/attributes"
+    };
+  }
+  rpc GetAttribute(GetAttributeRequest) returns (Attribute) {
+    option (google.api.http) = {
+      get: "/v1/{name=attributes/*}"
+    };
+  }
+  rpc CreateAttribute(CreateAttributeRequest) returns (Attribute) {
+    option (google.api.http) = {
+      post: "/v1/attributes"
+      body: "attribute"
+    };
+  }
+  rpc UpdateAttribute(UpdateAttributeRequest) returns (Attribute) {
+    option (google.api.http) = {
+      patch: "/v1/{attribute.name=attributes/*/update}"
+      body: "attribute"
+    };
+  }
+  rpc DeleteAttribute(DeleteAttributeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=attributes/*/delete}"
+    };
+  }
+}
+
+message ListAttributesRequest {
+  // The parent resource name
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListAttributesResponse {
+  repeated Attribute attributes = 1;
+  string next_page_token = 2;
+}
+
+message GetAttributeRequest {
+  string name = 1;
+}
+
+message CreateAttributeRequest {
+  string name = 1;
+  Attribute attribute = 2;
+}
+
+message UpdateAttributeRequest {
+  Attribute attribute = 1;
+}
+
+message DeleteAttributeRequest {
+  string name = 1;
+}
+
+message Attribute{
+  string name = 1;
+  int32 attribute_id = 2;
+  string path = 3;
+  string description = 4;
+  string user_id = 5;
+  string article_id = 6;
+  google.protobuf.Timestamp update_time = 7;
+}

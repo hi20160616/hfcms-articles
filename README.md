@@ -44,6 +44,10 @@ protoc --go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative \
     --grpc-gateway_out=. --grpc-gateway_opt=paths=source_relative \
     api/articles/v1/hfcms-tags.proto
+protoc --go_out=. --go_opt=paths=source_relative \
+    --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+    --grpc-gateway_out=. --grpc-gateway_opt=paths=source_relative \
+    api/articles/v1/hfcms-attributes.proto
 ```
 
 # 2. MariaDB

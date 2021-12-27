@@ -13,10 +13,15 @@ type Article struct {
 	TagIds                                        []string
 }
 
+type Articles struct {
+	Collection    []*Article
+	NextPageToken string
+}
+
 type ArticleRepo interface {
-	ListArticles(ctx context.Context) ([]*Article, error)
+	ListArticles(ctx context.Context) (*Articles, error)
 	GetArticle(ctx context.Context, name string) (*Article, error)
-	SearchArticles(ctx context.Context, name string) ([]*Article, error)
+	SearchArticles(ctx context.Context, name string) (*Articles, error)
 	CreateArticle(ctx context.Context, parent string) (*Article, error)
 	UpdateArticle(ctx context.Context, article *Article) (*Article, error)
 	DeleteArticle(ctx context.Context, name string) error

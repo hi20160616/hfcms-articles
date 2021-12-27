@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package hfcms.articles.v1;
 
+import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
@@ -74,4 +75,5 @@ message Tag{
   string name = 1;
   string tag_id = 2;
   string tag_name = 3;
+  google.protobuf.Timestamp update_time = 4;
 }
