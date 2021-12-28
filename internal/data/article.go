@@ -151,5 +151,12 @@ func (ar *articleRepo) UpdateArticle(ctx context.Context, article *biz.Article) 
 }
 
 func (ar *articleRepo) DeleteArticle(ctx context.Context, name string) error {
-	return nil
+	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
+	defer cancel()
+	re := regexp.MustCompile(`^articles/([\d.]+)/delete$`)
+	x := re.FindStringSubmatch(name)
+	if len(x) != 2 {
+		return errors.New("name cannot match regex express")
+	}
+	return ar.data.DBClient.DatabaseClient.DeleteArticle(ctx, x[1])
 }

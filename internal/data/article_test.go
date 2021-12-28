@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 	"testing"
 
 	"github.com/hi20160616/hfcms-articles/internal/biz"
@@ -79,4 +80,24 @@ func TestUpdateArticle(t *testing.T) {
 		t.Error(err)
 	}
 	fmt.Println(a.ArticleId)
+}
+
+func TestDeleteArticle(t *testing.T) {
+	id := "211227122641.15716700001"
+	name := "articles/" + id + "/delete"
+	if err := ar.DeleteArticle(context.Background(), name); err != nil {
+		t.Error(err)
+		return
+	}
+	a, err := ar.GetArticle(context.Background(), "articles/"+id)
+	if err != nil {
+		if strings.Contains(err.Error(), "Item not found in table") {
+			return
+		}
+		t.Error(err)
+		return
+	}
+	if a != nil {
+		t.Error(fmt.Errorf("DeleteArticle failed."))
+	}
 }
