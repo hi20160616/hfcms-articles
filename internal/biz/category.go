@@ -30,6 +30,6 @@ type CategoryUsecase struct {
 	repo CategoryRepo
 }
 
-func NewCategoryUsecase(repo CategoryRepo, logger log.Logger) *CategoryUsecase {
+func NewCategoryUsecase(repo CategoryRepo, logger *log.Logger) *CategoryUsecase {
 	return &CategoryUsecase{repo: repo}
 }

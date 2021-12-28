@@ -23,7 +23,7 @@ type articleRepo struct {
 	log  *log.Logger
 }
 
-func NewArticleRepo(data *Data, logger log.Logger) biz.ArticleRepo {
+func NewArticleRepo(data *Data, logger *log.Logger) biz.ArticleRepo {
 	return &articleRepo{
 		data: data,
 		log:  log.Default(),

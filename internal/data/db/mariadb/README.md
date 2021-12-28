@@ -4,6 +4,7 @@ Refer: https://hub.docker.com/\_/mariadb
 ## 1.1. docker
 ```
 docker pull mariadb
+docker network create hfcms-mariadb
 docker run --detach \
 --publish 3306:3306 \
 --env MARIADB_ROOT_PASSWORD=my-secret-pw \

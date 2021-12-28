@@ -11,17 +11,33 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
-var ar = NewArticleRepo(&Data{DBClient: mariadb.NewClient()}, *log.Default())
+var ar = NewArticleRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
 
-func TestListArticles(t *testing.T) {
-	as, err := ar.ListArticles(context.Background())
+func TestCreateArticle(t *testing.T) {
+	a, err := ar.CreateArticle(context.Background(), &biz.Article{
+		Title:      "Test Create article title",
+		Content:    "Test Create article content",
+		CategoryId: 1,
+		UserId:     1,
+	})
 	if err != nil {
 		t.Error(err)
-		return
 	}
-	for _, a := range as.Collection {
-		fmt.Println(a)
+	fmt.Println(a.ArticleId)
+}
+
+func TestUpdateArticle(t *testing.T) {
+	a, err := ar.UpdateArticle(context.Background(), &biz.Article{
+		ArticleId:  "211228160638.1784271",
+		Title:      "Test Update article title",
+		Content:    "Test Update article content",
+		CategoryId: 1,
+		UserId:     1,
+	})
+	if err != nil {
+		t.Error(err)
 	}
+	fmt.Println(a.ArticleId)
 }
 
 func TestGetArticle(t *testing.T) {
@@ -55,31 +71,15 @@ func TestSearchArticles(t *testing.T) {
 	}
 }
 
-func TestCreateArticle(t *testing.T) {
-	a, err := ar.CreateArticle(context.Background(), &biz.Article{
-		Title:      "Test Create article title",
-		Content:    "Test Create article content",
-		CategoryId: 1,
-		UserId:     1,
-	})
+func TestListArticles(t *testing.T) {
+	as, err := ar.ListArticles(context.Background())
 	if err != nil {
 		t.Error(err)
+		return
 	}
-	fmt.Println(a.ArticleId)
-}
-
-func TestUpdateArticle(t *testing.T) {
-	a, err := ar.UpdateArticle(context.Background(), &biz.Article{
-		ArticleId:  "211228160638.1784271",
-		Title:      "Test Update article title",
-		Content:    "Test Update article content",
-		CategoryId: 1,
-		UserId:     1,
-	})
-	if err != nil {
-		t.Error(err)
+	for _, a := range as.Collection {
+		fmt.Println(a)
 	}
-	fmt.Println(a.ArticleId)
 }
 
 func TestDeleteArticle(t *testing.T) {
