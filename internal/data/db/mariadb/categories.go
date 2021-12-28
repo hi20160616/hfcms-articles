@@ -119,9 +119,11 @@ func (cq *CategoryQuery) First(ctx context.Context) (*Category, error) {
 	return nodes.Collection[0], nil
 }
 
-// ps: {["name", "=", "jack", "and"], ["title", "like", "anything", ""]}
-func (cq *CategoryQuery) Where(ps ...[4]string) *CategoryQuery {
-	cq.clauses = append(cq.clauses, ps...)
+// cs: {["name", "=", "jack", "and"], ["title", "like", "anything", ""]}
+// the last `or` or `and` in clause will cut off after prepareQuery().
+// so, every clause need `or` or `and` for last element.
+func (cq *CategoryQuery) Where(cs ...[4]string) *CategoryQuery {
+	cq.clauses = append(cq.clauses, cs...)
 	return cq
 }
 
@@ -143,14 +145,20 @@ func (cq *CategoryQuery) Offset(offset int) *CategoryQuery {
 func (cq *CategoryQuery) prepareQuery(ctx context.Context) error {
 	if cq.clauses != nil {
 		cq.query += " WHERE "
-		for _, p := range cq.clauses {
-			cq.query += fmt.Sprintf(" %s %s ? %s", p[0], p[1], p[3])
-			if strings.ToLower(p[1]) == "like" {
-				p[2] = fmt.Sprintf("%%%s%%", p[2])
+		for i, c := range cq.clauses {
+			// the last `or` or `and` in clause will cut off there.
+			// so, every clause need `or` or `and` for last element.
+			if i == len(cq.clauses)-1 {
+				cq.query += fmt.Sprintf(" %s %s ?", c[0], c[1])
 			} else {
-				p[2] = fmt.Sprintf("%s", p[2])
+				cq.query += fmt.Sprintf(" %s %s ? %s", c[0], c[1], c[3])
 			}
-			cq.args = append(cq.args, p[2])
+			if strings.ToLower(c[1]) == "like" {
+				c[2] = fmt.Sprintf("%%%s%%", c[2])
+			} else {
+				c[2] = fmt.Sprintf("%s", c[2])
+			}
+			cq.args = append(cq.args, c[2])
 		}
 	}
 	if cq.order != "" {

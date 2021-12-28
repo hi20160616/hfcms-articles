@@ -6,6 +6,7 @@ import (
 	"log"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	_ "github.com/hi20160616/hfcms-articles/api/articles/v1"
@@ -31,13 +32,13 @@ func NewArticleRepo(data *Data, logger log.Logger) biz.ArticleRepo {
 func (ar *articleRepo) ListArticles(ctx context.Context) (*biz.Articles, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	articles, err := ar.data.DBClient.DatabaseClient.QueryArticle().All(ctx)
+	as, err := ar.data.DBClient.DatabaseClient.QueryArticle().All(ctx)
 	if err != nil {
 		return nil, err
 	}
-	as := &biz.Articles{Collection: []*biz.Article{}}
-	for _, a := range articles.Collection {
-		as.Collection = append(as.Collection, &biz.Article{
+	bizas := &biz.Articles{Collection: []*biz.Article{}}
+	for _, a := range as.Collection {
+		bizas.Collection = append(bizas.Collection, &biz.Article{
 			ArticleId:  a.Id,
 			Title:      a.Title,
 			Content:    a.Content,
@@ -46,7 +47,7 @@ func (ar *articleRepo) ListArticles(ctx context.Context) (*biz.Articles, error) 
 			UpdateTime: timestamppb.New(a.UpdateTime),
 		})
 	}
-	return as, nil
+	return bizas, nil
 }
 
 func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Article, error) {
@@ -76,10 +77,42 @@ func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Articl
 }
 
 func (ar *articleRepo) SearchArticles(ctx context.Context, name string) (*biz.Articles, error) {
-	as := &biz.Articles{Collection: []*biz.Article{}}
-	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	return as, nil
+	re := regexp.MustCompile(`^articles/(.+)/search$`)
+	x := re.FindStringSubmatch(name)
+	if len(x) != 2 {
+		return nil, errors.New("name cannot match regex express")
+	}
+	kws := strings.Split(
+		strings.TrimSpace(strings.ReplaceAll(x[1], "　", " ")), " ")
+	cs := [][4]string{}
+	for _, kw := range kws {
+		cs = append(cs,
+			// cs will be filtered by Where(clauses...)
+			// the last `or` `and` in clause will cut off.
+			// so, every clause need `or` or `and` for last element.
+			[4]string{"title", "like", kw, "or"},
+			[4]string{"content", "like", kw, "or"},
+		)
+	}
+	as, err := ar.data.DBClient.DatabaseClient.QueryArticle().
+		Where(cs...).All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	bizas := &biz.Articles{Collection: []*biz.Article{}}
+	for _, a := range as.Collection {
+		bizas.Collection = append(bizas.Collection, &biz.Article{
+			ArticleId:  a.Id,
+			Title:      a.Title,
+			Content:    a.Content,
+			CategoryId: strconv.Itoa(a.CategoryId),
+			UserId:     strconv.Itoa(a.UserId),
+			UpdateTime: timestamppb.New(a.UpdateTime),
+		})
+	}
+	return bizas, nil
 }
 
 func (ar *articleRepo) CreateArticle(ctx context.Context, parent string) (*biz.Article, error) {

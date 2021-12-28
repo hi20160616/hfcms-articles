@@ -12,7 +12,12 @@ import (
 
 func TestPrepareQuery(t *testing.T) {
 	qc := &ArticleQuery{query: "SELECT * FROM articles"}
-	qc.Where([4]string{"name", "like", "test"})
+	qc.Where(
+		[4]string{"name", "like", "test", "and"},
+		[4]string{"name", "like", "test1", "and"},
+		[4]string{"name", "like", "test2", "and"},
+		[4]string{"name", "like", "test3", "and"},
+	)
 	if err := qc.prepareQuery(context.Background()); err != nil {
 		t.Error(err)
 	}
@@ -76,19 +81,14 @@ func TestListArticles(t *testing.T) {
 	}
 }
 
-func TestWhereArticle(t *testing.T) {
+func TestWhereArticles(t *testing.T) {
 	c := NewClient()
 	if c.Err != nil {
 		t.Errorf("%v", c.Err)
 		return
 	}
 
-	as := [][4]string{
-		{"title", "like", "1"},
-		{"title", "=", "test2 title"},
-	}
-
-	for _, a := range as {
+	out := func(a [4]string) {
 		fmt.Println("-------------------------------------------")
 		fmt.Println("test where: ", a)
 		got, err := c.DatabaseClient.QueryArticle().Where(a).All(context.Background())
@@ -101,6 +101,35 @@ func TestWhereArticle(t *testing.T) {
 		}
 		fmt.Println("===========================================")
 	}
+
+	outs := func(ps [][4]string) {
+		fmt.Println("-------------------------------------------")
+		fmt.Println("test where: ", ps)
+		got, err := c.DatabaseClient.QueryArticle().Where(ps...).All(context.Background())
+		if err != nil {
+			t.Error(err)
+			return
+		}
+		// fmt.Println(got.Collection)
+		for _, e := range got.Collection {
+			fmt.Println(e)
+		}
+		fmt.Println("===========================================")
+	}
+
+	ps1 := [][4]string{
+		{"title", "=", "test2 title", "and"},
+		{"content", "like", "2", "and"},
+		{"user_id", "=", "0"},
+	}
+	ps2 := [][4]string{
+		{"title", "=", "test2 title", "or"},
+		{"content", "like", "2", "or"},
+		{"user_id", "=", "0"},
+	}
+	out(ps1[2]) // test one clause
+	outs(ps1)
+	outs(ps2)
 }
 
 func TestUpdateArticle(t *testing.T) {
