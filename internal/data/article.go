@@ -3,9 +3,9 @@ package data
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"regexp"
-	"strconv"
 	"strings"
 	"time"
 
@@ -119,22 +119,35 @@ func (ar *articleRepo) SearchArticles(ctx context.Context, name string) (*biz.Ar
 func (ar *articleRepo) CreateArticle(ctx context.Context, article *biz.Article) (*biz.Article, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	err := ar.data.DBClient.DatabaseClient.InsertArticle(ctx, &mariadb.Article{
-		Id: time.Now().Format("060102150405.000000") +
-			strconv.Itoa(article.UserId),
-		Title:      article.Title,
-		Content:    article.Content,
-		CategoryId: article.CategoryId,
-		UserId:     article.UserId,
-	})
-	if err != nil {
+	article.ArticleId = time.Now().Format("060102150405.000000") +
+		fmt.Sprintf("%05d", article.UserId)
+	if err := ar.data.DBClient.DatabaseClient.
+		InsertArticle(ctx, &mariadb.Article{
+			Id:         article.ArticleId,
+			Title:      article.Title,
+			Content:    article.Content,
+			CategoryId: article.CategoryId,
+			UserId:     article.UserId,
+		}); err != nil {
 		return nil, err
 	}
 	return article, nil
 }
 
 func (ar *articleRepo) UpdateArticle(ctx context.Context, article *biz.Article) (*biz.Article, error) {
-	return nil, nil
+	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
+	defer cancel()
+	if err := ar.data.DBClient.DatabaseClient.
+		UpdateArticle(ctx, &mariadb.Article{
+			Id:         article.ArticleId,
+			Title:      article.Title,
+			Content:    article.Content,
+			CategoryId: article.CategoryId,
+			UserId:     article.UserId,
+		}); err != nil {
+		return nil, err
+	}
+	return article, nil
 }
 
 func (ar *articleRepo) DeleteArticle(ctx context.Context, name string) error {

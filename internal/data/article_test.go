@@ -64,5 +64,19 @@ func TestCreateArticle(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	fmt.Println(a)
+	fmt.Println(a.ArticleId)
+}
+
+func TestUpdateArticle(t *testing.T) {
+	a, err := ar.UpdateArticle(context.Background(), &biz.Article{
+		ArticleId:  "211228160638.1784271",
+		Title:      "Test Update article title",
+		Content:    "Test Update article content",
+		CategoryId: 1,
+		UserId:     1,
+	})
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println(a.ArticleId)
 }
