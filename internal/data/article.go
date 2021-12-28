@@ -12,6 +12,7 @@ import (
 	_ "github.com/hi20160616/hfcms-articles/api/articles/v1"
 	_ "github.com/hi20160616/hfcms-articles/configs"
 	"github.com/hi20160616/hfcms-articles/internal/biz"
+	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -42,8 +43,8 @@ func (ar *articleRepo) ListArticles(ctx context.Context) (*biz.Articles, error) 
 			ArticleId:  a.Id,
 			Title:      a.Title,
 			Content:    a.Content,
-			CategoryId: strconv.Itoa(a.CategoryId),
-			UserId:     strconv.Itoa(a.UserId),
+			CategoryId: a.CategoryId,
+			UserId:     a.UserId,
 			UpdateTime: timestamppb.New(a.UpdateTime),
 		})
 	}
@@ -70,8 +71,8 @@ func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Articl
 		ArticleId:  a.Id,
 		Title:      a.Title,
 		Content:    a.Content,
-		CategoryId: strconv.Itoa(a.CategoryId),
-		UserId:     strconv.Itoa(a.UserId),
+		CategoryId: a.CategoryId,
+		UserId:     a.UserId,
 		UpdateTime: timestamppb.New(a.UpdateTime),
 	}, nil
 }
@@ -107,16 +108,29 @@ func (ar *articleRepo) SearchArticles(ctx context.Context, name string) (*biz.Ar
 			ArticleId:  a.Id,
 			Title:      a.Title,
 			Content:    a.Content,
-			CategoryId: strconv.Itoa(a.CategoryId),
-			UserId:     strconv.Itoa(a.UserId),
+			CategoryId: a.CategoryId,
+			UserId:     a.UserId,
 			UpdateTime: timestamppb.New(a.UpdateTime),
 		})
 	}
 	return bizas, nil
 }
 
-func (ar *articleRepo) CreateArticle(ctx context.Context, parent string) (*biz.Article, error) {
-	return nil, nil
+func (ar *articleRepo) CreateArticle(ctx context.Context, article *biz.Article) (*biz.Article, error) {
+	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
+	defer cancel()
+	err := ar.data.DBClient.DatabaseClient.InsertArticle(ctx, &mariadb.Article{
+		Id: time.Now().Format("060102150405.000000") +
+			strconv.Itoa(article.UserId),
+		Title:      article.Title,
+		Content:    article.Content,
+		CategoryId: article.CategoryId,
+		UserId:     article.UserId,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return article, nil
 }
 
 func (ar *articleRepo) UpdateArticle(ctx context.Context, article *biz.Article) (*biz.Article, error) {

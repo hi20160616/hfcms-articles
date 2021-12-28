@@ -8,9 +8,10 @@ import (
 )
 
 type Article struct {
-	ArticleId, Title, Content, CategoryId, UserId string
-	UpdateTime                                    *timestamppb.Timestamp
-	TagIds                                        []string
+	CategoryId, UserId        int
+	ArticleId, Title, Content string
+	UpdateTime                *timestamppb.Timestamp
+	TagIds                    []string
 }
 
 type Articles struct {
@@ -22,7 +23,7 @@ type ArticleRepo interface {
 	ListArticles(ctx context.Context) (*Articles, error)
 	GetArticle(ctx context.Context, name string) (*Article, error)
 	SearchArticles(ctx context.Context, name string) (*Articles, error)
-	CreateArticle(ctx context.Context, parent string) (*Article, error)
+	CreateArticle(ctx context.Context, article *Article) (*Article, error)
 	UpdateArticle(ctx context.Context, article *Article) (*Article, error)
 	DeleteArticle(ctx context.Context, name string) error
 }

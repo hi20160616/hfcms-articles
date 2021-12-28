@@ -6,6 +6,7 @@ import (
 	"log"
 	"testing"
 
+	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
@@ -51,4 +52,17 @@ func TestSearchArticles(t *testing.T) {
 	for _, n := range names {
 		out(n)
 	}
+}
+
+func TestCreateArticle(t *testing.T) {
+	a, err := ar.CreateArticle(context.Background(), &biz.Article{
+		Title:      "Test Create article title",
+		Content:    "Test Create article content",
+		CategoryId: 1,
+		UserId:     1,
+	})
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println(a)
 }
