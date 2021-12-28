@@ -21,3 +21,14 @@ func TestListArticles(t *testing.T) {
 		fmt.Println(a)
 	}
 }
+
+func TestGetArticle(t *testing.T) {
+	data := mariadb.NewClient()
+	ar := NewArticleRepo(&Data{DBClient: data}, *log.Default())
+	a, err := ar.GetArticle(context.Background(), "articles/211227122641.15716700001")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	fmt.Println(a)
+}
