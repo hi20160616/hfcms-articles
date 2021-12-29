@@ -75,25 +75,38 @@ func (ar *attributeRepo) GetAttribute(ctx context.Context, name string) (*biz.At
 	}, nil
 }
 
-// TODO: search via diff opts, by userid, articleid and fuzz search description
-func (ar *attributeRepo) SearchAttributes(ctx context.Context, name string) (*biz.Attributes, error) {
+// by article_id: `attributes/aid/211229113754.21500200001/search`
+// by user_id: `attributes/uid/1/search`
+// fuzz description: `attributes/desc/kw1,kw2,kw3/search`
+// by article_id and user_id: `attributes/aid/211229113754.21500200001/uid/1/search`
+// by user_id and article_id and fuzz:
+// `attributes/aid/211229113754.21500200001/uid/1/desc/kw1,kw2,kw3/search`
+func (ar *attributeRepo) SearchAttributes(
+	ctx context.Context, name string) (*biz.Attributes, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	re := regexp.MustCompile(`^attributes/(.+)/search$`)
+	e := `^attributes/(aid/([\d.]+))?(/)?(uid/(\d+))?(/)?(desc/([^^^#]+))?/search$`
+	re := regexp.MustCompile(e)
 	x := re.FindStringSubmatch(name)
-	if len(x) != 2 {
+	// aid: x[2], uid: x[5], kws: x[8]
+	if len(x) != 9 {
 		return nil, errors.New("name cannot match regex express")
 	}
-	kws := strings.Split(
-		strings.TrimSpace(strings.ReplaceAll(x[1], "　", " ")), " ")
+	aid, uid, kws := x[2], x[5], strings.Split(strings.TrimSpace(strings.ReplaceAll(
+		x[8], "　", " ")), ",")
 	cs := [][4]string{}
+	if aid != "" {
+		cs = append(cs, [4]string{"article_id", "=", aid, "and"})
+	}
+	if uid != "" {
+		cs = append(cs, [4]string{"user_id", "=", uid, "and"})
+	}
 	for _, kw := range kws {
 		cs = append(cs,
 			// cs will be filtered by Where(clauses...)
 			// the last `or` `and` in clause will cut off.
 			// so, every clause need `or` or `and` for last element.
 			[4]string{"description", "like", kw, "or"},
-			[4]string{"content", "like", kw, "or"},
 		)
 	}
 	as, err := ar.data.DBClient.DatabaseClient.QueryAttribute().
@@ -115,7 +128,8 @@ func (ar *attributeRepo) SearchAttributes(ctx context.Context, name string) (*bi
 	return bizas, nil
 }
 
-func (ar *attributeRepo) CreateAttribute(ctx context.Context, attribute *biz.Attribute) (*biz.Attribute, error) {
+func (ar *attributeRepo) CreateAttribute(
+	ctx context.Context, attribute *biz.Attribute) (*biz.Attribute, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
 	if err := ar.data.DBClient.DatabaseClient.
@@ -130,7 +144,8 @@ func (ar *attributeRepo) CreateAttribute(ctx context.Context, attribute *biz.Att
 	return attribute, nil
 }
 
-func (ar *attributeRepo) UpdateAttribute(ctx context.Context, attribute *biz.Attribute) (*biz.Attribute, error) {
+func (ar *attributeRepo) UpdateAttribute(
+	ctx context.Context, attribute *biz.Attribute) (*biz.Attribute, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
 	if err := ar.data.DBClient.DatabaseClient.

@@ -30,9 +30,9 @@ func TestCreateAttribute(t *testing.T) {
 
 func TestUpdateAttribute(t *testing.T) {
 	a, err := attr.UpdateAttribute(context.Background(), &biz.Attribute{
-		Id:          4,
+		Id:          2,
 		Path:        "Test Update Create attribute title",
-		Description: "Test Update Create attribute content",
+		Description: "测试 Update Create attribute content",
 		ArticleId:   aid,
 		UserId:      1,
 	})
@@ -52,6 +52,16 @@ func TestGetAttribute(t *testing.T) {
 }
 
 func TestSearchAttributes(t *testing.T) {
+	tcs := []struct {
+		name string
+	}{
+		{"attributes/aid/211227174018.87980300002/search"},
+		{"attributes/uid/2/search"},
+		{"attributes/desc/2,test,3/search"},
+		{"attributes/aid/211227174018.87980300002/uid/2/search"},
+		{"attributes/aid/211227174018.87980300002/uid/2/desc/test,3,测试/search"},
+	}
+
 	out := func(name string) {
 		fmt.Println("name: ", name)
 		as, err := attr.SearchAttributes(context.Background(), name)
@@ -64,12 +74,8 @@ func TestSearchAttributes(t *testing.T) {
 		}
 	}
 
-	names := []string{
-		"attributes/test1/search",
-		"attributes/test1 test2/search",
-	}
-	for _, n := range names {
-		out(n)
+	for _, tc := range tcs {
+		out(tc.name)
 	}
 }
 
