@@ -12,7 +12,7 @@ import (
 )
 
 type ArticleAttribute struct {
-	Id, AttributeId int64
+	Id, AttributeId int
 	ArticleId       string
 }
 
@@ -69,7 +69,7 @@ func (dc *DatabaseClient) QueryArticleAttribute() *ArticleAttributeQuery {
 }
 
 func mkArticleAttribute(rows *sql.Rows) (*ArticleAttributes, error) {
-	var id, attributeId int64
+	var id, attributeId int
 	var articleId sql.NullString
 	var articleAttributes = &ArticleAttributes{}
 	for rows.Next() {

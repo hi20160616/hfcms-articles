@@ -12,8 +12,7 @@ import (
 )
 
 type ArticleTag struct {
-	Id        int64
-	TagId     int
+	Id, TagId int
 	ArticleId string
 }
 
@@ -69,8 +68,7 @@ func (dc *DatabaseClient) QueryArticleTag() *ArticleTagQuery {
 }
 
 func mkArticleTag(rows *sql.Rows) (*ArticleTags, error) {
-	var id int64
-	var tagId int
+	var id, tagId int
 	var articleId sql.NullString
 	var articleTags = &ArticleTags{}
 	for rows.Next() {

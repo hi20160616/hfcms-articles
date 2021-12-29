@@ -10,6 +10,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+var id = "211229113754.21500200001"
+
 func TestPrepareQuery(t *testing.T) {
 	qc := &ArticleQuery{query: "SELECT * FROM articles"}
 	qc.Where(
@@ -139,7 +141,7 @@ func TestUpdateArticle(t *testing.T) {
 		return
 	}
 	article := &Article{
-		Id:      "211227122641.15719600002",
+		Id:      id,
 		Title:   "Test title update",
 		Content: "Test content update",
 	}
@@ -162,7 +164,6 @@ func TestDeleteArticle(t *testing.T) {
 		t.Error(c.Err)
 		return
 	}
-	id := "211227122641.15719600002"
 	if err := c.DatabaseClient.DeleteArticle(context.Background(), id); err != nil {
 		t.Error(err)
 		return

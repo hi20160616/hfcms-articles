@@ -13,8 +13,7 @@ import (
 )
 
 type Attribute struct {
-	Id                           int64
-	UserId                       int
+	Id, UserId                   int
 	Path, Description, ArticleId string
 	UpdateTime                   time.Time
 }
@@ -81,8 +80,7 @@ func (dc *DatabaseClient) QueryAttribute() *AttributeQuery {
 }
 
 func mkAttribute(rows *sql.Rows) (*Attributes, error) {
-	var id int64
-	var user_id int
+	var id, user_id int
 	var path, description, article_id sql.NullString
 	var update_time sql.NullTime
 	var attributes = &Attributes{}

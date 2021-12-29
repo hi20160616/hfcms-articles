@@ -12,6 +12,7 @@ import (
 )
 
 var ar = NewArticleRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
+var id = "211229114147.23586100001"
 
 func TestCreateArticle(t *testing.T) {
 	a, err := ar.CreateArticle(context.Background(), &biz.Article{
@@ -28,7 +29,7 @@ func TestCreateArticle(t *testing.T) {
 
 func TestUpdateArticle(t *testing.T) {
 	a, err := ar.UpdateArticle(context.Background(), &biz.Article{
-		ArticleId:  "211228160638.1784271",
+		ArticleId:  id,
 		Title:      "Test Update article title",
 		Content:    "Test Update article content",
 		CategoryId: 1,
@@ -41,7 +42,7 @@ func TestUpdateArticle(t *testing.T) {
 }
 
 func TestGetArticle(t *testing.T) {
-	a, err := ar.GetArticle(context.Background(), "articles/211227122641.15716700001")
+	a, err := ar.GetArticle(context.Background(), "articles/"+id)
 	if err != nil {
 		t.Error(err)
 		return
@@ -83,7 +84,6 @@ func TestListArticles(t *testing.T) {
 }
 
 func TestDeleteArticle(t *testing.T) {
-	id := "211227122641.15716700001"
 	name := "articles/" + id + "/delete"
 	if err := ar.DeleteArticle(context.Background(), name); err != nil {
 		t.Error(err)

@@ -77,12 +77,12 @@ describe tags;
 Attributes
 ```
 DROP TABLE attributes;
-CREATE TABLE attributes (id BIGINT(16) NOT NULL AUTO_INCREMENT, path VARCHAR(255), description VARCHAR(255), user_id INT(10), article_id VARCHAR(24), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
+CREATE TABLE attributes (id INT(16) NOT NULL AUTO_INCREMENT, path VARCHAR(255), description VARCHAR(255), user_id INT(10), article_id VARCHAR(24), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
 describe attributes;
 +-------------+--------------+------+-----+---------------------+-------------------------------+
 | Field       | Type         | Null | Key | Default             | Extra                         |
 +-------------+--------------+------+-----+---------------------+-------------------------------+
-| id          | bigint(16)   | NO   | PRI | NULL                | auto_increment                |
+| id          | int(16)      | NO   | PRI | NULL                | auto_increment                |
 | path        | varchar(255) | YES  |     | NULL                |                               |
 | description | varchar(255) | YES  |     | NULL                |                               |
 | user_id     | int(10)      | YES  |     | NULL                |                               |
@@ -93,12 +93,12 @@ describe attributes;
 ArticleTags
 ```
 DROP TABLE article_tags;
-CREATE TABLE article_tags (id BIGINT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), tag_id INT(10), UNIQUE KEY (id));
+CREATE TABLE article_tags (id INT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), tag_id INT(10), UNIQUE KEY (id));
 describe article_tags;
 +------------+-------------+------+-----+---------+----------------+
 | Field      | Type        | Null | Key | Default | Extra          |
 +------------+-------------+------+-----+---------+----------------+
-| id         | bigint(16)  | NO   | PRI | NULL    | auto_increment |
+| id         | int(16)     | NO   | PRI | NULL    | auto_increment |
 | article_id | varchar(24) | YES  |     | NULL    |                |
 | tag_id     | int(10)     | YES  |     | NULL    |                |
 +------------+-------------+------+-----+---------+----------------+
@@ -106,14 +106,14 @@ describe article_tags;
 ArticleAttributes
 ```
 DROP TABLE article_attributes;
-CREATE TABLE article_attributes (id BIGINT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), attribute_id BIGINT(16), UNIQUE KEY (id));
+CREATE TABLE article_attributes (id INT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), attribute_id INT(16), UNIQUE KEY (id));
 describe article_attributes;
 +--------------+-------------+------+-----+---------+----------------+
 | Field        | Type        | Null | Key | Default | Extra          |
 +--------------+-------------+------+-----+---------+----------------+
-| id           | bigint(16)  | NO   | PRI | NULL    | auto_increment |
+| id           | int(16)     | NO   | PRI | NULL    | auto_increment |
 | article_id   | varchar(24) | YES  |     | NULL    |                |
-| attribute_id | bigint(16)  | YES  |     | NULL    |                |
+| attribute_id | int(16)     | YES  |     | NULL    |                |
 +--------------+-------------+------+-----+---------+----------------+
 ```
 
@@ -127,9 +127,9 @@ USE hfcms_articles;
 CREATE TABLE articles (id VARCHAR(24) NOT NULL, title VARCHAR(255), content TEXT(65535), category_id INT(10), user_id INT(10), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
 CREATE TABLE categories (id INT(10) NOT NULL AUTO_INCREMENT, name VARCHAR(255), code VARCHAR(10), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
 CREATE TABLE tags (id INT(10) NOT NULL AUTO_INCREMENT, name VARCHAR(255), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
-CREATE TABLE attributes (id BIGINT(16) NOT NULL AUTO_INCREMENT, path VARCHAR(255), description VARCHAR(255), user_id INT(10), article_id VARCHAR(24), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
-CREATE TABLE article_tags (id BIGINT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), tag_id INT(10), UNIQUE KEY (id));
-CREATE TABLE article_attributes (id BIGINT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), attribute_id BIGINT(16), UNIQUE KEY (id));
+CREATE TABLE attributes (id INT(16) NOT NULL AUTO_INCREMENT, path VARCHAR(255), description VARCHAR(255), user_id INT(10), article_id VARCHAR(24), update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, UNIQUE KEY (id));
+CREATE TABLE article_tags (id INT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), tag_id INT(10), UNIQUE KEY (id));
+CREATE TABLE article_attributes (id INT(16) NOT NULL AUTO_INCREMENT, article_id VARCHAR(24), attribute_id INT(16), UNIQUE KEY (id));
 ```
 Validate
 ```
