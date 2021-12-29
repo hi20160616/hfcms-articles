@@ -65,7 +65,7 @@ func TestSearchArticles(t *testing.T) {
 
 	names := []string{
 		"articles/test1/search",
-		"articles/test1 test2/search",
+		"articles/test1,test2/search",
 	}
 	for _, n := range names {
 		out(n)
@@ -73,7 +73,15 @@ func TestSearchArticles(t *testing.T) {
 }
 
 func TestListArticles(t *testing.T) {
-	as, err := ar.ListArticles(context.Background())
+	as, err := ar.ListArticles(context.Background(), "")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	for _, a := range as.Collection {
+		fmt.Println(a)
+	}
+	as, err = ar.ListArticles(context.Background(), "categories/3/articles")
 	if err != nil {
 		t.Error(err)
 		return

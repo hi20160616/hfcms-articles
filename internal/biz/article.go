@@ -20,7 +20,7 @@ type Articles struct {
 }
 
 type ArticleRepo interface {
-	ListArticles(ctx context.Context) (*Articles, error)
+	ListArticles(ctx context.Context, parent string) (*Articles, error)
 	GetArticle(ctx context.Context, name string) (*Article, error)
 	SearchArticles(ctx context.Context, name string) (*Articles, error)
 	CreateArticle(ctx context.Context, article *Article) (*Article, error)

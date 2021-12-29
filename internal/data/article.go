@@ -30,14 +30,33 @@ func NewArticleRepo(data *Data, logger *log.Logger) biz.ArticleRepo {
 	}
 }
 
-func (ar *articleRepo) ListArticles(ctx context.Context) (*biz.Articles, error) {
+// parent=categories/*/articles
+// TODO parent=tags/*/articles
+// parent=users/*/articles
+func (ar *articleRepo) ListArticles(ctx context.Context, parent string) (*biz.Articles, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	as, err := ar.data.DBClient.DatabaseClient.QueryArticle().All(ctx)
+	var as *mariadb.Articles
+	var bizas *biz.Articles
+	var err error
+	re := regexp.MustCompile(`^(categories|tags)/(.+)/articles$`)
+	x := re.FindStringSubmatch(parent)
+	if len(x) != 3 {
+		as, err = ar.data.DBClient.DatabaseClient.QueryArticle().All(ctx)
+	} else {
+		clause := [4]string{}
+		if x[1] == "categories" {
+			clause = [4]string{"category_id", "=", x[2]}
+		}
+		if x[1] == "users" {
+			clause = [4]string{"users_id", "=", x[2]}
+		}
+		as, err = ar.data.DBClient.DatabaseClient.QueryArticle().
+			Where(clause).All(ctx)
+	}
 	if err != nil {
 		return nil, err
 	}
-	bizas := &biz.Articles{Collection: []*biz.Article{}}
 	for _, a := range as.Collection {
 		bizas.Collection = append(bizas.Collection, &biz.Article{
 			ArticleId:  a.Id,
@@ -49,6 +68,7 @@ func (ar *articleRepo) ListArticles(ctx context.Context) (*biz.Articles, error) 
 		})
 	}
 	return bizas, nil
+
 }
 
 func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Article, error) {
@@ -86,7 +106,7 @@ func (ar *articleRepo) SearchArticles(ctx context.Context, name string) (*biz.Ar
 		return nil, errors.New("name cannot match regex express")
 	}
 	kws := strings.Split(
-		strings.TrimSpace(strings.ReplaceAll(x[1], "　", " ")), " ")
+		strings.TrimSpace(strings.ReplaceAll(x[1], "　", " ")), ",")
 	cs := [][4]string{}
 	for _, kw := range kws {
 		cs = append(cs,
