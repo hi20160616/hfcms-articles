@@ -28,10 +28,10 @@ func NewCategoryRepo(data *Data, logger *log.Logger) biz.CategoryRepo {
 	}
 }
 
-func (ar *categoryRepo) ListCategories(ctx context.Context) (*biz.Categories, error) {
+func (cr *categoryRepo) ListCategories(ctx context.Context) (*biz.Categories, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	as, err := ar.data.DBClient.DatabaseClient.QueryCategory().All(ctx)
+	as, err := cr.data.DBClient.DatabaseClient.QueryCategory().All(ctx)
 	if err != nil {
 		return nil, err
 	}
