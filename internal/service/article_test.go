@@ -18,3 +18,12 @@ func TestListArticles(t *testing.T) {
 		fmt.Println(a)
 	}
 }
+
+func TestGetArticle(t *testing.T) {
+	id := "211229113754.21503300002"
+	a, err := us.ac.GetArticle(context.Background(), "articles/"+id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(a)
+}

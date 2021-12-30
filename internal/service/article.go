@@ -30,7 +30,7 @@ func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesR
 			fmt.Printf("Recovered in ListArticles: \n%v\n", r)
 		}
 	}()
-	bizas, err := as.ac.ListArticles(ctx, "")
+	bizas, err := as.ac.ListArticles(ctx, in.Parent)
 	if err != nil {
 		return nil, err
 	}
@@ -48,53 +48,35 @@ func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesR
 	return &pb.ListArticlesResponse{Articles: resp}, nil
 }
 
-func GetArticle(ctx context.Context, in *pb.GetArticleRequest, msTitle string) (*pb.Article, error) {
+func (as *ArticleService) GetArticle(ctx context.Context, in *pb.GetArticleRequest, msTitle string) (*pb.Article, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in GetArticle: %s\n%v\n", in.Name, r)
 		}
 	}()
-
-	// ar := data.NewArticleRepo(&data.Data{MsTitle: msTitle}, log.Default)
-	// a, err := ar.GetArticle(ctx, in.Id)
-	// if err != nil {
-	//         return nil, err
-	// }
-	// return &pb.Article{
-	//         Id:            a.Id,
-	//         Title:         a.Title,
-	//         Content:       a.Content,
-	//         WebsiteId:     a.WebsiteId,
-	//         WebsiteDomain: a.WebsiteDomain,
-	//         WebsiteTitle:  a.WebsiteTitle,
-	//         UpdateTime:    a.UpdateTime,
-	// }, nil
-	return nil, nil
+	biza, err := as.ac.GetArticle(ctx, in.Name)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.Article{
+		ArticleId:  biza.ArticleId,
+		Title:      biza.Title,
+		Content:    biza.Content,
+		CategoryId: int32(biza.CategoryId),
+		UserId:     int32(biza.UserId),
+		UpdateTime: biza.UpdateTime,
+	}, nil
 }
 
-func SearchArticles(ctx context.Context, in *pb.SearchArticlesRequest) (*pb.SearchArticlesResponse, error) {
+func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArticlesRequest) (*pb.SearchArticlesResponse, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in SearchArticles: \n%v\n", r)
 		}
 	}()
-	// ar := data.NewArticleRepo(&data.Data{}, log.Default())
-	// as, err := ar.SearchArticles(ctx, in.Keyword)
+	// bizas, err := as.ac.SearchArticles(ctx, in.Name)
 	// if err != nil {
 	//         return nil, err
 	// }
-	// resp := []*pb.Article{}
-	// for _, a := range as {
-	//         resp = append(resp, &pb.Article{
-	//                 Id:            a.Id,
-	//                 Title:         a.Title,
-	//                 Content:       a.Content,
-	//                 WebsiteId:     a.WebsiteId,
-	//                 WebsiteDomain: a.WebsiteDomain,
-	//                 WebsiteTitle:  a.WebsiteTitle,
-	//                 UpdateTime:    a.UpdateTime,
-	//         })
-	// }
-	// return &pb.SearchArticlesResponse{Articles: resp}, nil
 	return nil, nil
 }
