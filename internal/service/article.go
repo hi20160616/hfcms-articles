@@ -90,3 +90,29 @@ func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArtic
 	}
 	return respAs, nil
 }
+
+func (as *ArticleService) UpdateArticle(ctx context.Context, in *pb.UpdateArticleRequest) (*pb.Article, error) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
+		}
+	}()
+	a, err := as.ac.UpdateArticle(ctx, &biz.Article{
+		ArticleId:  in.Article.ArticleId,
+		Title:      in.Article.Title,
+		Content:    in.Article.Content,
+		CategoryId: int(in.Article.CategoryId),
+		UserId:     int(in.Article.UserId),
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &pb.Article{
+		ArticleId:  a.ArticleId,
+		Title:      a.Title,
+		Content:    a.Content,
+		CategoryId: int32(a.CategoryId),
+		UserId:     int32(a.UserId),
+		UpdateTime: a.UpdateTime,
+	}, nil
+}

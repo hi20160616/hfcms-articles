@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"testing"
+
+	"github.com/hi20160616/hfcms-articles/internal/biz"
 )
 
 var us = InitArticleService()
@@ -37,4 +39,18 @@ func TestSearchArticles(t *testing.T) {
 	for _, v := range as.Collection {
 		fmt.Println(v)
 	}
+}
+
+func TestUpdateArticle(t *testing.T) {
+	a, err := us.ac.UpdateArticle(context.Background(), &biz.Article{
+		ArticleId:  "211229113754.21503300002",
+		Title:      "UpdateViaAS",
+		Content:    "UpdateViaAS",
+		CategoryId: 5,
+		UserId:     6,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(a)
 }

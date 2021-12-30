@@ -47,3 +47,7 @@ func (au *ArticleUsecase) GetArticle(ctx context.Context, name string) (*Article
 func (au *ArticleUsecase) SearchArticles(ctx context.Context, name string) (*Articles, error) {
 	return au.repo.SearchArticles(ctx, name)
 }
+
+func (au *ArticleUsecase) UpdateArticle(ctx context.Context, article *Article) (*Article, error) {
+	return au.repo.UpdateArticle(ctx, article)
+}
