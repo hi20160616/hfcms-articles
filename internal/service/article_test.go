@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/hi20160616/hfcms-articles/internal/biz"
@@ -53,4 +54,18 @@ func TestUpdateArticle(t *testing.T) {
 		t.Fatal(err)
 	}
 	fmt.Println(a)
+}
+
+func TestDeleteArticle(t *testing.T) {
+	id := "211229113754.21503300002"
+	name := "articles/" + id + "/delete"
+	if err := us.ac.DeleteArticle(context.Background(), name); err != nil {
+		t.Fatal(err)
+	}
+	_, err := us.ac.GetArticle(context.Background(), "articles/"+id)
+	if err != nil {
+		if strings.Contains(err.Error(), "Item not found in table") {
+			return
+		}
+	}
 }

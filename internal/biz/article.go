@@ -51,3 +51,7 @@ func (au *ArticleUsecase) SearchArticles(ctx context.Context, name string) (*Art
 func (au *ArticleUsecase) UpdateArticle(ctx context.Context, article *Article) (*Article, error) {
 	return au.repo.UpdateArticle(ctx, article)
 }
+
+func (au *ArticleUsecase) DeleteArticle(ctx context.Context, name string) error {
+	return au.repo.DeleteArticle(ctx, name)
+}

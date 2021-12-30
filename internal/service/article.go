@@ -116,3 +116,15 @@ func (as *ArticleService) UpdateArticle(ctx context.Context, in *pb.UpdateArticl
 		UpdateTime: a.UpdateTime,
 	}, nil
 }
+
+func (as *ArticleService) DeleteArticle(ctx context.Context, in *pb.DeleteArticleRequest) error {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
+		}
+	}()
+	if err := as.ac.DeleteArticle(ctx, in.Name); err != nil {
+		return err
+	}
+	return nil
+}
