@@ -27,3 +27,14 @@ func TestGetArticle(t *testing.T) {
 	}
 	fmt.Println(a)
 }
+
+func TestSearchArticles(t *testing.T) {
+	name := "articles/test3/search"
+	as, err := us.ac.SearchArticles(context.Background(), name)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, v := range as.Collection {
+		fmt.Println(v)
+	}
+}

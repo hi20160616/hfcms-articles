@@ -74,9 +74,19 @@ func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArtic
 			fmt.Printf("Recovered in SearchArticles: \n%v\n", r)
 		}
 	}()
-	// bizas, err := as.ac.SearchArticles(ctx, in.Name)
-	// if err != nil {
-	//         return nil, err
-	// }
-	return nil, nil
+	bizas, err := as.ac.SearchArticles(ctx, in.Name)
+	if err != nil {
+		return nil, err
+	}
+	respAs := &pb.SearchArticlesResponse{}
+	for _, a := range bizas.Collection {
+		respAs.Articles = append(respAs.Articles, &pb.Article{
+			ArticleId:  a.ArticleId,
+			Title:      a.Title,
+			Content:    a.Content,
+			CategoryId: int32(a.CategoryId),
+			UserId:     int32(a.UserId),
+			UpdateTime: a.UpdateTime})
+	}
+	return respAs, nil
 }

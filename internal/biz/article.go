@@ -43,3 +43,7 @@ func (au *ArticleUsecase) ListArticles(ctx context.Context, parent string) (*Art
 func (au *ArticleUsecase) GetArticle(ctx context.Context, name string) (*Article, error) {
 	return au.repo.GetArticle(ctx, name)
 }
+
+func (au *ArticleUsecase) SearchArticles(ctx context.Context, name string) (*Articles, error) {
+	return au.repo.SearchArticles(ctx, name)
+}
