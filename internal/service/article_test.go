@@ -11,6 +11,19 @@ import (
 
 var us = InitArticleService()
 
+func TestCreateArticles(t *testing.T) {
+	a, err := us.ac.CreateArticle(context.Background(), &biz.Article{
+		Title:      "Test CreateArticle Service",
+		Content:    "Test CreateArticle Service Content",
+		CategoryId: 123,
+		UserId:     123,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(a)
+}
+
 func TestListArticles(t *testing.T) {
 	as, err := us.ac.ListArticles(context.Background(), "")
 	if err != nil {

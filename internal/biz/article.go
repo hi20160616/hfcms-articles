@@ -36,6 +36,10 @@ func NewArticleUsecase(repo ArticleRepo, logger log.Logger) *ArticleUsecase {
 	return &ArticleUsecase{repo: repo}
 }
 
+func (au *ArticleUsecase) CreateArticle(ctx context.Context, article *Article) (*Article, error) {
+	return au.repo.CreateArticle(ctx, article)
+}
+
 func (au *ArticleUsecase) ListArticles(ctx context.Context, parent string) (*Articles, error) {
 	return au.repo.ListArticles(ctx, parent)
 }
