@@ -158,9 +158,9 @@ func (aq *ArticleQuery) prepareQuery(ctx context.Context) error {
 }
 
 func mkArticle(rows *sql.Rows) (*Articles, error) {
-	var id, title, content, category_id sql.NullString
+	var id, title, content sql.NullString
 	var update_time sql.NullTime
-	var user_id int
+	var user_id, category_id int
 	var articles = &Articles{}
 	for rows.Next() {
 		if err := rows.Scan(&id, &title, &content, &category_id, &user_id, &update_time); err != nil {
@@ -170,6 +170,8 @@ func mkArticle(rows *sql.Rows) (*Articles, error) {
 			Id:         id.String,
 			Title:      title.String,
 			Content:    content.String,
+			CategoryId: category_id,
+			UserId:     user_id,
 			UpdateTime: update_time.Time,
 		})
 	}

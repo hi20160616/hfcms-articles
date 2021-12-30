@@ -36,8 +36,8 @@ func NewArticleRepo(data *Data, logger *log.Logger) biz.ArticleRepo {
 func (ar *articleRepo) ListArticles(ctx context.Context, parent string) (*biz.Articles, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
-	var as *mariadb.Articles
-	var bizas *biz.Articles
+	as := &mariadb.Articles{}
+	bizas := &biz.Articles{}
 	var err error
 	re := regexp.MustCompile(`^(categories|tags)/(.+)/articles$`)
 	x := re.FindStringSubmatch(parent)

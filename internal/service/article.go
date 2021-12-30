@@ -3,8 +3,10 @@ package service
 import (
 	"context"
 	"fmt"
+	"log"
 
 	pb "github.com/hi20160616/hfcms-articles/api/articles/v1"
+	"github.com/hi20160616/hfcms-articles/internal/data"
 )
 
 func ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle string) (*pb.ListArticlesResponse, error) {
@@ -13,25 +15,21 @@ func ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle strin
 			fmt.Printf("Recovered in ListArticles: \n%v\n", r)
 		}
 	}()
-	// ar := data.NewArticleRepo(&data.Data{MsTitle: msTitle}, log.Default)
-	// as, err := ar.ListArticles(ctx)
-	// if err != nil {
-	//         return nil, err
-	// }
-	// resp := []*pb.Article{}
-	// for _, a := range as {
-	//         resp = append(resp, &pb.Article{
-	//                 Id:            a.Id,
-	//                 Title:         a.Title,
-	//                 Content:       a.Content,
-	//                 UpdateTime:    a.UpdateTime,
-	//                 WebsiteId:     a.WebsiteId,
-	//                 WebsiteDomain: a.WebsiteDomain,
-	//                 WebsiteTitle:  a.WebsiteTitle,
-	//         })
-	// }
-	// return &pb.ListArticlesResponse{Articles: resp}, nil
-	return nil, nil
+	ar := data.NewArticleRepo(&data.Data{}, log.Default())
+	as, err := ar.ListArticles(ctx, "")
+	// as, err := ar.ListArticles(ctx, "categories/"+msTitle+"/articles")
+	if err != nil {
+		return nil, err
+	}
+	resp := []*pb.Article{}
+	for _, a := range as.Collection {
+		resp = append(resp, &pb.Article{
+			Title:      a.Title,
+			Content:    a.Content,
+			UpdateTime: a.UpdateTime,
+		})
+	}
+	return &pb.ListArticlesResponse{Articles: resp}, nil
 }
 
 func GetArticle(ctx context.Context, in *pb.GetArticleRequest, msTitle string) (*pb.Article, error) {
