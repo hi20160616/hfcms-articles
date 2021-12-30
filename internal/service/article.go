@@ -6,29 +6,42 @@ import (
 	"log"
 
 	pb "github.com/hi20160616/hfcms-articles/api/articles/v1"
+	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data"
+	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
 type ArticleService struct {
+	pb.UnimplementedArticleAPIServer
+	ac *biz.ArticleUsecase
 }
 
-func ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle string) (*pb.ListArticlesResponse, error) {
+func InitArticleService() *ArticleService {
+	dbc := mariadb.NewClient()
+	db := &data.Data{DBClient: dbc}
+	repo := data.NewArticleRepo(db, log.Default())
+	ac := biz.NewArticleUsecase(repo, *log.Default())
+	return &ArticleService{ac: ac}
+}
+
+func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle string) (*pb.ListArticlesResponse, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in ListArticles: \n%v\n", r)
 		}
 	}()
-	ar := data.NewArticleRepo(&data.Data{}, log.Default())
-	as, err := ar.ListArticles(ctx, "")
-	// as, err := ar.ListArticles(ctx, "categories/"+msTitle+"/articles")
+	bizas, err := as.ac.ListArticles(ctx, "")
 	if err != nil {
 		return nil, err
 	}
 	resp := []*pb.Article{}
-	for _, a := range as.Collection {
+	for _, a := range bizas.Collection {
 		resp = append(resp, &pb.Article{
+			ArticleId:  a.ArticleId,
 			Title:      a.Title,
 			Content:    a.Content,
+			CategoryId: int32(a.CategoryId),
+			UserId:     int32(a.UserId),
 			UpdateTime: a.UpdateTime,
 		})
 	}
