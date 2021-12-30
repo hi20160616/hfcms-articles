@@ -32,17 +32,17 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 var (
-	filter_AttributesService_ListAttributes_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_AttributesAPI_ListAttributes_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_AttributesService_ListAttributes_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AttributesAPI_ListAttributes_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListAttributesRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesService_ListAttributes_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesAPI_ListAttributes_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -51,14 +51,14 @@ func request_AttributesService_ListAttributes_0(ctx context.Context, marshaler r
 
 }
 
-func local_request_AttributesService_ListAttributes_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AttributesAPI_ListAttributes_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListAttributesRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesService_ListAttributes_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesAPI_ListAttributes_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -67,7 +67,7 @@ func local_request_AttributesService_ListAttributes_0(ctx context.Context, marsh
 
 }
 
-func request_AttributesService_GetAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AttributesAPI_GetAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -93,7 +93,7 @@ func request_AttributesService_GetAttribute_0(ctx context.Context, marshaler run
 
 }
 
-func local_request_AttributesService_GetAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AttributesAPI_GetAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -120,10 +120,10 @@ func local_request_AttributesService_GetAttribute_0(ctx context.Context, marshal
 }
 
 var (
-	filter_AttributesService_CreateAttribute_0 = &utilities.DoubleArray{Encoding: map[string]int{"attribute": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_AttributesAPI_CreateAttribute_0 = &utilities.DoubleArray{Encoding: map[string]int{"attribute": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
-func request_AttributesService_CreateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AttributesAPI_CreateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -138,7 +138,7 @@ func request_AttributesService_CreateAttribute_0(ctx context.Context, marshaler 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesService_CreateAttribute_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesAPI_CreateAttribute_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -147,7 +147,7 @@ func request_AttributesService_CreateAttribute_0(ctx context.Context, marshaler 
 
 }
 
-func local_request_AttributesService_CreateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AttributesAPI_CreateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -162,7 +162,7 @@ func local_request_AttributesService_CreateAttribute_0(ctx context.Context, mars
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesService_CreateAttribute_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_AttributesAPI_CreateAttribute_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -171,7 +171,7 @@ func local_request_AttributesService_CreateAttribute_0(ctx context.Context, mars
 
 }
 
-func request_AttributesService_UpdateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AttributesAPI_UpdateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -205,7 +205,7 @@ func request_AttributesService_UpdateAttribute_0(ctx context.Context, marshaler 
 
 }
 
-func local_request_AttributesService_UpdateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AttributesAPI_UpdateAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -239,7 +239,7 @@ func local_request_AttributesService_UpdateAttribute_0(ctx context.Context, mars
 
 }
 
-func request_AttributesService_DeleteAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_AttributesAPI_DeleteAttribute_0(ctx context.Context, marshaler runtime.Marshaler, client AttributesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -265,7 +265,7 @@ func request_AttributesService_DeleteAttribute_0(ctx context.Context, marshaler 
 
 }
 
-func local_request_AttributesService_DeleteAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_AttributesAPI_DeleteAttribute_0(ctx context.Context, marshaler runtime.Marshaler, server AttributesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteAttributeRequest
 	var metadata runtime.ServerMetadata
 
@@ -291,24 +291,24 @@ func local_request_AttributesService_DeleteAttribute_0(ctx context.Context, mars
 
 }
 
-// RegisterAttributesServiceHandlerServer registers the http handlers for service AttributesService to "mux".
-// UnaryRPC     :call AttributesServiceServer directly.
+// RegisterAttributesAPIHandlerServer registers the http handlers for service AttributesAPI to "mux".
+// UnaryRPC     :call AttributesAPIServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterAttributesServiceHandlerFromEndpoint instead.
-func RegisterAttributesServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server AttributesServiceServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterAttributesAPIHandlerFromEndpoint instead.
+func RegisterAttributesAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server AttributesAPIServer) error {
 
-	mux.Handle("GET", pattern_AttributesService_ListAttributes_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_AttributesAPI_ListAttributes_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/ListAttributes", runtime.WithHTTPPathPattern("/v1/attributes"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/ListAttributes", runtime.WithHTTPPathPattern("/v1/attributes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_AttributesService_ListAttributes_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AttributesAPI_ListAttributes_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -316,22 +316,22 @@ func RegisterAttributesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_AttributesService_ListAttributes_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_ListAttributes_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_AttributesService_GetAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_AttributesAPI_GetAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/GetAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/GetAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_AttributesService_GetAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AttributesAPI_GetAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -339,22 +339,22 @@ func RegisterAttributesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_AttributesService_GetAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_GetAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AttributesService_CreateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AttributesAPI_CreateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/CreateAttribute", runtime.WithHTTPPathPattern("/v1/attributes"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/CreateAttribute", runtime.WithHTTPPathPattern("/v1/attributes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_AttributesService_CreateAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AttributesAPI_CreateAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -362,22 +362,22 @@ func RegisterAttributesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_AttributesService_CreateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_CreateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_AttributesService_UpdateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_AttributesAPI_UpdateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/UpdateAttribute", runtime.WithHTTPPathPattern("/v1/{attribute.name=attributes/*/update}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/UpdateAttribute", runtime.WithHTTPPathPattern("/v1/{attribute.name=attributes/*/update}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_AttributesService_UpdateAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AttributesAPI_UpdateAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -385,22 +385,22 @@ func RegisterAttributesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_AttributesService_UpdateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_UpdateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_AttributesService_DeleteAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_AttributesAPI_DeleteAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/DeleteAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*/delete}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/DeleteAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*/delete}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_AttributesService_DeleteAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_AttributesAPI_DeleteAttribute_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -408,16 +408,16 @@ func RegisterAttributesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_AttributesService_DeleteAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_DeleteAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterAttributesServiceHandlerFromEndpoint is same as RegisterAttributesServiceHandler but
+// RegisterAttributesAPIHandlerFromEndpoint is same as RegisterAttributesAPIHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterAttributesServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterAttributesAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -437,119 +437,119 @@ func RegisterAttributesServiceHandlerFromEndpoint(ctx context.Context, mux *runt
 		}()
 	}()
 
-	return RegisterAttributesServiceHandler(ctx, mux, conn)
+	return RegisterAttributesAPIHandler(ctx, mux, conn)
 }
 
-// RegisterAttributesServiceHandler registers the http handlers for service AttributesService to "mux".
+// RegisterAttributesAPIHandler registers the http handlers for service AttributesAPI to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterAttributesServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterAttributesServiceHandlerClient(ctx, mux, NewAttributesServiceClient(conn))
+func RegisterAttributesAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterAttributesAPIHandlerClient(ctx, mux, NewAttributesAPIClient(conn))
 }
 
-// RegisterAttributesServiceHandlerClient registers the http handlers for service AttributesService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "AttributesServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "AttributesServiceClient"
+// RegisterAttributesAPIHandlerClient registers the http handlers for service AttributesAPI
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "AttributesAPIClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "AttributesAPIClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "AttributesServiceClient" to call the correct interceptors.
-func RegisterAttributesServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client AttributesServiceClient) error {
+// "AttributesAPIClient" to call the correct interceptors.
+func RegisterAttributesAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux, client AttributesAPIClient) error {
 
-	mux.Handle("GET", pattern_AttributesService_ListAttributes_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_AttributesAPI_ListAttributes_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/ListAttributes", runtime.WithHTTPPathPattern("/v1/attributes"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/ListAttributes", runtime.WithHTTPPathPattern("/v1/attributes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AttributesService_ListAttributes_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AttributesAPI_ListAttributes_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AttributesService_ListAttributes_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_ListAttributes_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_AttributesService_GetAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_AttributesAPI_GetAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/GetAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/GetAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AttributesService_GetAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AttributesAPI_GetAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AttributesService_GetAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_GetAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AttributesService_CreateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AttributesAPI_CreateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/CreateAttribute", runtime.WithHTTPPathPattern("/v1/attributes"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/CreateAttribute", runtime.WithHTTPPathPattern("/v1/attributes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AttributesService_CreateAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AttributesAPI_CreateAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AttributesService_CreateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_CreateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_AttributesService_UpdateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_AttributesAPI_UpdateAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/UpdateAttribute", runtime.WithHTTPPathPattern("/v1/{attribute.name=attributes/*/update}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/UpdateAttribute", runtime.WithHTTPPathPattern("/v1/{attribute.name=attributes/*/update}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AttributesService_UpdateAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AttributesAPI_UpdateAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AttributesService_UpdateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_UpdateAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_AttributesService_DeleteAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_AttributesAPI_DeleteAttribute_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesService/DeleteAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*/delete}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.AttributesAPI/DeleteAttribute", runtime.WithHTTPPathPattern("/v1/{name=attributes/*/delete}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AttributesService_DeleteAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AttributesAPI_DeleteAttribute_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AttributesService_DeleteAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_AttributesAPI_DeleteAttribute_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -557,25 +557,25 @@ func RegisterAttributesServiceHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_AttributesService_ListAttributes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "attributes"}, ""))
+	pattern_AttributesAPI_ListAttributes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "attributes"}, ""))
 
-	pattern_AttributesService_GetAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "attributes", "name"}, ""))
+	pattern_AttributesAPI_GetAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "attributes", "name"}, ""))
 
-	pattern_AttributesService_CreateAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "attributes"}, ""))
+	pattern_AttributesAPI_CreateAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "attributes"}, ""))
 
-	pattern_AttributesService_UpdateAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "attributes", "update", "attribute.name"}, ""))
+	pattern_AttributesAPI_UpdateAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "attributes", "update", "attribute.name"}, ""))
 
-	pattern_AttributesService_DeleteAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "attributes", "delete", "name"}, ""))
+	pattern_AttributesAPI_DeleteAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "attributes", "delete", "name"}, ""))
 )
 
 var (
-	forward_AttributesService_ListAttributes_0 = runtime.ForwardResponseMessage
+	forward_AttributesAPI_ListAttributes_0 = runtime.ForwardResponseMessage
 
-	forward_AttributesService_GetAttribute_0 = runtime.ForwardResponseMessage
+	forward_AttributesAPI_GetAttribute_0 = runtime.ForwardResponseMessage
 
-	forward_AttributesService_CreateAttribute_0 = runtime.ForwardResponseMessage
+	forward_AttributesAPI_CreateAttribute_0 = runtime.ForwardResponseMessage
 
-	forward_AttributesService_UpdateAttribute_0 = runtime.ForwardResponseMessage
+	forward_AttributesAPI_UpdateAttribute_0 = runtime.ForwardResponseMessage
 
-	forward_AttributesService_DeleteAttribute_0 = runtime.ForwardResponseMessage
+	forward_AttributesAPI_DeleteAttribute_0 = runtime.ForwardResponseMessage
 )

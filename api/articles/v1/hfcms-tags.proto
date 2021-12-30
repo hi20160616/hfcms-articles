@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
 
-service TagService {
+service TagAPI {
   rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {
     option (google.api.http) = {
       get: "/v1/tags"

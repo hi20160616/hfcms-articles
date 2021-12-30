@@ -32,17 +32,17 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 var (
-	filter_CategoriesService_ListCategories_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_CategoriesAPI_ListCategories_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_CategoriesService_ListCategories_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_CategoriesAPI_ListCategories_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListCategoriesRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesService_ListCategories_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesAPI_ListCategories_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -51,14 +51,14 @@ func request_CategoriesService_ListCategories_0(ctx context.Context, marshaler r
 
 }
 
-func local_request_CategoriesService_ListCategories_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_CategoriesAPI_ListCategories_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListCategoriesRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesService_ListCategories_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesAPI_ListCategories_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -67,7 +67,7 @@ func local_request_CategoriesService_ListCategories_0(ctx context.Context, marsh
 
 }
 
-func request_CategoriesService_GetCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_CategoriesAPI_GetCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -93,7 +93,7 @@ func request_CategoriesService_GetCategory_0(ctx context.Context, marshaler runt
 
 }
 
-func local_request_CategoriesService_GetCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_CategoriesAPI_GetCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -120,10 +120,10 @@ func local_request_CategoriesService_GetCategory_0(ctx context.Context, marshale
 }
 
 var (
-	filter_CategoriesService_CreateCategory_0 = &utilities.DoubleArray{Encoding: map[string]int{"category": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_CategoriesAPI_CreateCategory_0 = &utilities.DoubleArray{Encoding: map[string]int{"category": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
-func request_CategoriesService_CreateCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_CategoriesAPI_CreateCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -138,7 +138,7 @@ func request_CategoriesService_CreateCategory_0(ctx context.Context, marshaler r
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesService_CreateCategory_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesAPI_CreateCategory_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -147,7 +147,7 @@ func request_CategoriesService_CreateCategory_0(ctx context.Context, marshaler r
 
 }
 
-func local_request_CategoriesService_CreateCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_CategoriesAPI_CreateCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -162,7 +162,7 @@ func local_request_CategoriesService_CreateCategory_0(ctx context.Context, marsh
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesService_CreateCategory_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_CategoriesAPI_CreateCategory_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -171,7 +171,7 @@ func local_request_CategoriesService_CreateCategory_0(ctx context.Context, marsh
 
 }
 
-func request_CategoriesService_UpdateCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_CategoriesAPI_UpdateCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -205,7 +205,7 @@ func request_CategoriesService_UpdateCategory_0(ctx context.Context, marshaler r
 
 }
 
-func local_request_CategoriesService_UpdateCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_CategoriesAPI_UpdateCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -239,7 +239,7 @@ func local_request_CategoriesService_UpdateCategory_0(ctx context.Context, marsh
 
 }
 
-func request_CategoriesService_DeleteCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_CategoriesAPI_DeleteCategory_0(ctx context.Context, marshaler runtime.Marshaler, client CategoriesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -265,7 +265,7 @@ func request_CategoriesService_DeleteCategory_0(ctx context.Context, marshaler r
 
 }
 
-func local_request_CategoriesService_DeleteCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_CategoriesAPI_DeleteCategory_0(ctx context.Context, marshaler runtime.Marshaler, server CategoriesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteCategoryRequest
 	var metadata runtime.ServerMetadata
 
@@ -291,24 +291,24 @@ func local_request_CategoriesService_DeleteCategory_0(ctx context.Context, marsh
 
 }
 
-// RegisterCategoriesServiceHandlerServer registers the http handlers for service CategoriesService to "mux".
-// UnaryRPC     :call CategoriesServiceServer directly.
+// RegisterCategoriesAPIHandlerServer registers the http handlers for service CategoriesAPI to "mux".
+// UnaryRPC     :call CategoriesAPIServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterCategoriesServiceHandlerFromEndpoint instead.
-func RegisterCategoriesServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server CategoriesServiceServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterCategoriesAPIHandlerFromEndpoint instead.
+func RegisterCategoriesAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server CategoriesAPIServer) error {
 
-	mux.Handle("GET", pattern_CategoriesService_ListCategories_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_CategoriesAPI_ListCategories_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/ListCategories", runtime.WithHTTPPathPattern("/v1/categories"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/ListCategories", runtime.WithHTTPPathPattern("/v1/categories"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_CategoriesService_ListCategories_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_CategoriesAPI_ListCategories_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -316,22 +316,22 @@ func RegisterCategoriesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_CategoriesService_ListCategories_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_ListCategories_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_CategoriesService_GetCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_CategoriesAPI_GetCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/GetCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/GetCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_CategoriesService_GetCategory_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_CategoriesAPI_GetCategory_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -339,22 +339,22 @@ func RegisterCategoriesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_CategoriesService_GetCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_GetCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_CategoriesService_CreateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_CategoriesAPI_CreateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/CreateCategory", runtime.WithHTTPPathPattern("/v1/categories"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/CreateCategory", runtime.WithHTTPPathPattern("/v1/categories"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_CategoriesService_CreateCategory_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_CategoriesAPI_CreateCategory_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -362,22 +362,22 @@ func RegisterCategoriesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_CategoriesService_CreateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_CreateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_CategoriesService_UpdateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_CategoriesAPI_UpdateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/UpdateCategory", runtime.WithHTTPPathPattern("/v1/{category.name=categories/*/update}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/UpdateCategory", runtime.WithHTTPPathPattern("/v1/{category.name=categories/*/update}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_CategoriesService_UpdateCategory_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_CategoriesAPI_UpdateCategory_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -385,22 +385,22 @@ func RegisterCategoriesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_CategoriesService_UpdateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_UpdateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_CategoriesService_DeleteCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_CategoriesAPI_DeleteCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/DeleteCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*/delete}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/DeleteCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*/delete}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_CategoriesService_DeleteCategory_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_CategoriesAPI_DeleteCategory_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -408,16 +408,16 @@ func RegisterCategoriesServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			return
 		}
 
-		forward_CategoriesService_DeleteCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_DeleteCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterCategoriesServiceHandlerFromEndpoint is same as RegisterCategoriesServiceHandler but
+// RegisterCategoriesAPIHandlerFromEndpoint is same as RegisterCategoriesAPIHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterCategoriesServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterCategoriesAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -437,119 +437,119 @@ func RegisterCategoriesServiceHandlerFromEndpoint(ctx context.Context, mux *runt
 		}()
 	}()
 
-	return RegisterCategoriesServiceHandler(ctx, mux, conn)
+	return RegisterCategoriesAPIHandler(ctx, mux, conn)
 }
 
-// RegisterCategoriesServiceHandler registers the http handlers for service CategoriesService to "mux".
+// RegisterCategoriesAPIHandler registers the http handlers for service CategoriesAPI to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterCategoriesServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterCategoriesServiceHandlerClient(ctx, mux, NewCategoriesServiceClient(conn))
+func RegisterCategoriesAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterCategoriesAPIHandlerClient(ctx, mux, NewCategoriesAPIClient(conn))
 }
 
-// RegisterCategoriesServiceHandlerClient registers the http handlers for service CategoriesService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "CategoriesServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "CategoriesServiceClient"
+// RegisterCategoriesAPIHandlerClient registers the http handlers for service CategoriesAPI
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "CategoriesAPIClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "CategoriesAPIClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "CategoriesServiceClient" to call the correct interceptors.
-func RegisterCategoriesServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CategoriesServiceClient) error {
+// "CategoriesAPIClient" to call the correct interceptors.
+func RegisterCategoriesAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CategoriesAPIClient) error {
 
-	mux.Handle("GET", pattern_CategoriesService_ListCategories_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_CategoriesAPI_ListCategories_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/ListCategories", runtime.WithHTTPPathPattern("/v1/categories"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/ListCategories", runtime.WithHTTPPathPattern("/v1/categories"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CategoriesService_ListCategories_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_CategoriesAPI_ListCategories_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CategoriesService_ListCategories_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_ListCategories_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_CategoriesService_GetCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_CategoriesAPI_GetCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/GetCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/GetCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CategoriesService_GetCategory_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_CategoriesAPI_GetCategory_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CategoriesService_GetCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_GetCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_CategoriesService_CreateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_CategoriesAPI_CreateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/CreateCategory", runtime.WithHTTPPathPattern("/v1/categories"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/CreateCategory", runtime.WithHTTPPathPattern("/v1/categories"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CategoriesService_CreateCategory_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_CategoriesAPI_CreateCategory_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CategoriesService_CreateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_CreateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_CategoriesService_UpdateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_CategoriesAPI_UpdateCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/UpdateCategory", runtime.WithHTTPPathPattern("/v1/{category.name=categories/*/update}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/UpdateCategory", runtime.WithHTTPPathPattern("/v1/{category.name=categories/*/update}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CategoriesService_UpdateCategory_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_CategoriesAPI_UpdateCategory_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CategoriesService_UpdateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_UpdateCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_CategoriesService_DeleteCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_CategoriesAPI_DeleteCategory_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesService/DeleteCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*/delete}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.CategoriesAPI/DeleteCategory", runtime.WithHTTPPathPattern("/v1/{name=categories/*/delete}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CategoriesService_DeleteCategory_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_CategoriesAPI_DeleteCategory_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CategoriesService_DeleteCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoriesAPI_DeleteCategory_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -557,25 +557,25 @@ func RegisterCategoriesServiceHandlerClient(ctx context.Context, mux *runtime.Se
 }
 
 var (
-	pattern_CategoriesService_ListCategories_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "categories"}, ""))
+	pattern_CategoriesAPI_ListCategories_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "categories"}, ""))
 
-	pattern_CategoriesService_GetCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "categories", "name"}, ""))
+	pattern_CategoriesAPI_GetCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "categories", "name"}, ""))
 
-	pattern_CategoriesService_CreateCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "categories"}, ""))
+	pattern_CategoriesAPI_CreateCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "categories"}, ""))
 
-	pattern_CategoriesService_UpdateCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "categories", "update", "category.name"}, ""))
+	pattern_CategoriesAPI_UpdateCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "categories", "update", "category.name"}, ""))
 
-	pattern_CategoriesService_DeleteCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "categories", "delete", "name"}, ""))
+	pattern_CategoriesAPI_DeleteCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "categories", "delete", "name"}, ""))
 )
 
 var (
-	forward_CategoriesService_ListCategories_0 = runtime.ForwardResponseMessage
+	forward_CategoriesAPI_ListCategories_0 = runtime.ForwardResponseMessage
 
-	forward_CategoriesService_GetCategory_0 = runtime.ForwardResponseMessage
+	forward_CategoriesAPI_GetCategory_0 = runtime.ForwardResponseMessage
 
-	forward_CategoriesService_CreateCategory_0 = runtime.ForwardResponseMessage
+	forward_CategoriesAPI_CreateCategory_0 = runtime.ForwardResponseMessage
 
-	forward_CategoriesService_UpdateCategory_0 = runtime.ForwardResponseMessage
+	forward_CategoriesAPI_UpdateCategory_0 = runtime.ForwardResponseMessage
 
-	forward_CategoriesService_DeleteCategory_0 = runtime.ForwardResponseMessage
+	forward_CategoriesAPI_DeleteCategory_0 = runtime.ForwardResponseMessage
 )

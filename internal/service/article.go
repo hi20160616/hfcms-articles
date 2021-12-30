@@ -9,6 +9,9 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/data"
 )
 
+type ArticleService struct {
+}
+
 func ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle string) (*pb.ListArticlesResponse, error) {
 	defer func() {
 		if r := recover(); r != nil {

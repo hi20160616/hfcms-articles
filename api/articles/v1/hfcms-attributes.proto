@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
 
-service AttributesService {
+service AttributesAPI {
   rpc ListAttributes(ListAttributesRequest) returns (ListAttributesResponse) {
     option (google.api.http) = {
       get: "/v1/attributes"

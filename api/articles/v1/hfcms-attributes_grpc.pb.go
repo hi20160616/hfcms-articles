@@ -14,10 +14,10 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion7
 
-// AttributesServiceClient is the client API for AttributesService service.
+// AttributesAPIClient is the client API for AttributesAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AttributesServiceClient interface {
+type AttributesAPIClient interface {
 	ListAttributes(ctx context.Context, in *ListAttributesRequest, opts ...grpc.CallOption) (*ListAttributesResponse, error)
 	GetAttribute(ctx context.Context, in *GetAttributeRequest, opts ...grpc.CallOption) (*Attribute, error)
 	CreateAttribute(ctx context.Context, in *CreateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error)
@@ -25,216 +25,216 @@ type AttributesServiceClient interface {
 	DeleteAttribute(ctx context.Context, in *DeleteAttributeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
-type attributesServiceClient struct {
+type attributesAPIClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAttributesServiceClient(cc grpc.ClientConnInterface) AttributesServiceClient {
-	return &attributesServiceClient{cc}
+func NewAttributesAPIClient(cc grpc.ClientConnInterface) AttributesAPIClient {
+	return &attributesAPIClient{cc}
 }
 
-func (c *attributesServiceClient) ListAttributes(ctx context.Context, in *ListAttributesRequest, opts ...grpc.CallOption) (*ListAttributesResponse, error) {
+func (c *attributesAPIClient) ListAttributes(ctx context.Context, in *ListAttributesRequest, opts ...grpc.CallOption) (*ListAttributesResponse, error) {
 	out := new(ListAttributesResponse)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesService/ListAttributes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/ListAttributes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *attributesServiceClient) GetAttribute(ctx context.Context, in *GetAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
+func (c *attributesAPIClient) GetAttribute(ctx context.Context, in *GetAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
 	out := new(Attribute)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesService/GetAttribute", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/GetAttribute", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *attributesServiceClient) CreateAttribute(ctx context.Context, in *CreateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
+func (c *attributesAPIClient) CreateAttribute(ctx context.Context, in *CreateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
 	out := new(Attribute)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesService/CreateAttribute", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/CreateAttribute", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *attributesServiceClient) UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
+func (c *attributesAPIClient) UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
 	out := new(Attribute)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesService/UpdateAttribute", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/UpdateAttribute", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *attributesServiceClient) DeleteAttribute(ctx context.Context, in *DeleteAttributeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *attributesAPIClient) DeleteAttribute(ctx context.Context, in *DeleteAttributeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesService/DeleteAttribute", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/DeleteAttribute", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AttributesServiceServer is the server API for AttributesService service.
-// All implementations must embed UnimplementedAttributesServiceServer
+// AttributesAPIServer is the server API for AttributesAPI service.
+// All implementations must embed UnimplementedAttributesAPIServer
 // for forward compatibility
-type AttributesServiceServer interface {
+type AttributesAPIServer interface {
 	ListAttributes(context.Context, *ListAttributesRequest) (*ListAttributesResponse, error)
 	GetAttribute(context.Context, *GetAttributeRequest) (*Attribute, error)
 	CreateAttribute(context.Context, *CreateAttributeRequest) (*Attribute, error)
 	UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Attribute, error)
 	DeleteAttribute(context.Context, *DeleteAttributeRequest) (*emptypb.Empty, error)
-	mustEmbedUnimplementedAttributesServiceServer()
+	mustEmbedUnimplementedAttributesAPIServer()
 }
 
-// UnimplementedAttributesServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedAttributesServiceServer struct {
+// UnimplementedAttributesAPIServer must be embedded to have forward compatible implementations.
+type UnimplementedAttributesAPIServer struct {
 }
 
-func (UnimplementedAttributesServiceServer) ListAttributes(context.Context, *ListAttributesRequest) (*ListAttributesResponse, error) {
+func (UnimplementedAttributesAPIServer) ListAttributes(context.Context, *ListAttributesRequest) (*ListAttributesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAttributes not implemented")
 }
-func (UnimplementedAttributesServiceServer) GetAttribute(context.Context, *GetAttributeRequest) (*Attribute, error) {
+func (UnimplementedAttributesAPIServer) GetAttribute(context.Context, *GetAttributeRequest) (*Attribute, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAttribute not implemented")
 }
-func (UnimplementedAttributesServiceServer) CreateAttribute(context.Context, *CreateAttributeRequest) (*Attribute, error) {
+func (UnimplementedAttributesAPIServer) CreateAttribute(context.Context, *CreateAttributeRequest) (*Attribute, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAttribute not implemented")
 }
-func (UnimplementedAttributesServiceServer) UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Attribute, error) {
+func (UnimplementedAttributesAPIServer) UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Attribute, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAttribute not implemented")
 }
-func (UnimplementedAttributesServiceServer) DeleteAttribute(context.Context, *DeleteAttributeRequest) (*emptypb.Empty, error) {
+func (UnimplementedAttributesAPIServer) DeleteAttribute(context.Context, *DeleteAttributeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAttribute not implemented")
 }
-func (UnimplementedAttributesServiceServer) mustEmbedUnimplementedAttributesServiceServer() {}
+func (UnimplementedAttributesAPIServer) mustEmbedUnimplementedAttributesAPIServer() {}
 
-// UnsafeAttributesServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AttributesServiceServer will
+// UnsafeAttributesAPIServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AttributesAPIServer will
 // result in compilation errors.
-type UnsafeAttributesServiceServer interface {
-	mustEmbedUnimplementedAttributesServiceServer()
+type UnsafeAttributesAPIServer interface {
+	mustEmbedUnimplementedAttributesAPIServer()
 }
 
-func RegisterAttributesServiceServer(s *grpc.Server, srv AttributesServiceServer) {
-	s.RegisterService(&_AttributesService_serviceDesc, srv)
+func RegisterAttributesAPIServer(s *grpc.Server, srv AttributesAPIServer) {
+	s.RegisterService(&_AttributesAPI_serviceDesc, srv)
 }
 
-func _AttributesService_ListAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AttributesAPI_ListAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAttributesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AttributesServiceServer).ListAttributes(ctx, in)
+		return srv.(AttributesAPIServer).ListAttributes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.AttributesService/ListAttributes",
+		FullMethod: "/hfcms.articles.v1.AttributesAPI/ListAttributes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AttributesServiceServer).ListAttributes(ctx, req.(*ListAttributesRequest))
+		return srv.(AttributesAPIServer).ListAttributes(ctx, req.(*ListAttributesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AttributesService_GetAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AttributesAPI_GetAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAttributeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AttributesServiceServer).GetAttribute(ctx, in)
+		return srv.(AttributesAPIServer).GetAttribute(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.AttributesService/GetAttribute",
+		FullMethod: "/hfcms.articles.v1.AttributesAPI/GetAttribute",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AttributesServiceServer).GetAttribute(ctx, req.(*GetAttributeRequest))
+		return srv.(AttributesAPIServer).GetAttribute(ctx, req.(*GetAttributeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AttributesService_CreateAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AttributesAPI_CreateAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAttributeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AttributesServiceServer).CreateAttribute(ctx, in)
+		return srv.(AttributesAPIServer).CreateAttribute(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.AttributesService/CreateAttribute",
+		FullMethod: "/hfcms.articles.v1.AttributesAPI/CreateAttribute",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AttributesServiceServer).CreateAttribute(ctx, req.(*CreateAttributeRequest))
+		return srv.(AttributesAPIServer).CreateAttribute(ctx, req.(*CreateAttributeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AttributesService_UpdateAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AttributesAPI_UpdateAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAttributeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AttributesServiceServer).UpdateAttribute(ctx, in)
+		return srv.(AttributesAPIServer).UpdateAttribute(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.AttributesService/UpdateAttribute",
+		FullMethod: "/hfcms.articles.v1.AttributesAPI/UpdateAttribute",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AttributesServiceServer).UpdateAttribute(ctx, req.(*UpdateAttributeRequest))
+		return srv.(AttributesAPIServer).UpdateAttribute(ctx, req.(*UpdateAttributeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AttributesService_DeleteAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AttributesAPI_DeleteAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAttributeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AttributesServiceServer).DeleteAttribute(ctx, in)
+		return srv.(AttributesAPIServer).DeleteAttribute(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.AttributesService/DeleteAttribute",
+		FullMethod: "/hfcms.articles.v1.AttributesAPI/DeleteAttribute",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AttributesServiceServer).DeleteAttribute(ctx, req.(*DeleteAttributeRequest))
+		return srv.(AttributesAPIServer).DeleteAttribute(ctx, req.(*DeleteAttributeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _AttributesService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "hfcms.articles.v1.AttributesService",
-	HandlerType: (*AttributesServiceServer)(nil),
+var _AttributesAPI_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "hfcms.articles.v1.AttributesAPI",
+	HandlerType: (*AttributesAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListAttributes",
-			Handler:    _AttributesService_ListAttributes_Handler,
+			Handler:    _AttributesAPI_ListAttributes_Handler,
 		},
 		{
 			MethodName: "GetAttribute",
-			Handler:    _AttributesService_GetAttribute_Handler,
+			Handler:    _AttributesAPI_GetAttribute_Handler,
 		},
 		{
 			MethodName: "CreateAttribute",
-			Handler:    _AttributesService_CreateAttribute_Handler,
+			Handler:    _AttributesAPI_CreateAttribute_Handler,
 		},
 		{
 			MethodName: "UpdateAttribute",
-			Handler:    _AttributesService_UpdateAttribute_Handler,
+			Handler:    _AttributesAPI_UpdateAttribute_Handler,
 		},
 		{
 			MethodName: "DeleteAttribute",
-			Handler:    _AttributesService_DeleteAttribute_Handler,
+			Handler:    _AttributesAPI_DeleteAttribute_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

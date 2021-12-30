@@ -14,10 +14,10 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion7
 
-// CategoriesServiceClient is the client API for CategoriesService service.
+// CategoriesAPIClient is the client API for CategoriesAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CategoriesServiceClient interface {
+type CategoriesAPIClient interface {
 	ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error)
 	GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*Category, error)
 	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*Category, error)
@@ -25,216 +25,216 @@ type CategoriesServiceClient interface {
 	DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
-type categoriesServiceClient struct {
+type categoriesAPIClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCategoriesServiceClient(cc grpc.ClientConnInterface) CategoriesServiceClient {
-	return &categoriesServiceClient{cc}
+func NewCategoriesAPIClient(cc grpc.ClientConnInterface) CategoriesAPIClient {
+	return &categoriesAPIClient{cc}
 }
 
-func (c *categoriesServiceClient) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error) {
+func (c *categoriesAPIClient) ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error) {
 	out := new(ListCategoriesResponse)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesService/ListCategories", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesAPI/ListCategories", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *categoriesServiceClient) GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*Category, error) {
+func (c *categoriesAPIClient) GetCategory(ctx context.Context, in *GetCategoryRequest, opts ...grpc.CallOption) (*Category, error) {
 	out := new(Category)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesService/GetCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesAPI/GetCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *categoriesServiceClient) CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*Category, error) {
+func (c *categoriesAPIClient) CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*Category, error) {
 	out := new(Category)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesService/CreateCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesAPI/CreateCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *categoriesServiceClient) UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*Category, error) {
+func (c *categoriesAPIClient) UpdateCategory(ctx context.Context, in *UpdateCategoryRequest, opts ...grpc.CallOption) (*Category, error) {
 	out := new(Category)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesService/UpdateCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesAPI/UpdateCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *categoriesServiceClient) DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *categoriesAPIClient) DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesService/DeleteCategory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.CategoriesAPI/DeleteCategory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CategoriesServiceServer is the server API for CategoriesService service.
-// All implementations must embed UnimplementedCategoriesServiceServer
+// CategoriesAPIServer is the server API for CategoriesAPI service.
+// All implementations must embed UnimplementedCategoriesAPIServer
 // for forward compatibility
-type CategoriesServiceServer interface {
+type CategoriesAPIServer interface {
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	GetCategory(context.Context, *GetCategoryRequest) (*Category, error)
 	CreateCategory(context.Context, *CreateCategoryRequest) (*Category, error)
 	UpdateCategory(context.Context, *UpdateCategoryRequest) (*Category, error)
 	DeleteCategory(context.Context, *DeleteCategoryRequest) (*emptypb.Empty, error)
-	mustEmbedUnimplementedCategoriesServiceServer()
+	mustEmbedUnimplementedCategoriesAPIServer()
 }
 
-// UnimplementedCategoriesServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCategoriesServiceServer struct {
+// UnimplementedCategoriesAPIServer must be embedded to have forward compatible implementations.
+type UnimplementedCategoriesAPIServer struct {
 }
 
-func (UnimplementedCategoriesServiceServer) ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error) {
+func (UnimplementedCategoriesAPIServer) ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
 }
-func (UnimplementedCategoriesServiceServer) GetCategory(context.Context, *GetCategoryRequest) (*Category, error) {
+func (UnimplementedCategoriesAPIServer) GetCategory(context.Context, *GetCategoryRequest) (*Category, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCategory not implemented")
 }
-func (UnimplementedCategoriesServiceServer) CreateCategory(context.Context, *CreateCategoryRequest) (*Category, error) {
+func (UnimplementedCategoriesAPIServer) CreateCategory(context.Context, *CreateCategoryRequest) (*Category, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCategory not implemented")
 }
-func (UnimplementedCategoriesServiceServer) UpdateCategory(context.Context, *UpdateCategoryRequest) (*Category, error) {
+func (UnimplementedCategoriesAPIServer) UpdateCategory(context.Context, *UpdateCategoryRequest) (*Category, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategory not implemented")
 }
-func (UnimplementedCategoriesServiceServer) DeleteCategory(context.Context, *DeleteCategoryRequest) (*emptypb.Empty, error) {
+func (UnimplementedCategoriesAPIServer) DeleteCategory(context.Context, *DeleteCategoryRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategory not implemented")
 }
-func (UnimplementedCategoriesServiceServer) mustEmbedUnimplementedCategoriesServiceServer() {}
+func (UnimplementedCategoriesAPIServer) mustEmbedUnimplementedCategoriesAPIServer() {}
 
-// UnsafeCategoriesServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CategoriesServiceServer will
+// UnsafeCategoriesAPIServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CategoriesAPIServer will
 // result in compilation errors.
-type UnsafeCategoriesServiceServer interface {
-	mustEmbedUnimplementedCategoriesServiceServer()
+type UnsafeCategoriesAPIServer interface {
+	mustEmbedUnimplementedCategoriesAPIServer()
 }
 
-func RegisterCategoriesServiceServer(s *grpc.Server, srv CategoriesServiceServer) {
-	s.RegisterService(&_CategoriesService_serviceDesc, srv)
+func RegisterCategoriesAPIServer(s *grpc.Server, srv CategoriesAPIServer) {
+	s.RegisterService(&_CategoriesAPI_serviceDesc, srv)
 }
 
-func _CategoriesService_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CategoriesAPI_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListCategoriesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CategoriesServiceServer).ListCategories(ctx, in)
+		return srv.(CategoriesAPIServer).ListCategories(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.CategoriesService/ListCategories",
+		FullMethod: "/hfcms.articles.v1.CategoriesAPI/ListCategories",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoriesServiceServer).ListCategories(ctx, req.(*ListCategoriesRequest))
+		return srv.(CategoriesAPIServer).ListCategories(ctx, req.(*ListCategoriesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CategoriesService_GetCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CategoriesAPI_GetCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CategoriesServiceServer).GetCategory(ctx, in)
+		return srv.(CategoriesAPIServer).GetCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.CategoriesService/GetCategory",
+		FullMethod: "/hfcms.articles.v1.CategoriesAPI/GetCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoriesServiceServer).GetCategory(ctx, req.(*GetCategoryRequest))
+		return srv.(CategoriesAPIServer).GetCategory(ctx, req.(*GetCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CategoriesService_CreateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CategoriesAPI_CreateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CategoriesServiceServer).CreateCategory(ctx, in)
+		return srv.(CategoriesAPIServer).CreateCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.CategoriesService/CreateCategory",
+		FullMethod: "/hfcms.articles.v1.CategoriesAPI/CreateCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoriesServiceServer).CreateCategory(ctx, req.(*CreateCategoryRequest))
+		return srv.(CategoriesAPIServer).CreateCategory(ctx, req.(*CreateCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CategoriesService_UpdateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CategoriesAPI_UpdateCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CategoriesServiceServer).UpdateCategory(ctx, in)
+		return srv.(CategoriesAPIServer).UpdateCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.CategoriesService/UpdateCategory",
+		FullMethod: "/hfcms.articles.v1.CategoriesAPI/UpdateCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoriesServiceServer).UpdateCategory(ctx, req.(*UpdateCategoryRequest))
+		return srv.(CategoriesAPIServer).UpdateCategory(ctx, req.(*UpdateCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CategoriesService_DeleteCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CategoriesAPI_DeleteCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CategoriesServiceServer).DeleteCategory(ctx, in)
+		return srv.(CategoriesAPIServer).DeleteCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.CategoriesService/DeleteCategory",
+		FullMethod: "/hfcms.articles.v1.CategoriesAPI/DeleteCategory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoriesServiceServer).DeleteCategory(ctx, req.(*DeleteCategoryRequest))
+		return srv.(CategoriesAPIServer).DeleteCategory(ctx, req.(*DeleteCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _CategoriesService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "hfcms.articles.v1.CategoriesService",
-	HandlerType: (*CategoriesServiceServer)(nil),
+var _CategoriesAPI_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "hfcms.articles.v1.CategoriesAPI",
+	HandlerType: (*CategoriesAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListCategories",
-			Handler:    _CategoriesService_ListCategories_Handler,
+			Handler:    _CategoriesAPI_ListCategories_Handler,
 		},
 		{
 			MethodName: "GetCategory",
-			Handler:    _CategoriesService_GetCategory_Handler,
+			Handler:    _CategoriesAPI_GetCategory_Handler,
 		},
 		{
 			MethodName: "CreateCategory",
-			Handler:    _CategoriesService_CreateCategory_Handler,
+			Handler:    _CategoriesAPI_CreateCategory_Handler,
 		},
 		{
 			MethodName: "UpdateCategory",
-			Handler:    _CategoriesService_UpdateCategory_Handler,
+			Handler:    _CategoriesAPI_UpdateCategory_Handler,
 		},
 		{
 			MethodName: "DeleteCategory",
-			Handler:    _CategoriesService_DeleteCategory_Handler,
+			Handler:    _CategoriesAPI_DeleteCategory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
