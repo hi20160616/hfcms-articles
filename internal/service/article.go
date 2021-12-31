@@ -12,11 +12,11 @@ import (
 )
 
 type ArticleService struct {
-	pb.UnimplementedArticleAPIServer
+	pb.UnimplementedArticlesAPIServer
 	ac *biz.ArticleUsecase
 }
 
-func InitArticleService() *ArticleService {
+func NewArticleService() *ArticleService {
 	dbc := mariadb.NewClient()
 	db := &data.Data{DBClient: dbc}
 	repo := data.NewArticleRepo(db, log.Default())

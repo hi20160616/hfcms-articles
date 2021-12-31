@@ -9,7 +9,7 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 )
 
-var us = InitArticleService()
+var us = NewArticleService()
 
 func TestCreateArticles(t *testing.T) {
 	a, err := us.ac.CreateArticle(context.Background(), &biz.Article{

@@ -14,10 +14,10 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion7
 
-// TagAPIClient is the client API for TagAPI service.
+// TagsAPIClient is the client API for TagsAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TagAPIClient interface {
+type TagsAPIClient interface {
 	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error)
 	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*Tag, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*Tag, error)
@@ -25,216 +25,216 @@ type TagAPIClient interface {
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
-type tagAPIClient struct {
+type tagsAPIClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTagAPIClient(cc grpc.ClientConnInterface) TagAPIClient {
-	return &tagAPIClient{cc}
+func NewTagsAPIClient(cc grpc.ClientConnInterface) TagsAPIClient {
+	return &tagsAPIClient{cc}
 }
 
-func (c *tagAPIClient) ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error) {
+func (c *tagsAPIClient) ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error) {
 	out := new(ListTagsResponse)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagAPI/ListTags", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagsAPI/ListTags", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tagAPIClient) GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*Tag, error) {
+func (c *tagsAPIClient) GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*Tag, error) {
 	out := new(Tag)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagAPI/GetTag", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagsAPI/GetTag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tagAPIClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*Tag, error) {
+func (c *tagsAPIClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*Tag, error) {
 	out := new(Tag)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagAPI/CreateTag", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagsAPI/CreateTag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tagAPIClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*Tag, error) {
+func (c *tagsAPIClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*Tag, error) {
 	out := new(Tag)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagAPI/UpdateTag", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagsAPI/UpdateTag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tagAPIClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tagsAPIClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagAPI/DeleteTag", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.TagsAPI/DeleteTag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TagAPIServer is the server API for TagAPI service.
-// All implementations must embed UnimplementedTagAPIServer
+// TagsAPIServer is the server API for TagsAPI service.
+// All implementations must embed UnimplementedTagsAPIServer
 // for forward compatibility
-type TagAPIServer interface {
+type TagsAPIServer interface {
 	ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error)
 	GetTag(context.Context, *GetTagRequest) (*Tag, error)
 	CreateTag(context.Context, *CreateTagRequest) (*Tag, error)
 	UpdateTag(context.Context, *UpdateTagRequest) (*Tag, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*emptypb.Empty, error)
-	mustEmbedUnimplementedTagAPIServer()
+	mustEmbedUnimplementedTagsAPIServer()
 }
 
-// UnimplementedTagAPIServer must be embedded to have forward compatible implementations.
-type UnimplementedTagAPIServer struct {
+// UnimplementedTagsAPIServer must be embedded to have forward compatible implementations.
+type UnimplementedTagsAPIServer struct {
 }
 
-func (UnimplementedTagAPIServer) ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error) {
+func (UnimplementedTagsAPIServer) ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTags not implemented")
 }
-func (UnimplementedTagAPIServer) GetTag(context.Context, *GetTagRequest) (*Tag, error) {
+func (UnimplementedTagsAPIServer) GetTag(context.Context, *GetTagRequest) (*Tag, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTag not implemented")
 }
-func (UnimplementedTagAPIServer) CreateTag(context.Context, *CreateTagRequest) (*Tag, error) {
+func (UnimplementedTagsAPIServer) CreateTag(context.Context, *CreateTagRequest) (*Tag, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
 }
-func (UnimplementedTagAPIServer) UpdateTag(context.Context, *UpdateTagRequest) (*Tag, error) {
+func (UnimplementedTagsAPIServer) UpdateTag(context.Context, *UpdateTagRequest) (*Tag, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
 }
-func (UnimplementedTagAPIServer) DeleteTag(context.Context, *DeleteTagRequest) (*emptypb.Empty, error) {
+func (UnimplementedTagsAPIServer) DeleteTag(context.Context, *DeleteTagRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
 }
-func (UnimplementedTagAPIServer) mustEmbedUnimplementedTagAPIServer() {}
+func (UnimplementedTagsAPIServer) mustEmbedUnimplementedTagsAPIServer() {}
 
-// UnsafeTagAPIServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TagAPIServer will
+// UnsafeTagsAPIServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TagsAPIServer will
 // result in compilation errors.
-type UnsafeTagAPIServer interface {
-	mustEmbedUnimplementedTagAPIServer()
+type UnsafeTagsAPIServer interface {
+	mustEmbedUnimplementedTagsAPIServer()
 }
 
-func RegisterTagAPIServer(s *grpc.Server, srv TagAPIServer) {
-	s.RegisterService(&_TagAPI_serviceDesc, srv)
+func RegisterTagsAPIServer(s *grpc.Server, srv TagsAPIServer) {
+	s.RegisterService(&_TagsAPI_serviceDesc, srv)
 }
 
-func _TagAPI_ListTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TagsAPI_ListTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TagAPIServer).ListTags(ctx, in)
+		return srv.(TagsAPIServer).ListTags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.TagAPI/ListTags",
+		FullMethod: "/hfcms.articles.v1.TagsAPI/ListTags",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagAPIServer).ListTags(ctx, req.(*ListTagsRequest))
+		return srv.(TagsAPIServer).ListTags(ctx, req.(*ListTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TagAPI_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TagsAPI_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TagAPIServer).GetTag(ctx, in)
+		return srv.(TagsAPIServer).GetTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.TagAPI/GetTag",
+		FullMethod: "/hfcms.articles.v1.TagsAPI/GetTag",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagAPIServer).GetTag(ctx, req.(*GetTagRequest))
+		return srv.(TagsAPIServer).GetTag(ctx, req.(*GetTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TagAPI_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TagsAPI_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TagAPIServer).CreateTag(ctx, in)
+		return srv.(TagsAPIServer).CreateTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.TagAPI/CreateTag",
+		FullMethod: "/hfcms.articles.v1.TagsAPI/CreateTag",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagAPIServer).CreateTag(ctx, req.(*CreateTagRequest))
+		return srv.(TagsAPIServer).CreateTag(ctx, req.(*CreateTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TagAPI_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TagsAPI_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TagAPIServer).UpdateTag(ctx, in)
+		return srv.(TagsAPIServer).UpdateTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.TagAPI/UpdateTag",
+		FullMethod: "/hfcms.articles.v1.TagsAPI/UpdateTag",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagAPIServer).UpdateTag(ctx, req.(*UpdateTagRequest))
+		return srv.(TagsAPIServer).UpdateTag(ctx, req.(*UpdateTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TagAPI_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TagsAPI_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TagAPIServer).DeleteTag(ctx, in)
+		return srv.(TagsAPIServer).DeleteTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.TagAPI/DeleteTag",
+		FullMethod: "/hfcms.articles.v1.TagsAPI/DeleteTag",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagAPIServer).DeleteTag(ctx, req.(*DeleteTagRequest))
+		return srv.(TagsAPIServer).DeleteTag(ctx, req.(*DeleteTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _TagAPI_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "hfcms.articles.v1.TagAPI",
-	HandlerType: (*TagAPIServer)(nil),
+var _TagsAPI_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "hfcms.articles.v1.TagsAPI",
+	HandlerType: (*TagsAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListTags",
-			Handler:    _TagAPI_ListTags_Handler,
+			Handler:    _TagsAPI_ListTags_Handler,
 		},
 		{
 			MethodName: "GetTag",
-			Handler:    _TagAPI_GetTag_Handler,
+			Handler:    _TagsAPI_GetTag_Handler,
 		},
 		{
 			MethodName: "CreateTag",
-			Handler:    _TagAPI_CreateTag_Handler,
+			Handler:    _TagsAPI_CreateTag_Handler,
 		},
 		{
 			MethodName: "UpdateTag",
-			Handler:    _TagAPI_UpdateTag_Handler,
+			Handler:    _TagsAPI_UpdateTag_Handler,
 		},
 		{
 			MethodName: "DeleteTag",
-			Handler:    _TagAPI_DeleteTag_Handler,
+			Handler:    _TagsAPI_DeleteTag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

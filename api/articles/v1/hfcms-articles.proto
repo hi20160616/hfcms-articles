@@ -9,7 +9,7 @@ import "google/protobuf/empty.proto";
 
 option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
 
-service ArticleAPI {
+service ArticlesAPI {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=categories/*}/articles"

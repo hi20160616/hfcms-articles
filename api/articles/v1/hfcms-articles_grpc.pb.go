@@ -14,10 +14,10 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion7
 
-// ArticleAPIClient is the client API for ArticleAPI service.
+// ArticlesAPIClient is the client API for ArticlesAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ArticleAPIClient interface {
+type ArticlesAPIClient interface {
 	ListArticles(ctx context.Context, in *ListArticlesRequest, opts ...grpc.CallOption) (*ListArticlesResponse, error)
 	GetArticle(ctx context.Context, in *GetArticleRequest, opts ...grpc.CallOption) (*Article, error)
 	SearchArticles(ctx context.Context, in *SearchArticlesRequest, opts ...grpc.CallOption) (*SearchArticlesResponse, error)
@@ -26,251 +26,251 @@ type ArticleAPIClient interface {
 	DeleteArticle(ctx context.Context, in *DeleteArticleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
-type articleAPIClient struct {
+type articlesAPIClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewArticleAPIClient(cc grpc.ClientConnInterface) ArticleAPIClient {
-	return &articleAPIClient{cc}
+func NewArticlesAPIClient(cc grpc.ClientConnInterface) ArticlesAPIClient {
+	return &articlesAPIClient{cc}
 }
 
-func (c *articleAPIClient) ListArticles(ctx context.Context, in *ListArticlesRequest, opts ...grpc.CallOption) (*ListArticlesResponse, error) {
+func (c *articlesAPIClient) ListArticles(ctx context.Context, in *ListArticlesRequest, opts ...grpc.CallOption) (*ListArticlesResponse, error) {
 	out := new(ListArticlesResponse)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticleAPI/ListArticles", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticlesAPI/ListArticles", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *articleAPIClient) GetArticle(ctx context.Context, in *GetArticleRequest, opts ...grpc.CallOption) (*Article, error) {
+func (c *articlesAPIClient) GetArticle(ctx context.Context, in *GetArticleRequest, opts ...grpc.CallOption) (*Article, error) {
 	out := new(Article)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticleAPI/GetArticle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticlesAPI/GetArticle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *articleAPIClient) SearchArticles(ctx context.Context, in *SearchArticlesRequest, opts ...grpc.CallOption) (*SearchArticlesResponse, error) {
+func (c *articlesAPIClient) SearchArticles(ctx context.Context, in *SearchArticlesRequest, opts ...grpc.CallOption) (*SearchArticlesResponse, error) {
 	out := new(SearchArticlesResponse)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticleAPI/SearchArticles", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticlesAPI/SearchArticles", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *articleAPIClient) CreateArticle(ctx context.Context, in *CreateArticleRequest, opts ...grpc.CallOption) (*Article, error) {
+func (c *articlesAPIClient) CreateArticle(ctx context.Context, in *CreateArticleRequest, opts ...grpc.CallOption) (*Article, error) {
 	out := new(Article)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticleAPI/CreateArticle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticlesAPI/CreateArticle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *articleAPIClient) UpdateArticle(ctx context.Context, in *UpdateArticleRequest, opts ...grpc.CallOption) (*Article, error) {
+func (c *articlesAPIClient) UpdateArticle(ctx context.Context, in *UpdateArticleRequest, opts ...grpc.CallOption) (*Article, error) {
 	out := new(Article)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticleAPI/UpdateArticle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticlesAPI/UpdateArticle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *articleAPIClient) DeleteArticle(ctx context.Context, in *DeleteArticleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *articlesAPIClient) DeleteArticle(ctx context.Context, in *DeleteArticleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticleAPI/DeleteArticle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.ArticlesAPI/DeleteArticle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ArticleAPIServer is the server API for ArticleAPI service.
-// All implementations must embed UnimplementedArticleAPIServer
+// ArticlesAPIServer is the server API for ArticlesAPI service.
+// All implementations must embed UnimplementedArticlesAPIServer
 // for forward compatibility
-type ArticleAPIServer interface {
+type ArticlesAPIServer interface {
 	ListArticles(context.Context, *ListArticlesRequest) (*ListArticlesResponse, error)
 	GetArticle(context.Context, *GetArticleRequest) (*Article, error)
 	SearchArticles(context.Context, *SearchArticlesRequest) (*SearchArticlesResponse, error)
 	CreateArticle(context.Context, *CreateArticleRequest) (*Article, error)
 	UpdateArticle(context.Context, *UpdateArticleRequest) (*Article, error)
 	DeleteArticle(context.Context, *DeleteArticleRequest) (*emptypb.Empty, error)
-	mustEmbedUnimplementedArticleAPIServer()
+	mustEmbedUnimplementedArticlesAPIServer()
 }
 
-// UnimplementedArticleAPIServer must be embedded to have forward compatible implementations.
-type UnimplementedArticleAPIServer struct {
+// UnimplementedArticlesAPIServer must be embedded to have forward compatible implementations.
+type UnimplementedArticlesAPIServer struct {
 }
 
-func (UnimplementedArticleAPIServer) ListArticles(context.Context, *ListArticlesRequest) (*ListArticlesResponse, error) {
+func (UnimplementedArticlesAPIServer) ListArticles(context.Context, *ListArticlesRequest) (*ListArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListArticles not implemented")
 }
-func (UnimplementedArticleAPIServer) GetArticle(context.Context, *GetArticleRequest) (*Article, error) {
+func (UnimplementedArticlesAPIServer) GetArticle(context.Context, *GetArticleRequest) (*Article, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticle not implemented")
 }
-func (UnimplementedArticleAPIServer) SearchArticles(context.Context, *SearchArticlesRequest) (*SearchArticlesResponse, error) {
+func (UnimplementedArticlesAPIServer) SearchArticles(context.Context, *SearchArticlesRequest) (*SearchArticlesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArticles not implemented")
 }
-func (UnimplementedArticleAPIServer) CreateArticle(context.Context, *CreateArticleRequest) (*Article, error) {
+func (UnimplementedArticlesAPIServer) CreateArticle(context.Context, *CreateArticleRequest) (*Article, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateArticle not implemented")
 }
-func (UnimplementedArticleAPIServer) UpdateArticle(context.Context, *UpdateArticleRequest) (*Article, error) {
+func (UnimplementedArticlesAPIServer) UpdateArticle(context.Context, *UpdateArticleRequest) (*Article, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateArticle not implemented")
 }
-func (UnimplementedArticleAPIServer) DeleteArticle(context.Context, *DeleteArticleRequest) (*emptypb.Empty, error) {
+func (UnimplementedArticlesAPIServer) DeleteArticle(context.Context, *DeleteArticleRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteArticle not implemented")
 }
-func (UnimplementedArticleAPIServer) mustEmbedUnimplementedArticleAPIServer() {}
+func (UnimplementedArticlesAPIServer) mustEmbedUnimplementedArticlesAPIServer() {}
 
-// UnsafeArticleAPIServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ArticleAPIServer will
+// UnsafeArticlesAPIServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ArticlesAPIServer will
 // result in compilation errors.
-type UnsafeArticleAPIServer interface {
-	mustEmbedUnimplementedArticleAPIServer()
+type UnsafeArticlesAPIServer interface {
+	mustEmbedUnimplementedArticlesAPIServer()
 }
 
-func RegisterArticleAPIServer(s *grpc.Server, srv ArticleAPIServer) {
-	s.RegisterService(&_ArticleAPI_serviceDesc, srv)
+func RegisterArticlesAPIServer(s *grpc.Server, srv ArticlesAPIServer) {
+	s.RegisterService(&_ArticlesAPI_serviceDesc, srv)
 }
 
-func _ArticleAPI_ListArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ArticlesAPI_ListArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListArticlesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ArticleAPIServer).ListArticles(ctx, in)
+		return srv.(ArticlesAPIServer).ListArticles(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.ArticleAPI/ListArticles",
+		FullMethod: "/hfcms.articles.v1.ArticlesAPI/ListArticles",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArticleAPIServer).ListArticles(ctx, req.(*ListArticlesRequest))
+		return srv.(ArticlesAPIServer).ListArticles(ctx, req.(*ListArticlesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArticleAPI_GetArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ArticlesAPI_GetArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetArticleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ArticleAPIServer).GetArticle(ctx, in)
+		return srv.(ArticlesAPIServer).GetArticle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.ArticleAPI/GetArticle",
+		FullMethod: "/hfcms.articles.v1.ArticlesAPI/GetArticle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArticleAPIServer).GetArticle(ctx, req.(*GetArticleRequest))
+		return srv.(ArticlesAPIServer).GetArticle(ctx, req.(*GetArticleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArticleAPI_SearchArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ArticlesAPI_SearchArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchArticlesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ArticleAPIServer).SearchArticles(ctx, in)
+		return srv.(ArticlesAPIServer).SearchArticles(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.ArticleAPI/SearchArticles",
+		FullMethod: "/hfcms.articles.v1.ArticlesAPI/SearchArticles",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArticleAPIServer).SearchArticles(ctx, req.(*SearchArticlesRequest))
+		return srv.(ArticlesAPIServer).SearchArticles(ctx, req.(*SearchArticlesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArticleAPI_CreateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ArticlesAPI_CreateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateArticleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ArticleAPIServer).CreateArticle(ctx, in)
+		return srv.(ArticlesAPIServer).CreateArticle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.ArticleAPI/CreateArticle",
+		FullMethod: "/hfcms.articles.v1.ArticlesAPI/CreateArticle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArticleAPIServer).CreateArticle(ctx, req.(*CreateArticleRequest))
+		return srv.(ArticlesAPIServer).CreateArticle(ctx, req.(*CreateArticleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArticleAPI_UpdateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ArticlesAPI_UpdateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateArticleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ArticleAPIServer).UpdateArticle(ctx, in)
+		return srv.(ArticlesAPIServer).UpdateArticle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.ArticleAPI/UpdateArticle",
+		FullMethod: "/hfcms.articles.v1.ArticlesAPI/UpdateArticle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArticleAPIServer).UpdateArticle(ctx, req.(*UpdateArticleRequest))
+		return srv.(ArticlesAPIServer).UpdateArticle(ctx, req.(*UpdateArticleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArticleAPI_DeleteArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ArticlesAPI_DeleteArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteArticleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ArticleAPIServer).DeleteArticle(ctx, in)
+		return srv.(ArticlesAPIServer).DeleteArticle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hfcms.articles.v1.ArticleAPI/DeleteArticle",
+		FullMethod: "/hfcms.articles.v1.ArticlesAPI/DeleteArticle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArticleAPIServer).DeleteArticle(ctx, req.(*DeleteArticleRequest))
+		return srv.(ArticlesAPIServer).DeleteArticle(ctx, req.(*DeleteArticleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _ArticleAPI_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "hfcms.articles.v1.ArticleAPI",
-	HandlerType: (*ArticleAPIServer)(nil),
+var _ArticlesAPI_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "hfcms.articles.v1.ArticlesAPI",
+	HandlerType: (*ArticlesAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListArticles",
-			Handler:    _ArticleAPI_ListArticles_Handler,
+			Handler:    _ArticlesAPI_ListArticles_Handler,
 		},
 		{
 			MethodName: "GetArticle",
-			Handler:    _ArticleAPI_GetArticle_Handler,
+			Handler:    _ArticlesAPI_GetArticle_Handler,
 		},
 		{
 			MethodName: "SearchArticles",
-			Handler:    _ArticleAPI_SearchArticles_Handler,
+			Handler:    _ArticlesAPI_SearchArticles_Handler,
 		},
 		{
 			MethodName: "CreateArticle",
-			Handler:    _ArticleAPI_CreateArticle_Handler,
+			Handler:    _ArticlesAPI_CreateArticle_Handler,
 		},
 		{
 			MethodName: "UpdateArticle",
-			Handler:    _ArticleAPI_UpdateArticle_Handler,
+			Handler:    _ArticlesAPI_UpdateArticle_Handler,
 		},
 		{
 			MethodName: "DeleteArticle",
-			Handler:    _ArticleAPI_DeleteArticle_Handler,
+			Handler:    _ArticlesAPI_DeleteArticle_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

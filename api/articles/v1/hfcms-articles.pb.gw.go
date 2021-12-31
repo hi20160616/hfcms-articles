@@ -32,10 +32,10 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 var (
-	filter_ArticleAPI_ListArticles_0 = &utilities.DoubleArray{Encoding: map[string]int{"parent": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_ArticlesAPI_ListArticles_0 = &utilities.DoubleArray{Encoding: map[string]int{"parent": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
-func request_ArticleAPI_ListArticles_0(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_ListArticles_0(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListArticlesRequest
 	var metadata runtime.ServerMetadata
 
@@ -59,7 +59,7 @@ func request_ArticleAPI_ListArticles_0(ctx context.Context, marshaler runtime.Ma
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_ListArticles_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_ListArticles_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -68,7 +68,7 @@ func request_ArticleAPI_ListArticles_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func local_request_ArticleAPI_ListArticles_0(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_ListArticles_0(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListArticlesRequest
 	var metadata runtime.ServerMetadata
 
@@ -92,7 +92,7 @@ func local_request_ArticleAPI_ListArticles_0(ctx context.Context, marshaler runt
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_ListArticles_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_ListArticles_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -102,10 +102,10 @@ func local_request_ArticleAPI_ListArticles_0(ctx context.Context, marshaler runt
 }
 
 var (
-	filter_ArticleAPI_ListArticles_1 = &utilities.DoubleArray{Encoding: map[string]int{"parent": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_ArticlesAPI_ListArticles_1 = &utilities.DoubleArray{Encoding: map[string]int{"parent": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
-func request_ArticleAPI_ListArticles_1(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_ListArticles_1(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListArticlesRequest
 	var metadata runtime.ServerMetadata
 
@@ -129,7 +129,7 @@ func request_ArticleAPI_ListArticles_1(ctx context.Context, marshaler runtime.Ma
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_ListArticles_1); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_ListArticles_1); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -138,7 +138,7 @@ func request_ArticleAPI_ListArticles_1(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func local_request_ArticleAPI_ListArticles_1(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_ListArticles_1(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListArticlesRequest
 	var metadata runtime.ServerMetadata
 
@@ -162,7 +162,7 @@ func local_request_ArticleAPI_ListArticles_1(ctx context.Context, marshaler runt
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_ListArticles_1); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_ListArticles_1); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -171,7 +171,7 @@ func local_request_ArticleAPI_ListArticles_1(ctx context.Context, marshaler runt
 
 }
 
-func request_ArticleAPI_GetArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_GetArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -197,7 +197,7 @@ func request_ArticleAPI_GetArticle_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func local_request_ArticleAPI_GetArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_GetArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -223,7 +223,7 @@ func local_request_ArticleAPI_GetArticle_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_ArticleAPI_SearchArticles_0(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_SearchArticles_0(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SearchArticlesRequest
 	var metadata runtime.ServerMetadata
 
@@ -249,7 +249,7 @@ func request_ArticleAPI_SearchArticles_0(ctx context.Context, marshaler runtime.
 
 }
 
-func local_request_ArticleAPI_SearchArticles_0(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_SearchArticles_0(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SearchArticlesRequest
 	var metadata runtime.ServerMetadata
 
@@ -276,10 +276,10 @@ func local_request_ArticleAPI_SearchArticles_0(ctx context.Context, marshaler ru
 }
 
 var (
-	filter_ArticleAPI_CreateArticle_0 = &utilities.DoubleArray{Encoding: map[string]int{"article": 0, "parent": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+	filter_ArticlesAPI_CreateArticle_0 = &utilities.DoubleArray{Encoding: map[string]int{"article": 0, "parent": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
-func request_ArticleAPI_CreateArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_CreateArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -311,7 +311,7 @@ func request_ArticleAPI_CreateArticle_0(ctx context.Context, marshaler runtime.M
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_CreateArticle_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_CreateArticle_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -320,7 +320,7 @@ func request_ArticleAPI_CreateArticle_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func local_request_ArticleAPI_CreateArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_CreateArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -352,7 +352,7 @@ func local_request_ArticleAPI_CreateArticle_0(ctx context.Context, marshaler run
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_CreateArticle_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_CreateArticle_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -362,10 +362,10 @@ func local_request_ArticleAPI_CreateArticle_0(ctx context.Context, marshaler run
 }
 
 var (
-	filter_ArticleAPI_UpdateArticle_0 = &utilities.DoubleArray{Encoding: map[string]int{"article": 0, "name": 1}, Base: []int{1, 2, 1, 0, 0}, Check: []int{0, 1, 2, 3, 2}}
+	filter_ArticlesAPI_UpdateArticle_0 = &utilities.DoubleArray{Encoding: map[string]int{"article": 0, "name": 1}, Base: []int{1, 2, 1, 0, 0}, Check: []int{0, 1, 2, 3, 2}}
 )
 
-func request_ArticleAPI_UpdateArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_UpdateArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -404,7 +404,7 @@ func request_ArticleAPI_UpdateArticle_0(ctx context.Context, marshaler runtime.M
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_UpdateArticle_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_UpdateArticle_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -413,7 +413,7 @@ func request_ArticleAPI_UpdateArticle_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func local_request_ArticleAPI_UpdateArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_UpdateArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -452,7 +452,7 @@ func local_request_ArticleAPI_UpdateArticle_0(ctx context.Context, marshaler run
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticleAPI_UpdateArticle_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ArticlesAPI_UpdateArticle_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -461,7 +461,7 @@ func local_request_ArticleAPI_UpdateArticle_0(ctx context.Context, marshaler run
 
 }
 
-func request_ArticleAPI_DeleteArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticleAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_ArticlesAPI_DeleteArticle_0(ctx context.Context, marshaler runtime.Marshaler, client ArticlesAPIClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -487,7 +487,7 @@ func request_ArticleAPI_DeleteArticle_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func local_request_ArticleAPI_DeleteArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticleAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_ArticlesAPI_DeleteArticle_0(ctx context.Context, marshaler runtime.Marshaler, server ArticlesAPIServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteArticleRequest
 	var metadata runtime.ServerMetadata
 
@@ -513,24 +513,24 @@ func local_request_ArticleAPI_DeleteArticle_0(ctx context.Context, marshaler run
 
 }
 
-// RegisterArticleAPIHandlerServer registers the http handlers for service ArticleAPI to "mux".
-// UnaryRPC     :call ArticleAPIServer directly.
+// RegisterArticlesAPIHandlerServer registers the http handlers for service ArticlesAPI to "mux".
+// UnaryRPC     :call ArticlesAPIServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterArticleAPIHandlerFromEndpoint instead.
-func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ArticleAPIServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterArticlesAPIHandlerFromEndpoint instead.
+func RegisterArticlesAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ArticlesAPIServer) error {
 
-	mux.Handle("GET", pattern_ArticleAPI_ListArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_ListArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=categories/*}/articles"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=categories/*}/articles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_ListArticles_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_ListArticles_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -538,22 +538,22 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_ListArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_ListArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ArticleAPI_ListArticles_1, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_ListArticles_1, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=tags/*}/articles"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=tags/*}/articles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_ListArticles_1(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_ListArticles_1(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -561,22 +561,22 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_ListArticles_1(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_ListArticles_1(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ArticleAPI_GetArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_GetArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/GetArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/GetArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_GetArticle_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_GetArticle_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -584,22 +584,22 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_GetArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_GetArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ArticleAPI_SearchArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_SearchArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/SearchArticles", runtime.WithHTTPPathPattern("/v1/{name=articles/*/search}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/SearchArticles", runtime.WithHTTPPathPattern("/v1/{name=articles/*/search}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_SearchArticles_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_SearchArticles_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -607,22 +607,22 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_SearchArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_SearchArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_ArticleAPI_CreateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_ArticlesAPI_CreateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/CreateArticle", runtime.WithHTTPPathPattern("/v1/{parent=categories/*/articles}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/CreateArticle", runtime.WithHTTPPathPattern("/v1/{parent=categories/*/articles}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_CreateArticle_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_CreateArticle_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -630,22 +630,22 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_CreateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_CreateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_ArticleAPI_UpdateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_ArticlesAPI_UpdateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/UpdateArticle", runtime.WithHTTPPathPattern("/v1/{article.name=articles/*/update}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/UpdateArticle", runtime.WithHTTPPathPattern("/v1/{article.name=articles/*/update}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_UpdateArticle_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_UpdateArticle_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -653,22 +653,22 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_UpdateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_UpdateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_ArticleAPI_DeleteArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_ArticlesAPI_DeleteArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/DeleteArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*/delete}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/DeleteArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*/delete}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_ArticleAPI_DeleteArticle_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_ArticlesAPI_DeleteArticle_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -676,16 +676,16 @@ func RegisterArticleAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_ArticleAPI_DeleteArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_DeleteArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterArticleAPIHandlerFromEndpoint is same as RegisterArticleAPIHandler but
+// RegisterArticlesAPIHandlerFromEndpoint is same as RegisterArticlesAPIHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterArticleAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterArticlesAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -705,159 +705,159 @@ func RegisterArticleAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.Ser
 		}()
 	}()
 
-	return RegisterArticleAPIHandler(ctx, mux, conn)
+	return RegisterArticlesAPIHandler(ctx, mux, conn)
 }
 
-// RegisterArticleAPIHandler registers the http handlers for service ArticleAPI to "mux".
+// RegisterArticlesAPIHandler registers the http handlers for service ArticlesAPI to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterArticleAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterArticleAPIHandlerClient(ctx, mux, NewArticleAPIClient(conn))
+func RegisterArticlesAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterArticlesAPIHandlerClient(ctx, mux, NewArticlesAPIClient(conn))
 }
 
-// RegisterArticleAPIHandlerClient registers the http handlers for service ArticleAPI
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ArticleAPIClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ArticleAPIClient"
+// RegisterArticlesAPIHandlerClient registers the http handlers for service ArticlesAPI
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ArticlesAPIClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ArticlesAPIClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "ArticleAPIClient" to call the correct interceptors.
-func RegisterArticleAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ArticleAPIClient) error {
+// "ArticlesAPIClient" to call the correct interceptors.
+func RegisterArticlesAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ArticlesAPIClient) error {
 
-	mux.Handle("GET", pattern_ArticleAPI_ListArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_ListArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=categories/*}/articles"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=categories/*}/articles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_ListArticles_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_ListArticles_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_ListArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_ListArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ArticleAPI_ListArticles_1, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_ListArticles_1, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=tags/*}/articles"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/ListArticles", runtime.WithHTTPPathPattern("/v1/{parent=tags/*}/articles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_ListArticles_1(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_ListArticles_1(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_ListArticles_1(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_ListArticles_1(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ArticleAPI_GetArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_GetArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/GetArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/GetArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_GetArticle_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_GetArticle_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_GetArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_GetArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_ArticleAPI_SearchArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_ArticlesAPI_SearchArticles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/SearchArticles", runtime.WithHTTPPathPattern("/v1/{name=articles/*/search}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/SearchArticles", runtime.WithHTTPPathPattern("/v1/{name=articles/*/search}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_SearchArticles_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_SearchArticles_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_SearchArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_SearchArticles_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_ArticleAPI_CreateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_ArticlesAPI_CreateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/CreateArticle", runtime.WithHTTPPathPattern("/v1/{parent=categories/*/articles}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/CreateArticle", runtime.WithHTTPPathPattern("/v1/{parent=categories/*/articles}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_CreateArticle_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_CreateArticle_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_CreateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_CreateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PATCH", pattern_ArticleAPI_UpdateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PATCH", pattern_ArticlesAPI_UpdateArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/UpdateArticle", runtime.WithHTTPPathPattern("/v1/{article.name=articles/*/update}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/UpdateArticle", runtime.WithHTTPPathPattern("/v1/{article.name=articles/*/update}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_UpdateArticle_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_UpdateArticle_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_UpdateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_UpdateArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_ArticleAPI_DeleteArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_ArticlesAPI_DeleteArticle_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticleAPI/DeleteArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*/delete}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/hfcms.articles.v1.ArticlesAPI/DeleteArticle", runtime.WithHTTPPathPattern("/v1/{name=articles/*/delete}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ArticleAPI_DeleteArticle_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ArticlesAPI_DeleteArticle_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ArticleAPI_DeleteArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ArticlesAPI_DeleteArticle_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -865,33 +865,33 @@ func RegisterArticleAPIHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 }
 
 var (
-	pattern_ArticleAPI_ListArticles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "categories", "parent", "articles"}, ""))
+	pattern_ArticlesAPI_ListArticles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "categories", "parent", "articles"}, ""))
 
-	pattern_ArticleAPI_ListArticles_1 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "tags", "parent", "articles"}, ""))
+	pattern_ArticlesAPI_ListArticles_1 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "tags", "parent", "articles"}, ""))
 
-	pattern_ArticleAPI_GetArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "articles", "name"}, ""))
+	pattern_ArticlesAPI_GetArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "articles", "name"}, ""))
 
-	pattern_ArticleAPI_SearchArticles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "articles", "search", "name"}, ""))
+	pattern_ArticlesAPI_SearchArticles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "articles", "search", "name"}, ""))
 
-	pattern_ArticleAPI_CreateArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "categories", "articles", "parent"}, ""))
+	pattern_ArticlesAPI_CreateArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "categories", "articles", "parent"}, ""))
 
-	pattern_ArticleAPI_UpdateArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "articles", "update", "article.name"}, ""))
+	pattern_ArticlesAPI_UpdateArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "articles", "update", "article.name"}, ""))
 
-	pattern_ArticleAPI_DeleteArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "articles", "delete", "name"}, ""))
+	pattern_ArticlesAPI_DeleteArticle_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 4, 3, 5, 3}, []string{"v1", "articles", "delete", "name"}, ""))
 )
 
 var (
-	forward_ArticleAPI_ListArticles_0 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_ListArticles_0 = runtime.ForwardResponseMessage
 
-	forward_ArticleAPI_ListArticles_1 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_ListArticles_1 = runtime.ForwardResponseMessage
 
-	forward_ArticleAPI_GetArticle_0 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_GetArticle_0 = runtime.ForwardResponseMessage
 
-	forward_ArticleAPI_SearchArticles_0 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_SearchArticles_0 = runtime.ForwardResponseMessage
 
-	forward_ArticleAPI_CreateArticle_0 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_CreateArticle_0 = runtime.ForwardResponseMessage
 
-	forward_ArticleAPI_UpdateArticle_0 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_UpdateArticle_0 = runtime.ForwardResponseMessage
 
-	forward_ArticleAPI_DeleteArticle_0 = runtime.ForwardResponseMessage
+	forward_ArticlesAPI_DeleteArticle_0 = runtime.ForwardResponseMessage
 )
