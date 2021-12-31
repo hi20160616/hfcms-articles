@@ -19,6 +19,11 @@ service AttributesAPI {
       get: "/v1/{name=attributes/*}"
     };
   }
+  rpc SearchAttributes(SearchAttributesRequest) returns (SearchAttributesResponse) {
+    option (google.api.http) = {
+      get: "/v1/{name=attributes/*/search}"
+    };
+  }
   rpc CreateAttribute(CreateAttributeRequest) returns (Attribute) {
     option (google.api.http) = {
       post: "/v1/attributes"
@@ -56,6 +61,15 @@ message ListAttributesResponse {
 
 message GetAttributeRequest {
   string name = 1;
+}
+
+message SearchAttributesRequest{
+  string name = 1;
+}
+
+message SearchAttributesResponse{
+  repeated Attribute attributes = 1;
+  string next_page_token = 2;
 }
 
 message CreateAttributeRequest {

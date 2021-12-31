@@ -13,7 +13,7 @@ import (
 
 type ArticleService struct {
 	pb.UnimplementedArticlesAPIServer
-	ac *biz.ArticleUsecase
+	Acase *biz.ArticleUsecase
 }
 
 func NewArticleService() *ArticleService {
@@ -21,7 +21,7 @@ func NewArticleService() *ArticleService {
 	db := &data.Data{DBClient: dbc}
 	repo := data.NewArticleRepo(db, log.Default())
 	ac := biz.NewArticleUsecase(repo, *log.Default())
-	return &ArticleService{ac: ac}
+	return &ArticleService{Acase: ac}
 }
 
 func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle string) (*pb.ListArticlesResponse, error) {
@@ -30,7 +30,7 @@ func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesR
 			fmt.Printf("Recovered in ListArticles: \n%v\n", r)
 		}
 	}()
-	bizas, err := as.ac.ListArticles(ctx, in.Parent)
+	bizas, err := as.Acase.ListArticles(ctx, in.Parent)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (as *ArticleService) GetArticle(ctx context.Context, in *pb.GetArticleReque
 			fmt.Printf("Recovered in GetArticle: %s\n%v\n", in.Name, r)
 		}
 	}()
-	biza, err := as.ac.GetArticle(ctx, in.Name)
+	biza, err := as.Acase.GetArticle(ctx, in.Name)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArtic
 			fmt.Printf("Recovered in SearchArticles: \n%v\n", r)
 		}
 	}()
-	bizas, err := as.ac.SearchArticles(ctx, in.Name)
+	bizas, err := as.Acase.SearchArticles(ctx, in.Name)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ func (as *ArticleService) UpdateArticle(ctx context.Context, in *pb.UpdateArticl
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	a, err := as.ac.UpdateArticle(ctx, &biz.Article{
+	a, err := as.Acase.UpdateArticle(ctx, &biz.Article{
 		ArticleId:  in.Article.ArticleId,
 		Title:      in.Article.Title,
 		Content:    in.Article.Content,
@@ -123,7 +123,7 @@ func (as *ArticleService) DeleteArticle(ctx context.Context, in *pb.DeleteArticl
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	if err := as.ac.DeleteArticle(ctx, in.Name); err != nil {
+	if err := as.Acase.DeleteArticle(ctx, in.Name); err != nil {
 		return err
 	}
 	return nil
@@ -135,7 +135,7 @@ func (as *ArticleService) CreateArticle(ctx context.Context, in *pb.CreateArticl
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	a, err := as.ac.CreateArticle(ctx, &biz.Article{
+	a, err := as.Acase.CreateArticle(ctx, &biz.Article{
 		ArticleId:  in.Article.ArticleId,
 		Title:      in.Article.Title,
 		Content:    in.Article.Content,

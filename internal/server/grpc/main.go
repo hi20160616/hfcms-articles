@@ -13,18 +13,24 @@ import (
 )
 
 type GRPC struct {
-	AS service.ArticleService
+	AS   *service.ArticleService
+	CS   *service.CategoryService
+	TS   *service.TagService
+	ATTS *service.AttributeService
 }
 
 func NewGRPC() *GRPC {
 	return &GRPC{
-		AS: *service.NewArticleService(),
+		AS:   service.NewArticleService(),
+		CS:   service.NewCategoryService(),
+		TS:   service.NewTagService(),
+		ATTS: service.NewAttributeService(),
 	}
 }
 
 // Run starts the example gRPC service.
 // "network" and "address" are passed to net.Listen.
-func (g *GRPC) Run(ctx context.Context, gx *GRPC, network, address string) error {
+func (gx *GRPC) Run(ctx context.Context, network, address string) error {
 	l, err := net.Listen(network, address)
 	if err != nil {
 		return err
@@ -37,9 +43,9 @@ func (g *GRPC) Run(ctx context.Context, gx *GRPC, network, address string) error
 
 	s := grpc.NewServer()
 	pb.RegisterArticlesAPIServer(s, gx.AS.UnimplementedArticlesAPIServer)
-	// pb.RegisterCategoriesAPIServer(s, newCagegoriesAPIServer())
-	// pb.RegisterTagsAPIServer(s, newTagsAPIServer())
-	// pb.RegisterAttributesAPIServer(s, newAttributesAPIServer())
+	pb.RegisterCategoriesAPIServer(s, gx.CS.UnimplementedCategoriesAPIServer)
+	pb.RegisterTagsAPIServer(s, gx.TS.UnimplementedTagsAPIServer)
+	pb.RegisterAttributesAPIServer(s, gx.ATTS.UnimplementedAttributesAPIServer)
 
 	go func() {
 		defer s.GracefulStop()
@@ -49,13 +55,13 @@ func (g *GRPC) Run(ctx context.Context, gx *GRPC, network, address string) error
 }
 
 // RunInProcessGateway starts the invoke in process http gateway.
-func RunInProcessGateway(ctx context.Context, gx *GRPC, addr string, opts ...runtime.ServeMuxOption) error {
+func (gx *GRPC) RunInProcessGateway(ctx context.Context, addr string, opts ...runtime.ServeMuxOption) error {
 	mux := runtime.NewServeMux(opts...)
 
 	pb.RegisterArticlesAPIHandlerServer(ctx, mux, gx.AS.UnimplementedArticlesAPIServer)
-	// pb.RegisterCategoriesAPIHandlerServer(ctx, mux, newArticlesAPIServer())
-	// pb.RegisterTagsAPIHandlerServer(ctx, mux, newArticlesAPIServer())
-	// pb.RegisterAttributesAPIHandlerServer(ctx, mux, newArticlesAPIServer())
+	pb.RegisterCategoriesAPIHandlerServer(ctx, mux, gx.CS.UnimplementedCategoriesAPIServer)
+	pb.RegisterTagsAPIHandlerServer(ctx, mux, gx.TS.UnimplementedTagsAPIServer)
+	pb.RegisterAttributesAPIHandlerServer(ctx, mux, gx.ATTS.UnimplementedAttributesAPIServer)
 
 	s := &http.Server{
 		Addr:    addr,

@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type AttributesAPIClient interface {
 	ListAttributes(ctx context.Context, in *ListAttributesRequest, opts ...grpc.CallOption) (*ListAttributesResponse, error)
 	GetAttribute(ctx context.Context, in *GetAttributeRequest, opts ...grpc.CallOption) (*Attribute, error)
+	SearchAttributes(ctx context.Context, in *SearchAttributesRequest, opts ...grpc.CallOption) (*SearchAttributesResponse, error)
 	CreateAttribute(ctx context.Context, in *CreateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error)
 	UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Attribute, error)
 	DeleteAttribute(ctx context.Context, in *DeleteAttributeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -45,6 +46,15 @@ func (c *attributesAPIClient) ListAttributes(ctx context.Context, in *ListAttrib
 func (c *attributesAPIClient) GetAttribute(ctx context.Context, in *GetAttributeRequest, opts ...grpc.CallOption) (*Attribute, error) {
 	out := new(Attribute)
 	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/GetAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributesAPIClient) SearchAttributes(ctx context.Context, in *SearchAttributesRequest, opts ...grpc.CallOption) (*SearchAttributesResponse, error) {
+	out := new(SearchAttributesResponse)
+	err := c.cc.Invoke(ctx, "/hfcms.articles.v1.AttributesAPI/SearchAttributes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +94,7 @@ func (c *attributesAPIClient) DeleteAttribute(ctx context.Context, in *DeleteAtt
 type AttributesAPIServer interface {
 	ListAttributes(context.Context, *ListAttributesRequest) (*ListAttributesResponse, error)
 	GetAttribute(context.Context, *GetAttributeRequest) (*Attribute, error)
+	SearchAttributes(context.Context, *SearchAttributesRequest) (*SearchAttributesResponse, error)
 	CreateAttribute(context.Context, *CreateAttributeRequest) (*Attribute, error)
 	UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Attribute, error)
 	DeleteAttribute(context.Context, *DeleteAttributeRequest) (*emptypb.Empty, error)
@@ -99,6 +110,9 @@ func (UnimplementedAttributesAPIServer) ListAttributes(context.Context, *ListAtt
 }
 func (UnimplementedAttributesAPIServer) GetAttribute(context.Context, *GetAttributeRequest) (*Attribute, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAttribute not implemented")
+}
+func (UnimplementedAttributesAPIServer) SearchAttributes(context.Context, *SearchAttributesRequest) (*SearchAttributesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchAttributes not implemented")
 }
 func (UnimplementedAttributesAPIServer) CreateAttribute(context.Context, *CreateAttributeRequest) (*Attribute, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAttribute not implemented")
@@ -154,6 +168,24 @@ func _AttributesAPI_GetAttribute_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AttributesAPIServer).GetAttribute(ctx, req.(*GetAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributesAPI_SearchAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributesAPIServer).SearchAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/hfcms.articles.v1.AttributesAPI/SearchAttributes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributesAPIServer).SearchAttributes(ctx, req.(*SearchAttributesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -223,6 +255,10 @@ var _AttributesAPI_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAttribute",
 			Handler:    _AttributesAPI_GetAttribute_Handler,
+		},
+		{
+			MethodName: "SearchAttributes",
+			Handler:    _AttributesAPI_SearchAttributes_Handler,
 		},
 		{
 			MethodName: "CreateAttribute",

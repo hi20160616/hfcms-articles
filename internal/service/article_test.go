@@ -12,7 +12,7 @@ import (
 var us = NewArticleService()
 
 func TestCreateArticles(t *testing.T) {
-	a, err := us.ac.CreateArticle(context.Background(), &biz.Article{
+	a, err := us.Acase.CreateArticle(context.Background(), &biz.Article{
 		Title:      "Test CreateArticle Service",
 		Content:    "Test CreateArticle Service Content",
 		CategoryId: 123,
@@ -25,7 +25,7 @@ func TestCreateArticles(t *testing.T) {
 }
 
 func TestListArticles(t *testing.T) {
-	as, err := us.ac.ListArticles(context.Background(), "")
+	as, err := us.Acase.ListArticles(context.Background(), "")
 	if err != nil {
 		t.Error(err)
 		return
@@ -37,7 +37,7 @@ func TestListArticles(t *testing.T) {
 
 func TestGetArticle(t *testing.T) {
 	id := "211229113754.21503300002"
-	a, err := us.ac.GetArticle(context.Background(), "articles/"+id)
+	a, err := us.Acase.GetArticle(context.Background(), "articles/"+id)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -46,7 +46,7 @@ func TestGetArticle(t *testing.T) {
 
 func TestSearchArticles(t *testing.T) {
 	name := "articles/test3/search"
-	as, err := us.ac.SearchArticles(context.Background(), name)
+	as, err := us.Acase.SearchArticles(context.Background(), name)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,7 +56,7 @@ func TestSearchArticles(t *testing.T) {
 }
 
 func TestUpdateArticle(t *testing.T) {
-	a, err := us.ac.UpdateArticle(context.Background(), &biz.Article{
+	a, err := us.Acase.UpdateArticle(context.Background(), &biz.Article{
 		ArticleId:  "211229113754.21503300002",
 		Title:      "UpdateViaAS",
 		Content:    "UpdateViaAS",
@@ -72,10 +72,10 @@ func TestUpdateArticle(t *testing.T) {
 func TestDeleteArticle(t *testing.T) {
 	id := "211229113754.21503300002"
 	name := "articles/" + id + "/delete"
-	if err := us.ac.DeleteArticle(context.Background(), name); err != nil {
+	if err := us.Acase.DeleteArticle(context.Background(), name); err != nil {
 		t.Fatal(err)
 	}
-	_, err := us.ac.GetArticle(context.Background(), "articles/"+id)
+	_, err := us.Acase.GetArticle(context.Background(), "articles/"+id)
 	if err != nil {
 		if strings.Contains(err.Error(), "Item not found in table") {
 			return
