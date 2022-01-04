@@ -12,6 +12,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // AttributesAPIClient is the client API for AttributesAPI service.
@@ -132,8 +133,8 @@ type UnsafeAttributesAPIServer interface {
 	mustEmbedUnimplementedAttributesAPIServer()
 }
 
-func RegisterAttributesAPIServer(s *grpc.Server, srv AttributesAPIServer) {
-	s.RegisterService(&_AttributesAPI_serviceDesc, srv)
+func RegisterAttributesAPIServer(s grpc.ServiceRegistrar, srv AttributesAPIServer) {
+	s.RegisterService(&AttributesAPI_ServiceDesc, srv)
 }
 
 func _AttributesAPI_ListAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -244,7 +245,10 @@ func _AttributesAPI_DeleteAttribute_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-var _AttributesAPI_serviceDesc = grpc.ServiceDesc{
+// AttributesAPI_ServiceDesc is the grpc.ServiceDesc for AttributesAPI service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AttributesAPI_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "hfcms.articles.v1.AttributesAPI",
 	HandlerType: (*AttributesAPIServer)(nil),
 	Methods: []grpc.MethodDesc{

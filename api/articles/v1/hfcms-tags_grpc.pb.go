@@ -12,6 +12,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // TagsAPIClient is the client API for TagsAPI service.
@@ -118,8 +119,8 @@ type UnsafeTagsAPIServer interface {
 	mustEmbedUnimplementedTagsAPIServer()
 }
 
-func RegisterTagsAPIServer(s *grpc.Server, srv TagsAPIServer) {
-	s.RegisterService(&_TagsAPI_serviceDesc, srv)
+func RegisterTagsAPIServer(s grpc.ServiceRegistrar, srv TagsAPIServer) {
+	s.RegisterService(&TagsAPI_ServiceDesc, srv)
 }
 
 func _TagsAPI_ListTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -212,7 +213,10 @@ func _TagsAPI_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-var _TagsAPI_serviceDesc = grpc.ServiceDesc{
+// TagsAPI_ServiceDesc is the grpc.ServiceDesc for TagsAPI service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TagsAPI_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "hfcms.articles.v1.TagsAPI",
 	HandlerType: (*TagsAPIServer)(nil),
 	Methods: []grpc.MethodDesc{

@@ -11,7 +11,14 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
-var tr = NewTagRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
+var tr = func() biz.TagRepo {
+	dc, err := mariadb.NewClient()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return NewTagRepo(&Data{DBClient: dc}, log.Default())
+
+}()
 
 func TestCreateTag(t *testing.T) {
 	cs := []*biz.Tag{

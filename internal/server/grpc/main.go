@@ -19,13 +19,28 @@ type GRPC struct {
 	ATTS *service.AttributeService
 }
 
-func NewGRPC() *GRPC {
-	return &GRPC{
-		AS:   service.NewArticleService(),
-		CS:   service.NewCategoryService(),
-		TS:   service.NewTagService(),
-		ATTS: service.NewAttributeService(),
+func NewGRPC() (*GRPC, error) {
+	as, err := service.NewArticleService()
+	if err != nil {
+		return nil, err
 	}
+
+	cs, err := service.NewCategoryService()
+	if err != nil {
+		return nil, err
+	}
+
+	ts, err := service.NewTagService()
+	if err != nil {
+		return nil, err
+	}
+
+	atts, err := service.NewAttributeService()
+	if err != nil {
+		return nil, err
+	}
+
+	return &GRPC{AS: as, CS: cs, TS: ts, ATTS: atts}, nil
 }
 
 // Run starts the example gRPC service.

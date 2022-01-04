@@ -15,12 +15,16 @@ type TagService struct {
 	tc *biz.TagUsecase
 }
 
-func NewTagService() *TagService {
-	dbc := mariadb.NewClient()
+func NewTagService() (*TagService, error) {
+	dbc, err := mariadb.NewClient()
+	if err != nil {
+		return nil, err
+	}
+
 	db := &data.Data{DBClient: dbc}
 	repo := data.NewTagRepo(db, log.Default())
 	tc := biz.NewTagUsecase(repo, log.Default())
-	return &TagService{tc: tc}
+	return &TagService{tc: tc}, nil
 }
 
 func (ts *TagService) ListTags(ctx context.Context, in *pb.ListTagsRequest) (*pb.ListTagsResponse, error) {

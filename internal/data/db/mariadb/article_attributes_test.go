@@ -11,10 +11,9 @@ import (
 )
 
 func TestInsertArticleAttribute(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	tag1 := &ArticleAttribute{
 		ArticleId:   "211227174018.87977400001",
@@ -40,10 +39,9 @@ func TestInsertArticleAttribute(t *testing.T) {
 }
 
 func TestListArticleAttributes(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	got, err := c.DatabaseClient.QueryArticleAttribute().All(context.Background())
 	if err != nil {
@@ -56,10 +54,9 @@ func TestListArticleAttributes(t *testing.T) {
 }
 
 func TestWhereArticleAttributes(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	as := [][4]string{
@@ -89,10 +86,9 @@ func TestWhereArticleAttributes(t *testing.T) {
 }
 
 func TestUpdateArticleAttribute(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	tag := &ArticleAttribute{
 		Id:          1,
@@ -113,10 +109,9 @@ func TestUpdateArticleAttribute(t *testing.T) {
 }
 
 func TestDeleteArticleAttribute(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	id := "1"
 	if err := c.DatabaseClient.DeleteArticleAttribute(context.Background(), id); err != nil {

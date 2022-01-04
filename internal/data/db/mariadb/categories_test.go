@@ -11,10 +11,9 @@ import (
 )
 
 func TestInsertCategory(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	category1 := &Category{
 		Name: "category 1",
@@ -40,10 +39,9 @@ func TestInsertCategory(t *testing.T) {
 }
 
 func TestListCategories(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	got, err := c.DatabaseClient.QueryCategory().All(context.Background())
 	if err != nil {
@@ -56,10 +54,9 @@ func TestListCategories(t *testing.T) {
 }
 
 func TestWhereCategories(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	as := [][4]string{
@@ -89,10 +86,9 @@ func TestWhereCategories(t *testing.T) {
 }
 
 func TestUpdateCategories(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	category := &Category{
 		Id:   1,
@@ -113,10 +109,9 @@ func TestUpdateCategories(t *testing.T) {
 }
 
 func TestDeleteCategory(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	id := "1"
 	if err := c.DatabaseClient.DeleteCategory(context.Background(), id); err != nil {

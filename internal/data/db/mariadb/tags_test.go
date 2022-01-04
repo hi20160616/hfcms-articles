@@ -11,11 +11,11 @@ import (
 )
 
 func TestInsertTag(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
+
 	tag1 := &Tag{
 		Name: "tag 1",
 	}
@@ -37,10 +37,9 @@ func TestInsertTag(t *testing.T) {
 }
 
 func TestListTags(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	got, err := c.DatabaseClient.QueryTag().All(context.Background())
 	if err != nil {
@@ -53,10 +52,9 @@ func TestListTags(t *testing.T) {
 }
 
 func TestWhereTags(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	as := [][4]string{
@@ -86,10 +84,9 @@ func TestWhereTags(t *testing.T) {
 }
 
 func TestUpdateTag(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	tag := &Tag{
 		Id:   1,
@@ -109,10 +106,9 @@ func TestUpdateTag(t *testing.T) {
 }
 
 func TestDeleteTag(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	id := "1"
 	if err := c.DatabaseClient.DeleteTag(context.Background(), id); err != nil {

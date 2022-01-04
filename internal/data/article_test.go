@@ -11,7 +11,14 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
-var ar = NewArticleRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
+var ar = func() biz.ArticleRepo {
+	dc, err := mariadb.NewClient()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return NewArticleRepo(&Data{DBClient: dc}, log.Default())
+}()
+
 var id = "211229114147.23586100001"
 
 func TestCreateArticle(t *testing.T) {

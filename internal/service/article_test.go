@@ -3,20 +3,30 @@ package service
 import (
 	"context"
 	"fmt"
+	"log"
 	"strings"
 	"testing"
 
-	"github.com/hi20160616/hfcms-articles/internal/biz"
+	v1 "github.com/hi20160616/hfcms-articles/api/articles/v1"
 )
 
-var us = NewArticleService()
+var as = func() *ArticleService {
+	us, err := NewArticleService()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return us
+}()
 
 func TestCreateArticles(t *testing.T) {
-	a, err := us.Acase.CreateArticle(context.Background(), &biz.Article{
-		Title:      "Test CreateArticle Service",
-		Content:    "Test CreateArticle Service Content",
-		CategoryId: 123,
-		UserId:     123,
+
+	a, err := as.CreateArticle(context.Background(), &v1.CreateArticleRequest{
+		Article: &v1.Article{
+			Title:      "Test CreateArticle Service",
+			Content:    "Test CreateArticle Service Content",
+			CategoryId: 123,
+			UserId:     123,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -25,19 +35,19 @@ func TestCreateArticles(t *testing.T) {
 }
 
 func TestListArticles(t *testing.T) {
-	as, err := us.Acase.ListArticles(context.Background(), "")
+	as, err := as.ListArticles(context.Background(), &v1.ListArticlesRequest{})
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	for _, a := range as.Collection {
+	for _, a := range as.Articles {
 		fmt.Println(a)
 	}
 }
 
 func TestGetArticle(t *testing.T) {
 	id := "211229113754.21503300002"
-	a, err := us.Acase.GetArticle(context.Background(), "articles/"+id)
+	a, err := as.GetArticle(context.Background(), &v1.GetArticleRequest{Name: "articles/" + id})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -46,22 +56,24 @@ func TestGetArticle(t *testing.T) {
 
 func TestSearchArticles(t *testing.T) {
 	name := "articles/test3/search"
-	as, err := us.Acase.SearchArticles(context.Background(), name)
+	articles, err := as.SearchArticles(context.Background(), &v1.SearchArticlesRequest{Name: name})
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, v := range as.Collection {
+	for _, v := range articles.Articles {
 		fmt.Println(v)
 	}
 }
 
 func TestUpdateArticle(t *testing.T) {
-	a, err := us.Acase.UpdateArticle(context.Background(), &biz.Article{
-		ArticleId:  "211229113754.21503300002",
-		Title:      "UpdateViaAS",
-		Content:    "UpdateViaAS",
-		CategoryId: 5,
-		UserId:     6,
+	a, err := as.UpdateArticle(context.Background(), &v1.UpdateArticleRequest{
+		Article: &v1.Article{
+			ArticleId:  "211229113754.21503300002",
+			Title:      "UpdateViaAS",
+			Content:    "UpdateViaAS",
+			CategoryId: 5,
+			UserId:     6,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -72,10 +84,10 @@ func TestUpdateArticle(t *testing.T) {
 func TestDeleteArticle(t *testing.T) {
 	id := "211229113754.21503300002"
 	name := "articles/" + id + "/delete"
-	if err := us.Acase.DeleteArticle(context.Background(), name); err != nil {
+	if _, err := as.DeleteArticle(context.Background(), &v1.DeleteArticleRequest{Name: name}); err != nil {
 		t.Fatal(err)
 	}
-	_, err := us.Acase.GetArticle(context.Background(), "articles/"+id)
+	_, err := as.GetArticle(context.Background(), &v1.GetArticleRequest{Name: "articles/" + id})
 	if err != nil {
 		if strings.Contains(err.Error(), "Item not found in table") {
 			return

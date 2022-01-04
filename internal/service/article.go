@@ -9,28 +9,33 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type ArticleService struct {
 	pb.UnimplementedArticlesAPIServer
-	Acase *biz.ArticleUsecase
+	ac *biz.ArticleUsecase
 }
 
-func NewArticleService() *ArticleService {
-	dbc := mariadb.NewClient()
+func NewArticleService() (*ArticleService, error) {
+	dbc, err := mariadb.NewClient()
+	if err != nil {
+		return nil, err
+	}
+
 	db := &data.Data{DBClient: dbc}
 	repo := data.NewArticleRepo(db, log.Default())
-	ac := biz.NewArticleUsecase(repo, *log.Default())
-	return &ArticleService{Acase: ac}
+	articleUsecase := biz.NewArticleUsecase(repo, *log.Default())
+	return &ArticleService{ac: articleUsecase}, nil
 }
 
-func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesRequest, msTitle string) (*pb.ListArticlesResponse, error) {
+func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesRequest) (*pb.ListArticlesResponse, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in ListArticles: \n%v\n", r)
 		}
 	}()
-	bizas, err := as.Acase.ListArticles(ctx, in.Parent)
+	bizas, err := as.ac.ListArticles(ctx, in.Parent)
 	if err != nil {
 		return nil, err
 	}
@@ -48,13 +53,13 @@ func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesR
 	return &pb.ListArticlesResponse{Articles: resp}, nil
 }
 
-func (as *ArticleService) GetArticle(ctx context.Context, in *pb.GetArticleRequest, msTitle string) (*pb.Article, error) {
+func (as *ArticleService) GetArticle(ctx context.Context, in *pb.GetArticleRequest) (*pb.Article, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in GetArticle: %s\n%v\n", in.Name, r)
 		}
 	}()
-	biza, err := as.Acase.GetArticle(ctx, in.Name)
+	biza, err := as.ac.GetArticle(ctx, in.Name)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +79,7 @@ func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArtic
 			fmt.Printf("Recovered in SearchArticles: \n%v\n", r)
 		}
 	}()
-	bizas, err := as.Acase.SearchArticles(ctx, in.Name)
+	bizas, err := as.ac.SearchArticles(ctx, in.Name)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +102,7 @@ func (as *ArticleService) UpdateArticle(ctx context.Context, in *pb.UpdateArticl
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	a, err := as.Acase.UpdateArticle(ctx, &biz.Article{
+	a, err := as.ac.UpdateArticle(ctx, &biz.Article{
 		ArticleId:  in.Article.ArticleId,
 		Title:      in.Article.Title,
 		Content:    in.Article.Content,
@@ -117,16 +122,13 @@ func (as *ArticleService) UpdateArticle(ctx context.Context, in *pb.UpdateArticl
 	}, nil
 }
 
-func (as *ArticleService) DeleteArticle(ctx context.Context, in *pb.DeleteArticleRequest) error {
+func (as *ArticleService) DeleteArticle(ctx context.Context, in *pb.DeleteArticleRequest) (*emptypb.Empty, error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	if err := as.Acase.DeleteArticle(ctx, in.Name); err != nil {
-		return err
-	}
-	return nil
+	return new(emptypb.Empty), as.ac.DeleteArticle(ctx, in.Name)
 }
 
 func (as *ArticleService) CreateArticle(ctx context.Context, in *pb.CreateArticleRequest) (*pb.Article, error) {
@@ -135,7 +137,7 @@ func (as *ArticleService) CreateArticle(ctx context.Context, in *pb.CreateArticl
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	a, err := as.Acase.CreateArticle(ctx, &biz.Article{
+	a, err := as.ac.CreateArticle(ctx, &biz.Article{
 		ArticleId:  in.Article.ArticleId,
 		Title:      in.Article.Title,
 		Content:    in.Article.Content,

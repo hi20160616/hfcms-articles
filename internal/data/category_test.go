@@ -11,7 +11,13 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
-var cr = NewCategoryRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
+var cr = func() biz.CategoryRepo {
+	dc, err := mariadb.NewClient()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return NewCategoryRepo(&Data{DBClient: dc}, log.Default())
+}()
 
 func TestCreateCategory(t *testing.T) {
 	cs := []*biz.Category{

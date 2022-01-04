@@ -27,10 +27,9 @@ func TestPrepareQuery(t *testing.T) {
 }
 
 func TestInsertArticle(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	article1 := &Article{
 		Id:         time.Now().Format("060102150405.000000") + "00001",
@@ -68,10 +67,9 @@ func TestInsertArticle(t *testing.T) {
 }
 
 func TestListArticles(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	got, err := c.DatabaseClient.QueryArticle().All(context.Background())
 	if err != nil {
@@ -84,10 +82,9 @@ func TestListArticles(t *testing.T) {
 }
 
 func TestWhereArticles(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	out := func(a [4]string) {
@@ -135,10 +132,9 @@ func TestWhereArticles(t *testing.T) {
 }
 
 func TestUpdateArticle(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	article := &Article{
 		Id:      id,
@@ -159,10 +155,9 @@ func TestUpdateArticle(t *testing.T) {
 }
 
 func TestDeleteArticle(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	if err := c.DatabaseClient.DeleteArticle(context.Background(), id); err != nil {
 		t.Error(err)

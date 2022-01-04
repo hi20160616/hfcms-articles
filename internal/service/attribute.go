@@ -15,12 +15,16 @@ type AttributeService struct {
 	ac *biz.AttributeUsecase
 }
 
-func NewAttributeService() *AttributeService {
-	dbc := mariadb.NewClient()
+func NewAttributeService() (*AttributeService, error) {
+	dbc, err := mariadb.NewClient()
+	if err != nil {
+		return nil, err
+	}
+
 	db := &data.Data{DBClient: dbc}
 	repo := data.NewAttributeRepo(db, log.Default())
 	ac := biz.NewAttributeUsecase(repo, *log.Default())
-	return &AttributeService{ac: ac}
+	return &AttributeService{ac: ac}, nil
 }
 
 func (as *AttributeService) ListAttributes(ctx context.Context) (*pb.ListAttributesResponse, error) {

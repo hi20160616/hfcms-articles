@@ -15,12 +15,16 @@ type CategoryService struct {
 	cc *biz.CategoryUsecase
 }
 
-func NewCategoryService() *CategoryService {
-	dbc := mariadb.NewClient()
+func NewCategoryService() (*CategoryService, error) {
+	dbc, err := mariadb.NewClient()
+	if err != nil {
+		return nil, err
+	}
+
 	db := &data.Data{DBClient: dbc}
 	repo := data.NewCategoryRepo(db, log.Default())
 	cc := biz.NewCategoryUsecase(repo, log.Default())
-	return &CategoryService{cc: cc}
+	return &CategoryService{cc: cc}, nil
 }
 
 func (cs *CategoryService) ListCategories(ctx context.Context, in *pb.ListCategoriesRequest) (*pb.ListCategoriesResponse, error) {

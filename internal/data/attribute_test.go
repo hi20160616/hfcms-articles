@@ -11,7 +11,15 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
 )
 
-var attr = NewAttributeRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
+// var attr = NewAttributeRepo(&Data{DBClient: mariadb.NewClient()}, log.Default())
+var attr = func() biz.AttributeRepo {
+	dc, err := mariadb.NewClient()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return NewAttributeRepo(&Data{DBClient: dc}, log.Default())
+}()
+
 var aid = "211229114147.23586100001"
 var attrid = "4"
 

@@ -9,7 +9,6 @@ import (
 type Client struct {
 	db             *sql.DB
 	DatabaseClient *DatabaseClient
-	Err            error
 }
 
 type DatabaseClient struct {
@@ -21,11 +20,11 @@ func open(cfg *configs.Config) (*sql.DB, error) {
 	// return sql.Open("mysql", "hfcms_article_user:hfcms_article_user_pwd@tcp(127.0.0.1:3306)/hfcms_articles?loc=Asia%2FShanghai&parseTime=true")
 }
 
-func NewClient() *Client {
+func NewClient() (*Client, error) {
 	cfg := configs.NewConfig("hfcms-articles")
 	if cfg.Err != nil {
-		return &Client{nil, nil, cfg.Err}
+		return &Client{nil, nil}, cfg.Err
 	}
 	db, err := open(cfg)
-	return &Client{db, &DatabaseClient{db}, err}
+	return &Client{db, &DatabaseClient{db}}, err
 }

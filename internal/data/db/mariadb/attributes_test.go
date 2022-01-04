@@ -11,10 +11,9 @@ import (
 )
 
 func TestInsertAttribute(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	attribute1 := &Attribute{
 		Path:        "./Upload/1/test1.jpg",
@@ -46,10 +45,9 @@ func TestInsertAttribute(t *testing.T) {
 }
 
 func TestListAttributes(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	got, err := c.DatabaseClient.QueryAttribute().All(context.Background())
 	if err != nil {
@@ -62,10 +60,9 @@ func TestListAttributes(t *testing.T) {
 }
 
 func TestWhereAttributes(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Errorf("%v", c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	as := [][4]string{
@@ -95,10 +92,9 @@ func TestWhereAttributes(t *testing.T) {
 }
 
 func TestUpdateAttribute(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	attribute := &Attribute{
 		Id:          1,
@@ -121,10 +117,9 @@ func TestUpdateAttribute(t *testing.T) {
 }
 
 func TestDeleteAttribute(t *testing.T) {
-	c := NewClient()
-	if c.Err != nil {
-		t.Error(c.Err)
-		return
+	c, err := NewClient()
+	if err != nil {
+		t.Fatal(err)
 	}
 	id := "1"
 	if err := c.DatabaseClient.DeleteAttribute(context.Background(), id); err != nil {

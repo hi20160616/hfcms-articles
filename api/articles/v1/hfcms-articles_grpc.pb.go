@@ -12,6 +12,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // ArticlesAPIClient is the client API for ArticlesAPI service.
@@ -132,8 +133,8 @@ type UnsafeArticlesAPIServer interface {
 	mustEmbedUnimplementedArticlesAPIServer()
 }
 
-func RegisterArticlesAPIServer(s *grpc.Server, srv ArticlesAPIServer) {
-	s.RegisterService(&_ArticlesAPI_serviceDesc, srv)
+func RegisterArticlesAPIServer(s grpc.ServiceRegistrar, srv ArticlesAPIServer) {
+	s.RegisterService(&ArticlesAPI_ServiceDesc, srv)
 }
 
 func _ArticlesAPI_ListArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -244,7 +245,10 @@ func _ArticlesAPI_DeleteArticle_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-var _ArticlesAPI_serviceDesc = grpc.ServiceDesc{
+// ArticlesAPI_ServiceDesc is the grpc.ServiceDesc for ArticlesAPI service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ArticlesAPI_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "hfcms.articles.v1.ArticlesAPI",
 	HandlerType: (*ArticlesAPIServer)(nil),
 	Methods: []grpc.MethodDesc{

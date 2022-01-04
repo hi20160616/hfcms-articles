@@ -23,9 +23,21 @@ type GRPC struct {
 }
 
 func NewGRPCServer() (*GRPC, error) {
+	// t, err := time.ParseDuration("1s")
+	// if err != nil {
+	//         return nil, err
+	// }
+	// opts := []grpc.ServerOption{
+	//         grpc.ConnectionTimeout(t),
+	// }
+	// s := grpc.NewServer(opts...)
 	s := grpc.NewServer()
-	as := service.NewArticleService()
-	pb.RegisterArticlesAPIServer(s, as.UnimplementedArticlesAPIServer)
+	as, err := service.NewArticleService()
+	if err != nil {
+		return nil, err
+	}
+
+	pb.RegisterArticlesAPIServer(s, as)
 	l, err := net.Listen("tcp", *addr)
 	if err != nil {
 		return nil, err
