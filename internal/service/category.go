@@ -8,6 +8,7 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type CategoryService struct {
@@ -43,6 +44,6 @@ func (cs *CategoryService) UpdateCategory(ctx context.Context, in *pb.UpdateCate
 	return nil, nil
 }
 
-func (cs *CategoryService) DeleteCategory(ctx context.Context, in *pb.DeleteCategoryRequest) error {
-	return nil
+func (cs *CategoryService) DeleteCategory(ctx context.Context, in *pb.DeleteCategoryRequest) (*emptypb.Empty, error) {
+	return new(emptypb.Empty), nil
 }

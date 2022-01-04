@@ -8,6 +8,7 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type TagService struct {
@@ -43,6 +44,6 @@ func (ts *TagService) UpdateTag(ctx context.Context, in *pb.UpdateTagRequest) (*
 	return nil, nil
 }
 
-func (ts *TagService) DeleteTag(ctx context.Context, in *pb.DeleteTagRequest) (*pb.Tag, error) {
-	return nil, nil
+func (ts *TagService) DeleteTag(ctx context.Context, in *pb.DeleteTagRequest) (*emptypb.Empty, error) {
+	return &emptypb.Empty{}, nil
 }

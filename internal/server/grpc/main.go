@@ -19,28 +19,19 @@ type GRPC struct {
 	ATTS *service.AttributeService
 }
 
-func NewGRPC() (*GRPC, error) {
-	as, err := service.NewArticleService()
-	if err != nil {
-		return nil, err
-	}
-
-	cs, err := service.NewCategoryService()
-	if err != nil {
-		return nil, err
-	}
-
-	ts, err := service.NewTagService()
-	if err != nil {
-		return nil, err
-	}
-
-	atts, err := service.NewAttributeService()
-	if err != nil {
-		return nil, err
-	}
-
-	return &GRPC{AS: as, CS: cs, TS: ts, ATTS: atts}, nil
+func NewGRPC() (*GRPC, []error) {
+	ng := &GRPC{}
+	var errs []error
+	var err error
+	ng.AS, err = service.NewArticleService()
+	errs = append(errs, err)
+	ng.CS, err = service.NewCategoryService()
+	errs = append(errs, err)
+	ng.TS, err = service.NewTagService()
+	errs = append(errs, err)
+	ng.ATTS, err = service.NewAttributeService()
+	errs = append(errs, err)
+	return ng, errs
 }
 
 // Run starts the example gRPC service.
@@ -57,10 +48,10 @@ func (gx *GRPC) Run(ctx context.Context, network, address string) error {
 	}()
 
 	s := grpc.NewServer()
-	pb.RegisterArticlesAPIServer(s, gx.AS.UnimplementedArticlesAPIServer)
-	pb.RegisterCategoriesAPIServer(s, gx.CS.UnimplementedCategoriesAPIServer)
-	pb.RegisterTagsAPIServer(s, gx.TS.UnimplementedTagsAPIServer)
-	pb.RegisterAttributesAPIServer(s, gx.ATTS.UnimplementedAttributesAPIServer)
+	pb.RegisterArticlesAPIServer(s, gx.AS)
+	pb.RegisterCategoriesAPIServer(s, gx.CS)
+	pb.RegisterTagsAPIServer(s, gx.TS)
+	pb.RegisterAttributesAPIServer(s, gx.ATTS)
 
 	go func() {
 		defer s.GracefulStop()

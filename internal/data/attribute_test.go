@@ -100,7 +100,7 @@ func TestListAttributes(t *testing.T) {
 
 func TestDeleteAttribute(t *testing.T) {
 	name := "attributes/" + attrid + "/delete"
-	if err := attr.DeleteAttribute(context.Background(), name); err != nil {
+	if _, err := attr.DeleteAttribute(context.Background(), name); err != nil {
 		t.Error(err)
 		return
 	}

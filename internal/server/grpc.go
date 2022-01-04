@@ -23,14 +23,6 @@ type GRPC struct {
 }
 
 func NewGRPCServer() (*GRPC, error) {
-	// t, err := time.ParseDuration("1s")
-	// if err != nil {
-	//         return nil, err
-	// }
-	// opts := []grpc.ServerOption{
-	//         grpc.ConnectionTimeout(t),
-	// }
-	// s := grpc.NewServer(opts...)
 	s := grpc.NewServer()
 	as, err := service.NewArticleService()
 	if err != nil {

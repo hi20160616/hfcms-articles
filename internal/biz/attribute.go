@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -24,7 +25,7 @@ type AttributeRepo interface {
 	SearchAttributes(ctx context.Context, name string) (*Attributes, error)
 	CreateAttribute(ctx context.Context, article *Attribute) (*Attribute, error)
 	UpdateAttribute(ctx context.Context, article *Attribute) (*Attribute, error)
-	DeleteAttribute(ctx context.Context, name string) error
+	DeleteAttribute(ctx context.Context, name string) (*emptypb.Empty, error)
 }
 
 type AttributeUsecase struct {

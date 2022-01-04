@@ -72,7 +72,7 @@ func TestListCategories(t *testing.T) {
 func TestDeleteCategory(t *testing.T) {
 	id := "2"
 	name := "categories/" + id + "/delete"
-	if err := cr.DeleteCategory(context.Background(), name); err != nil {
+	if _, err := cr.DeleteCategory(context.Background(), name); err != nil {
 		t.Error(err)
 		return
 	}

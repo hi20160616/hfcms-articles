@@ -8,6 +8,7 @@ import (
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type AttributeService struct {
@@ -27,7 +28,7 @@ func NewAttributeService() (*AttributeService, error) {
 	return &AttributeService{ac: ac}, nil
 }
 
-func (as *AttributeService) ListAttributes(ctx context.Context) (*pb.ListAttributesResponse, error) {
+func (as *AttributeService) ListAttributes(ctx context.Context, in *pb.ListAttributesRequest) (*pb.ListAttributesResponse, error) {
 	return nil, nil
 }
 
@@ -47,6 +48,6 @@ func (as *AttributeService) UpdateAttribute(ctx context.Context, in *pb.UpdateAt
 	return nil, nil
 }
 
-func (as *AttributeService) DeleteAttribute(ctx context.Context, in *pb.DeleteAttributeRequest) error {
-	return nil
+func (as *AttributeService) DeleteAttribute(ctx context.Context, in *pb.DeleteAttributeRequest) (*emptypb.Empty, error) {
+	return &emptypb.Empty{}, nil
 }

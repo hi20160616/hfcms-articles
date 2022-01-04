@@ -128,7 +128,7 @@ func (as *ArticleService) DeleteArticle(ctx context.Context, in *pb.DeleteArticl
 			fmt.Printf("Recovered in UpdateArticles: \n%v\n", r)
 		}
 	}()
-	return new(emptypb.Empty), as.ac.DeleteArticle(ctx, in.Name)
+	return as.ac.DeleteArticle(ctx, in.Name)
 }
 
 func (as *ArticleService) CreateArticle(ctx context.Context, in *pb.CreateArticleRequest) (*pb.Article, error) {

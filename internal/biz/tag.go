@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -23,7 +24,7 @@ type TagRepo interface {
 	GetTag(ctx context.Context, name string) (*Tag, error)
 	CreateTag(ctx context.Context, tag *Tag) (*Tag, error)
 	UpdateTag(ctx context.Context, tag *Tag) (*Tag, error)
-	DeleteTag(ctx context.Context, name string) error
+	DeleteTag(ctx context.Context, name string) (*emptypb.Empty, error)
 }
 
 type TagUsecase struct {

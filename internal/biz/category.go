@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -23,7 +24,7 @@ type CategoryRepo interface {
 	GetCategory(ctx context.Context, name string) (*Category, error)
 	CreateCategory(ctx context.Context, category *Category) (*Category, error)
 	UpdateCategory(ctx context.Context, category *Category) (*Category, error)
-	DeleteCategory(ctx context.Context, name string) error
+	DeleteCategory(ctx context.Context, name string) (*emptypb.Empty, error)
 }
 
 type CategoryUsecase struct {

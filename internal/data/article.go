@@ -13,6 +13,7 @@ import (
 	_ "github.com/hi20160616/hfcms-articles/configs"
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -170,13 +171,13 @@ func (ar *articleRepo) UpdateArticle(ctx context.Context, article *biz.Article) 
 	return article, nil
 }
 
-func (ar *articleRepo) DeleteArticle(ctx context.Context, name string) error {
+func (ar *articleRepo) DeleteArticle(ctx context.Context, name string) (*emptypb.Empty, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
 	re := regexp.MustCompile(`^articles/([\d.]+)/delete$`)
 	x := re.FindStringSubmatch(name)
 	if len(x) != 2 {
-		return errors.New("name cannot match regex express")
+		return &emptypb.Empty{}, errors.New("name cannot match regex express")
 	}
-	return ar.data.DBClient.DatabaseClient.DeleteArticle(ctx, x[1])
+	return &emptypb.Empty{}, ar.data.DBClient.DatabaseClient.DeleteArticle(ctx, x[1])
 }

@@ -12,6 +12,7 @@ import (
 	_ "github.com/hi20160616/hfcms-articles/configs"
 	"github.com/hi20160616/hfcms-articles/internal/biz"
 	"github.com/hi20160616/hfcms-articles/internal/data/db/mariadb"
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -161,13 +162,14 @@ func (ar *attributeRepo) UpdateAttribute(
 	return attribute, nil
 }
 
-func (ar *attributeRepo) DeleteAttribute(ctx context.Context, name string) error {
+func (ar *attributeRepo) DeleteAttribute(ctx context.Context, name string) (*emptypb.Empty, error) {
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
 	re := regexp.MustCompile(`^attributes/([\d.]+)/delete$`)
 	x := re.FindStringSubmatch(name)
 	if len(x) != 2 {
-		return errors.New("name cannot match regex express")
+		return &emptypb.Empty{}, errors.New("name cannot match regex express")
 	}
-	return ar.data.DBClient.DatabaseClient.DeleteAttribute(ctx, x[1])
+	return &emptypb.Empty{},
+		ar.data.DBClient.DatabaseClient.DeleteAttribute(ctx, x[1])
 }

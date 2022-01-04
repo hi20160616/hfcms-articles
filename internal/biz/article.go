@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -25,7 +26,7 @@ type ArticleRepo interface {
 	SearchArticles(ctx context.Context, name string) (*Articles, error)
 	CreateArticle(ctx context.Context, article *Article) (*Article, error)
 	UpdateArticle(ctx context.Context, article *Article) (*Article, error)
-	DeleteArticle(ctx context.Context, name string) error
+	DeleteArticle(ctx context.Context, name string) (*emptypb.Empty, error)
 }
 
 type ArticleUsecase struct {
@@ -56,6 +57,6 @@ func (au *ArticleUsecase) UpdateArticle(ctx context.Context, article *Article) (
 	return au.repo.UpdateArticle(ctx, article)
 }
 
-func (au *ArticleUsecase) DeleteArticle(ctx context.Context, name string) error {
+func (au *ArticleUsecase) DeleteArticle(ctx context.Context, name string) (*emptypb.Empty, error) {
 	return au.repo.DeleteArticle(ctx, name)
 }

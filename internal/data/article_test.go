@@ -100,7 +100,7 @@ func TestListArticles(t *testing.T) {
 
 func TestDeleteArticle(t *testing.T) {
 	name := "articles/" + id + "/delete"
-	if err := ar.DeleteArticle(context.Background(), name); err != nil {
+	if _, err := ar.DeleteArticle(context.Background(), name); err != nil {
 		t.Error(err)
 		return
 	}

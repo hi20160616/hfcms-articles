@@ -73,7 +73,7 @@ func TestListTags(t *testing.T) {
 func TestDeleteTag(t *testing.T) {
 	id := "2"
 	name := "tags/" + id + "/delete"
-	if err := tr.DeleteTag(context.Background(), name); err != nil {
+	if _, err := tr.DeleteTag(context.Background(), name); err != nil {
 		t.Error(err)
 		return
 	}
