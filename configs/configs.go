@@ -46,24 +46,14 @@ func setRootPath(cfg *Config) *Config {
 	if cfg.Err != nil {
 		return cfg
 	}
-	if strings.Contains(os.Args[0], ".test") {
-		return rootPath4Test(cfg)
-	}
-	return cfg
-}
-
-func rootPath4Test(cfg *Config) *Config {
-	cfg.RootPath, cfg.Err = os.Getwd()
-	if cfg.Err != nil {
-		return cfg
-	}
 	ps := strings.Split(cfg.RootPath, string(cfg.ProjectName))
 	n := 0
 	if len(ps) > 1 {
 		n = strings.Count(ps[1], string(os.PathSeparator))
 	}
 	for i := 0; i < n; i++ {
-		cfg.RootPath = filepath.Join(cfg.RootPath, "../")
+		cfg.RootPath = filepath.Join(
+			cfg.RootPath, ".."+string(os.PathSeparator))
 	}
 	cfg.RootPath = filepath.FromSlash(cfg.RootPath)
 	return cfg

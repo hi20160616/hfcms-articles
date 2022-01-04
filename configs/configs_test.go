@@ -13,11 +13,3 @@ func TestLoad(t *testing.T) {
 	}
 	fmt.Println(cfg)
 }
-
-func TestRootPath4Test(t *testing.T) {
-	cfg := rootPath4Test(&Config{})
-	if cfg.Err != nil {
-		t.Error(cfg.Err)
-	}
-	fmt.Println(cfg.RootPath)
-}
