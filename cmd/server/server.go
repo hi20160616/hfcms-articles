@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/hi20160616/hfcms-articles/configs"
 	"github.com/hi20160616/hfcms-articles/internal/server"
 	"golang.org/x/sync/errgroup"
 )
@@ -17,14 +18,13 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	g, ctx := errgroup.WithContext(ctx)
-
+	cfg := configs.NewConfig("hfcms-articles")
 	// gRPC
-	gs, err := server.NewGRPCServer()
+	gs, err := server.NewGRPCServer(cfg)
 	if err != nil {
 		log.Printf("%v", err)
 	}
 	g.Go(func() error {
-		log.Println("gRPC Server start.")
 		return gs.Start(ctx)
 	})
 	g.Go(func() error {
@@ -32,6 +32,11 @@ func main() {
 		<-ctx.Done()
 		log.Println("gRPC Server stop now...")
 		return gs.Stop(ctx)
+	})
+
+	// RESTFul
+	g.Go(func() error {
+		return gs.StartRESTFul(ctx)
 	})
 
 	// Graceful stop
