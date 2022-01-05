@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	pb "github.com/hi20160616/hfcms-articles/api/articles/v1"
@@ -12,13 +13,8 @@ import (
 	myerr "github.com/hi20160616/hfcms-articles/errors"
 	"github.com/hi20160616/hfcms-articles/internal/service"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/keepalive"
 )
-
-// var (
-//         addr    = flag.String("addr", ":9090", "endpoint of the gRPC service")
-//         network = flag.String("network", "tcp", "a valid network type which is consistent to -addr")
-//         restful = flag.String("restful", ":8080", "the port to restful serve on")
-// )
 
 type GRPC struct {
 	s   *grpc.Server
@@ -27,7 +23,11 @@ type GRPC struct {
 }
 
 func NewGRPCServer(cfg *configs.Config) (*GRPC, error) {
-	s := grpc.NewServer()
+	s := grpc.NewServer(
+		grpc.KeepaliveParams(keepalive.ServerParameters{
+			MaxConnectionIdle: 5 * time.Minute,
+		}),
+	)
 	as, err := service.NewArticleService()
 	if err != nil {
 		return nil, err
