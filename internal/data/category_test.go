@@ -21,8 +21,8 @@ var cr = func() biz.CategoryRepo {
 
 func TestCreateCategory(t *testing.T) {
 	cs := []*biz.Category{
-		{Name: "Root1", Code: "1"},
-		{Name: "Root2", Code: "2"},
+		{CategoryName: "Root1", CategoryCode: "1"},
+		{CategoryName: "Root2", CategoryCode: "2"},
 	}
 	create := func(c *biz.Category) {
 		a, err := cr.CreateCategory(context.Background(), c)
@@ -48,9 +48,9 @@ func TestGetCategory(t *testing.T) {
 
 func TestUpdateCategory(t *testing.T) {
 	a, err := cr.UpdateCategory(context.Background(), &biz.Category{
-		CategoryId: 3,
-		Name:       "Root+",
-		Code:       "1+",
+		CategoryId:   3,
+		CategoryName: "Root+",
+		CategoryCode: "1+",
 	})
 	if err != nil {
 		t.Error(err)

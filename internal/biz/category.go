@@ -9,9 +9,9 @@ import (
 )
 
 type Category struct {
-	CategoryId int
-	Name, Code string
-	UpdateTime *timestamppb.Timestamp
+	CategoryId                 int
+	CategoryName, CategoryCode string
+	UpdateTime                 *timestamppb.Timestamp
 }
 
 type Categories struct {
@@ -33,4 +33,20 @@ type CategoryUsecase struct {
 
 func NewCategoryUsecase(repo CategoryRepo, logger *log.Logger) *CategoryUsecase {
 	return &CategoryUsecase{repo: repo}
+}
+
+func (cu *CategoryUsecase) ListCategories(ctx context.Context) (*Categories, error) {
+	return cu.repo.ListCategories(ctx)
+}
+func (cu *CategoryUsecase) GetCategory(ctx context.Context, name string) (*Category, error) {
+	return cu.repo.GetCategory(ctx, name)
+}
+func (cu *CategoryUsecase) CreateCategory(ctx context.Context, category *Category) (*Category, error) {
+	return cu.repo.CreateCategory(ctx, category)
+}
+func (cu *CategoryUsecase) UpdateCategory(ctx context.Context, category *Category) (*Category, error) {
+	return cu.repo.CreateCategory(ctx, category)
+}
+func (cu *CategoryUsecase) DeleteCategory(ctx context.Context, name string) (*emptypb.Empty, error) {
+	return cu.repo.DeleteCategory(ctx, name)
 }

@@ -39,10 +39,10 @@ func (cr *categoryRepo) ListCategories(ctx context.Context) (*biz.Categories, er
 	bizas := &biz.Categories{Collection: []*biz.Category{}}
 	for _, a := range as.Collection {
 		bizas.Collection = append(bizas.Collection, &biz.Category{
-			CategoryId: a.Id,
-			Name:       a.Name,
-			Code:       a.Code,
-			UpdateTime: timestamppb.New(a.UpdateTime),
+			CategoryId:   a.Id,
+			CategoryName: a.Name,
+			CategoryCode: a.Code,
+			UpdateTime:   timestamppb.New(a.UpdateTime),
 		})
 	}
 	return bizas, nil
@@ -65,10 +65,10 @@ func (cr *categoryRepo) GetCategory(ctx context.Context, name string) (*biz.Cate
 		return nil, err
 	}
 	return &biz.Category{
-		CategoryId: c.Id,
-		Name:       c.Name,
-		Code:       c.Code,
-		UpdateTime: timestamppb.New(c.UpdateTime),
+		CategoryId:   c.Id,
+		CategoryName: c.Name,
+		CategoryCode: c.Code,
+		UpdateTime:   timestamppb.New(c.UpdateTime),
 	}, nil
 }
 
@@ -77,8 +77,8 @@ func (cr *categoryRepo) CreateCategory(ctx context.Context, category *biz.Catego
 	defer cancel()
 	if err := cr.data.DBClient.DatabaseClient.
 		InsertCategory(ctx, &mariadb.Category{
-			Name: category.Name,
-			Code: category.Code,
+			Name: category.CategoryName,
+			Code: category.CategoryCode,
 		}); err != nil {
 		return nil, err
 	}
@@ -91,8 +91,8 @@ func (cr *categoryRepo) UpdateCategory(ctx context.Context, category *biz.Catego
 	if err := cr.data.DBClient.DatabaseClient.
 		UpdateCategory(ctx, &mariadb.Category{
 			Id:   category.CategoryId,
-			Name: category.Name,
-			Code: category.Code,
+			Name: category.CategoryName,
+			Code: category.CategoryCode,
 		}); err != nil {
 		return nil, err
 	}

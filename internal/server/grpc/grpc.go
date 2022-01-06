@@ -27,8 +27,13 @@ func Run(ctx context.Context, network, address string) error {
 	if err != nil {
 		return err
 	}
+	cs, err := service.NewCategoryService()
+	if err != nil {
+		return err
+	}
 
 	pb.RegisterArticlesAPIServer(s, as)
+	pb.RegisterCategoriesAPIServer(s, cs)
 	go func() {
 		defer s.GracefulStop()
 		<-ctx.Done()
