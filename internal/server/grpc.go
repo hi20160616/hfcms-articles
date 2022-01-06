@@ -5,7 +5,6 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"time"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	pb "github.com/hi20160616/hfcms-articles/api/articles/v1"
@@ -13,7 +12,6 @@ import (
 	myerr "github.com/hi20160616/hfcms-articles/errors"
 	"github.com/hi20160616/hfcms-articles/internal/service"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/keepalive"
 )
 
 type GRPC struct {
@@ -23,11 +21,12 @@ type GRPC struct {
 }
 
 func NewGRPCServer(cfg *configs.Config) (*GRPC, error) {
-	s := grpc.NewServer(
-		grpc.KeepaliveParams(keepalive.ServerParameters{
-			MaxConnectionIdle: 5 * time.Minute,
-		}),
-	)
+	// s := grpc.NewServer(
+	//         grpc.KeepaliveParams(keepalive.ServerParameters{
+	//                 MaxConnectionIdle: 5 * time.Minute,
+	//         }),
+	// )
+	s := grpc.NewServer()
 	as, err := service.NewArticleService()
 	if err != nil {
 		return nil, err
@@ -69,7 +68,11 @@ func (g *GRPC) StartRESTFul(ctx context.Context) error {
 		}
 	}()
 
-	conn, err := grpc.Dial(g.cfg.API.HTTP.Addr, grpc.WithInsecure())
+	conn, err := grpc.DialContext(ctx,
+		g.cfg.API.GRPC.Addr,
+		grpc.WithBlock(),
+		grpc.WithInsecure(),
+	)
 	if err != nil {
 		return err
 	}
