@@ -3,12 +3,14 @@ package main
 import (
 	"context"
 	"errors"
+	"flag"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/golang/glog"
 	"github.com/hi20160616/hfcms-articles/configs"
 	theGateway "github.com/hi20160616/hfcms-articles/internal/server/gateway"
 	theGRPC "github.com/hi20160616/hfcms-articles/internal/server/grpc"
@@ -16,6 +18,9 @@ import (
 )
 
 func main() {
+	flag.Parse()
+	defer glog.Flush()
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	g, ctx := errgroup.WithContext(ctx)
