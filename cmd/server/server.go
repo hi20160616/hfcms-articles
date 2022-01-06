@@ -10,7 +10,8 @@ import (
 	"syscall"
 
 	"github.com/hi20160616/hfcms-articles/configs"
-	"github.com/hi20160616/hfcms-articles/internal/server"
+	theGateway "github.com/hi20160616/hfcms-articles/internal/server/gateway"
+	theGRPC "github.com/hi20160616/hfcms-articles/internal/server/grpc"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -19,24 +20,22 @@ func main() {
 	defer cancel()
 	g, ctx := errgroup.WithContext(ctx)
 	cfg := configs.NewConfig("hfcms-articles")
+
 	// gRPC
-	gs, err := server.NewGRPCServer(cfg)
-	if err != nil {
-		log.Printf("%v", err)
-	}
 	g.Go(func() error {
-		return gs.Start(ctx)
-	})
-	g.Go(func() error {
-		defer log.Println("gRPC Server stop done.")
-		<-ctx.Done()
-		log.Println("gRPC Server stop now...")
-		return gs.Stop(ctx)
+		return theGRPC.Run(ctx, "tcp", cfg.API.GRPC.Addr)
 	})
 
-	// RESTFul
+	// gRPC-gateway
+	opts := theGateway.Options{
+		Addr: cfg.API.HTTP.Addr,
+		GRPCServer: theGateway.Endpoint{
+			Network: cfg.API.GRPC.Network,
+			Addr:    cfg.API.GRPC.Addr,
+		},
+	}
 	g.Go(func() error {
-		return gs.StartRESTFul(ctx)
+		return theGateway.Run(ctx, opts)
 	})
 
 	// Graceful stop

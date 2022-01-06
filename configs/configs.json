@@ -4,6 +4,7 @@
   "LogName":"log.txt",
   "api": {
     "grpc": {
+      "Network": "tcp",
       "Addr": "0.0.0.0:8000",
       "Timeout": "1s"
     },

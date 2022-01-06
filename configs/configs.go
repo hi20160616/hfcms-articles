@@ -34,7 +34,7 @@ type Config struct {
 }
 
 type api struct {
-	Addr, Timeout string
+	Network, Addr, Timeout string
 }
 
 func NewConfig(projectName ProjectName) *Config {
