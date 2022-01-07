@@ -48,6 +48,9 @@ func Run(ctx context.Context, opts Options) error {
 	if err = pb.RegisterCategoriesAPIHandler(ctx, mux, conn); err != nil {
 		return err
 	}
+	if err = pb.RegisterAttributesAPIHandler(ctx, mux, conn); err != nil {
+		return err
+	}
 	gwServer := &http.Server{
 		Addr:    opts.Addr,
 		Handler: mux,

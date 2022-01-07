@@ -54,7 +54,7 @@ func (cs *CategoryService) ListCategories(ctx context.Context, in *pb.ListCatego
 func (cs *CategoryService) GetCategory(ctx context.Context, in *pb.GetCategoryRequest) (*pb.Category, error) {
 	defer func() {
 		if err := recover(); err != nil {
-			glog.Errorf("Recovered from GetCategory: \n%v\n", err)
+			glog.Errorf("Recovered from GetCategory: %s\n%v\n", in.GetName(), err)
 		}
 	}()
 	bizc, err := cs.cu.GetCategory(ctx, in.GetName())
@@ -72,7 +72,7 @@ func (cs *CategoryService) GetCategory(ctx context.Context, in *pb.GetCategoryRe
 func (cs *CategoryService) CreateCategory(ctx context.Context, in *pb.CreateCategoryRequest) (*pb.Category, error) {
 	defer func() {
 		if err := recover(); err != nil {
-			glog.Errorf("Recovered from CreateCategory: \n%v\n", err)
+			glog.Errorf("Recovered from CreateCategory: %s\n%v\n", in.GetName(), err)
 		}
 	}()
 	c, err := cs.cu.CreateCategory(ctx, &biz.Category{
@@ -116,7 +116,7 @@ func (cs *CategoryService) UpdateCategory(ctx context.Context, in *pb.UpdateCate
 func (cs *CategoryService) DeleteCategory(ctx context.Context, in *pb.DeleteCategoryRequest) (*emptypb.Empty, error) {
 	defer func() {
 		if err := recover(); err != nil {
-			glog.Errorf("Recovered from DeleteCategory: \n%v\n", err)
+			glog.Errorf("Recovered from DeleteCategory: %s\n%v\n", in.GetName(), err)
 		}
 	}()
 	return cs.cu.DeleteCategory(ctx, in.Name)

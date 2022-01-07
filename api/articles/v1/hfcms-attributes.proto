@@ -90,7 +90,7 @@ message Attribute{
   int32 attribute_id = 2;
   string path = 3;
   string description = 4;
-  string user_id = 5;
+  int32 user_id = 5;
   string article_id = 6;
   google.protobuf.Timestamp update_time = 7;
 }
