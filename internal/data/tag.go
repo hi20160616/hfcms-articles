@@ -40,7 +40,7 @@ func (tr *tagRepo) ListTags(ctx context.Context) (*biz.Tags, error) {
 	for _, tag := range ts.Collection {
 		bizas.Collection = append(bizas.Collection, &biz.Tag{
 			TagId:      tag.Id,
-			Name:       tag.Name,
+			TagName:    tag.Name,
 			UpdateTime: timestamppb.New(tag.UpdateTime),
 		})
 	}
@@ -65,7 +65,7 @@ func (tr *tagRepo) GetTag(ctx context.Context, name string) (*biz.Tag, error) {
 	}
 	return &biz.Tag{
 		TagId:      c.Id,
-		Name:       c.Name,
+		TagName:    c.Name,
 		UpdateTime: timestamppb.New(c.UpdateTime),
 	}, nil
 }
@@ -74,7 +74,7 @@ func (tr *tagRepo) CreateTag(ctx context.Context, tag *biz.Tag) (*biz.Tag, error
 	ctx, cancel := context.WithTimeout(ctx, 50*time.Second)
 	defer cancel()
 	if err := tr.data.DBClient.DatabaseClient.
-		InsertTag(ctx, &mariadb.Tag{Name: tag.Name}); err != nil {
+		InsertTag(ctx, &mariadb.Tag{Name: tag.TagName}); err != nil {
 		return nil, err
 	}
 	return tag, nil
@@ -86,7 +86,7 @@ func (tr *tagRepo) UpdateTag(ctx context.Context, tag *biz.Tag) (*biz.Tag, error
 	if err := tr.data.DBClient.DatabaseClient.
 		UpdateTag(ctx, &mariadb.Tag{
 			Id:   tag.TagId,
-			Name: tag.Name,
+			Name: tag.TagName,
 		}); err != nil {
 		return nil, err
 	}

@@ -46,19 +46,29 @@ func TestGRPCServer(t *testing.T) {
 	// fmt.Println(a)
 
 	// categories
-	c := pb.NewCategoriesAPIClient(conn)
-	cs, err := c.ListCategories(ctx, &pb.ListCategoriesRequest{})
-	if err != nil {
-		log.Fatal(err)
-	}
-	for _, c := range cs.Categories {
-		fmt.Printf("%-5d %-30s %-30s \n", c.CategoryId, c.CategoryName, c.CategoryCode)
-	}
+	// c := pb.NewCategoriesAPIClient(conn)
+	// cs, err := c.ListCategories(ctx, &pb.ListCategoriesRequest{})
+	// if err != nil {
+	//         log.Fatal(err)
+	// }
+	// for _, c := range cs.Categories {
+	//         fmt.Printf("%-5d %-30s %-30s \n", c.CategoryId, c.CategoryName, c.CategoryCode)
+	// }
+	//
+	// id := "3"
+	// cc, err := c.GetCategory(ctx, &pb.GetCategoryRequest{Name: "categories/" + id})
+	// if err != nil {
+	//         log.Fatal(err)
+	// }
+	// fmt.Println(cc)
 
-	id := "3"
-	cc, err := c.GetCategory(ctx, &pb.GetCategoryRequest{Name: "categories/" + id})
+	// tags
+	tc := pb.NewTagsAPIClient(conn)
+	ts, err := tc.ListTags(ctx, &pb.ListTagsRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(cc)
+	for _, tag := range ts.Tags {
+		fmt.Printf("%-5d %-30s %-30s \n", tag.TagId, tag.TagName, tag.UpdateTime)
+	}
 }

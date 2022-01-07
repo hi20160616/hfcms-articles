@@ -22,9 +22,9 @@ var tr = func() biz.TagRepo {
 
 func TestCreateTag(t *testing.T) {
 	cs := []*biz.Tag{
-		{Name: "Tag1"},
-		{Name: "Tag2"},
-		{Name: "Tag3"},
+		{TagName: "Tag1"},
+		{TagName: "Tag2"},
+		{TagName: "Tag3"},
 	}
 	create := func(c *biz.Tag) {
 		a, err := tr.CreateTag(context.Background(), c)
@@ -50,8 +50,8 @@ func TestGetTag(t *testing.T) {
 
 func TestUpdateTag(t *testing.T) {
 	a, err := tr.UpdateTag(context.Background(), &biz.Tag{
-		TagId: 3,
-		Name:  "Tag3+",
+		TagId:   3,
+		TagName: "Tag3+",
 	})
 	if err != nil {
 		t.Error(err)
