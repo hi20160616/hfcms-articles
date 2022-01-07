@@ -22,7 +22,7 @@ func Run(ctx context.Context, network, address string) error {
 			glog.Errorf("Failed to close %s %s: %v", network, address, err)
 		}
 	}()
-	s := grpc.NewServer()
+
 	as, err := service.NewArticleService()
 	if err != nil {
 		return err
@@ -40,6 +40,7 @@ func Run(ctx context.Context, network, address string) error {
 		return err
 	}
 
+	s := grpc.NewServer()
 	pb.RegisterArticlesAPIServer(s, as)
 	pb.RegisterAttributesAPIServer(s, atts)
 	pb.RegisterCategoriesAPIServer(s, cs)

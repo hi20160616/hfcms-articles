@@ -29,35 +29,24 @@ func Run(ctx context.Context, opts Options) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
+	// Conn
 	conn, err := dial(ctx, opts.GRPCServer.Network, opts.GRPCServer.Addr)
 	if err != nil {
 		return err
 	}
-
+	// Conn Close
 	go func() {
 		<-ctx.Done()
 		if err := conn.Close(); err != nil {
 			glog.Errorf("Failed to close a client connection to the gRPC server: %v", err)
 		}
 	}()
-
-	mux := gwruntime.NewServeMux()
-	if err = pb.RegisterArticlesAPIHandler(ctx, mux, conn); err != nil {
+	// New Gateway mux
+	gwServer, err := NewGatewayServer(ctx, conn, opts)
+	if err != nil {
 		return err
 	}
-	if err = pb.RegisterAttributesAPIHandler(ctx, mux, conn); err != nil {
-		return err
-	}
-	if err = pb.RegisterCategoriesAPIHandler(ctx, mux, conn); err != nil {
-		return err
-	}
-	if err = pb.RegisterTagsAPIHandler(ctx, mux, conn); err != nil {
-		return err
-	}
-	gwServer := &http.Server{
-		Addr:    opts.Addr,
-		Handler: mux,
-	}
+	// Gateway Graceful Stop
 	go func() {
 		<-ctx.Done()
 		glog.Infof("Shutting down the grpc-gateway http server")
@@ -65,12 +54,32 @@ func Run(ctx context.Context, opts Options) error {
 			glog.Errorf("Failed to shutdown grpc-gateway http server: %v", err)
 		}
 	}()
+	// Gateway Start
 	glog.Infof("gRPC gateway starting listening at %s", opts.Addr)
 	if err := gwServer.ListenAndServe(); err != http.ErrServerClosed {
 		glog.Errorf("Failed to listen and serve: %v", err)
 		return err
 	}
 	return nil
+}
+
+func NewGatewayServer(ctx context.Context, conn *grpc.ClientConn, opts Options) (*http.Server, error) {
+	mux := gwruntime.NewServeMux()
+	for _, f := range []func(context.Context, *gwruntime.ServeMux, *grpc.ClientConn) error{
+		pb.RegisterArticlesAPIHandler,
+		pb.RegisterAttributesAPIHandler,
+		pb.RegisterCategoriesAPIHandler,
+		pb.RegisterTagsAPIHandler,
+	} {
+		if err := f(ctx, mux, conn); err != nil {
+			return nil, err
+		}
+
+	}
+	return &http.Server{
+		Addr:    opts.Addr,
+		Handler: mux,
+	}, nil
 }
 
 func dial(ctx context.Context, network, addr string) (*grpc.ClientConn, error) {
