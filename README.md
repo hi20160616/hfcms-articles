@@ -1,5 +1,5 @@
-# hfcms-api
-The api for hfcms web crawler
+# hfcms-articles
+This is article related miscroservice
 
 # 1. gRPC
 Look forward to ./api/README.md
