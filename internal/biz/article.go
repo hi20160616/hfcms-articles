@@ -12,7 +12,8 @@ type Article struct {
 	CategoryId, UserId        int
 	ArticleId, Title, Content string
 	UpdateTime                *timestamppb.Timestamp
-	TagIds, AttributeIds      []string
+	Tags                      *Tags
+	Attributes                *Attributes
 }
 
 type Articles struct {

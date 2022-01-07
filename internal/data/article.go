@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -82,9 +83,17 @@ func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Articl
 		return nil, errors.New("name cannot match regex express")
 	}
 	id := x[1]
-	ps := [][4]string{{"id", "=", id}}
+	clause := [4]string{"id", "=", id}
 	a, err := ar.data.DBClient.DatabaseClient.QueryArticle().
-		Where(ps...).First(ctx)
+		Where(clause).First(ctx)
+	if err != nil {
+		return nil, err
+	}
+	attrs, err := ar.getAttrs(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	tags, err := ar.getTags(ctx, id)
 	if err != nil {
 		return nil, err
 	}
@@ -94,8 +103,75 @@ func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Articl
 		Content:    a.Content,
 		CategoryId: a.CategoryId,
 		UserId:     a.UserId,
+		Attributes: attrs,
+		Tags:       tags,
 		UpdateTime: timestamppb.New(a.UpdateTime),
 	}, nil
+}
+
+func (ar *articleRepo) getAttrs(ctx context.Context, articleId string) (*biz.Attributes, error) {
+	clause := [4]string{"article_id", "=", articleId}
+	attrs, err := ar.data.DBClient.DatabaseClient.
+		QueryArticleAttribute().Where(clause).All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	attrIds := []int{}
+	for _, attr := range attrs.Collection {
+		attrIds = append(attrIds, attr.AttributeId)
+	}
+	clauses := [][4]string{}
+	for _, aid := range attrIds {
+		clauses = append(clauses,
+			[4]string{"id", "=", strconv.Itoa(aid), "or"})
+	}
+	dataAttrs, err := ar.data.DBClient.DatabaseClient.QueryAttribute().Where(clauses...).All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	bizAttrs := &biz.Attributes{}
+	for _, a := range dataAttrs.Collection {
+		bizAttrs.Collection = append(bizAttrs.Collection, &biz.Attribute{
+			Id:          a.Id,
+			Path:        a.Path,
+			Description: a.Description,
+			UserId:      a.UserId,
+			ArticleId:   a.ArticleId,
+			UpdateTime:  timestamppb.New(a.UpdateTime),
+		})
+	}
+	return bizAttrs, nil
+}
+
+func (ar *articleRepo) getTags(ctx context.Context, articleId string) (*biz.Tags, error) {
+	clause := [4]string{"article_id", "=", articleId}
+	tags, err := ar.data.DBClient.DatabaseClient.
+		QueryArticleTag().Where(clause).All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	tids := []int{}
+	for _, tag := range tags.Collection {
+		tids = append(tids, tag.TagId)
+	}
+	clauses := [][4]string{}
+	for _, tid := range tids {
+		clauses = append(clauses,
+			[4]string{"id", "=", strconv.Itoa(tid), "or"})
+	}
+	dataTags, err := ar.data.DBClient.DatabaseClient.QueryTag().Where(clauses...).All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	bizTags := &biz.Tags{}
+	for _, tag := range dataTags.Collection {
+		bizTags.Collection = append(bizTags.Collection, &biz.Tag{
+			TagId:      tag.Id,
+			TagName:    tag.Name,
+			UpdateTime: timestamppb.New(tag.UpdateTime),
+		})
+	}
+	return bizTags, nil
 }
 
 func (ar *articleRepo) SearchArticles(ctx context.Context, name string) (*biz.Articles, error) {
