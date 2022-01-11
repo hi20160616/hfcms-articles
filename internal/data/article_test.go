@@ -19,7 +19,7 @@ var ar = func() biz.ArticleRepo {
 	return NewArticleRepo(&Data{DBClient: dc}, log.Default())
 }()
 
-var id = "211229114147.23586100001"
+var id = "211229113754.21503400003"
 
 func TestCreateArticle(t *testing.T) {
 	a, err := ar.CreateArticle(context.Background(), &biz.Article{
@@ -54,7 +54,9 @@ func TestGetArticle(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	fmt.Println(a)
+	fmt.Println(a.Category)
+	fmt.Println(a.Tags)
+	fmt.Println(a.Attributes)
 }
 
 func TestSearchArticles(t *testing.T) {
@@ -88,7 +90,7 @@ func TestListArticles(t *testing.T) {
 	for _, a := range as.Collection {
 		fmt.Println(a)
 	}
-	as, err = ar.ListArticles(context.Background(), "categories/3/articles")
+	as, err = ar.ListArticles(context.Background(), "articles/")
 	if err != nil {
 		t.Error(err)
 		return

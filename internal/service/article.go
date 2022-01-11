@@ -47,6 +47,7 @@ func (as *ArticleService) ListArticles(ctx context.Context, in *pb.ListArticlesR
 			Content:    a.Content,
 			CategoryId: int32(a.CategoryId),
 			UserId:     int32(a.UserId),
+			Category:   getCate(a),
 			UpdateTime: a.UpdateTime,
 		})
 	}
@@ -69,8 +70,46 @@ func (as *ArticleService) GetArticle(ctx context.Context, in *pb.GetArticleReque
 		Content:    biza.Content,
 		CategoryId: int32(biza.CategoryId),
 		UserId:     int32(biza.UserId),
+		Category:   getCate(biza),
+		Tags:       getTags(biza),
+		Attributes: getAttrs(biza),
 		UpdateTime: biza.UpdateTime,
 	}, nil
+}
+
+func getCate(biza *biz.Article) *pb.Category {
+	return &pb.Category{
+		CategoryId:   int32(biza.CategoryId),
+		CategoryName: biza.Category.CategoryName,
+		CategoryCode: biza.Category.CategoryCode,
+	}
+}
+
+func getAttrs(biza *biz.Article) []*pb.Attribute {
+	attrs := []*pb.Attribute{}
+	for _, attr := range biza.Attributes.Collection {
+		attrs = append(attrs, &pb.Attribute{
+			AttributeId: int32(attr.Id),
+			Path:        attr.Path,
+			Description: attr.Description,
+			UserId:      int32(attr.UserId),
+			ArticleId:   attr.ArticleId,
+			UpdateTime:  attr.UpdateTime,
+		})
+	}
+	return attrs
+}
+
+func getTags(biza *biz.Article) []*pb.Tag {
+	ts := []*pb.Tag{}
+	for _, tag := range biza.Tags.Collection {
+		ts = append(ts, &pb.Tag{
+			TagId:      int32(tag.TagId),
+			Name:       tag.TagName,
+			UpdateTime: tag.UpdateTime,
+		})
+	}
+	return ts
 }
 
 func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArticlesRequest) (*pb.SearchArticlesResponse, error) {
@@ -91,6 +130,7 @@ func (as *ArticleService) SearchArticles(ctx context.Context, in *pb.SearchArtic
 			Content:    a.Content,
 			CategoryId: int32(a.CategoryId),
 			UserId:     int32(a.UserId),
+			Category:   getCate(a),
 			UpdateTime: a.UpdateTime})
 	}
 	return respAs, nil

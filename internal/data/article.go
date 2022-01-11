@@ -48,10 +48,10 @@ func (ar *articleRepo) ListArticles(ctx context.Context, parent string) (*biz.Ar
 	} else {
 		clause := [4]string{}
 		if x[1] == "categories" {
-			clause = [4]string{"category_id", "=", x[2]}
+			clause = [4]string{"category_id", "=", x[2], "and"}
 		}
 		if x[1] == "users" {
-			clause = [4]string{"users_id", "=", x[2]}
+			clause = [4]string{"users_id", "=", x[2], "and"}
 		}
 		as, err = ar.data.DBClient.DatabaseClient.QueryArticle().
 			Where(clause).All(ctx)

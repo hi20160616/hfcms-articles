@@ -46,12 +46,14 @@ func TestListArticles(t *testing.T) {
 }
 
 func TestGetArticle(t *testing.T) {
-	id := "211229113754.21503300002"
+	id := "211229113754.21503400003"
 	a, err := as.GetArticle(context.Background(), &v1.GetArticleRequest{Name: "articles/" + id})
 	if err != nil {
 		t.Fatal(err)
 	}
-	fmt.Println(a)
+	fmt.Println(a.Category)
+	fmt.Println(a.Tags)
+	fmt.Println(a.Attributes)
 }
 
 func TestSearchArticles(t *testing.T) {

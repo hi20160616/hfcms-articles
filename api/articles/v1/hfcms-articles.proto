@@ -107,7 +107,7 @@ message Article{
   google.protobuf.Timestamp update_time = 5;
   int32 category_id = 6;
   int32 user_id = 7;
-  repeated Category categories = 8;
+  Category category = 8;
   repeated Tag tags = 9;
   repeated Attribute attributes = 10;
 }
