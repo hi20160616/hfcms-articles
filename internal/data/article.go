@@ -60,11 +60,13 @@ func (ar *articleRepo) ListArticles(ctx context.Context, parent string) (*biz.Ar
 		return nil, err
 	}
 	for _, a := range as.Collection {
+		c := ar.getCate(ctx, a.CategoryId)
 		bizas.Collection = append(bizas.Collection, &biz.Article{
 			ArticleId:  a.Id,
 			Title:      a.Title,
 			Content:    a.Content,
 			CategoryId: a.CategoryId,
+			Category:   c,
 			UserId:     a.UserId,
 			UpdateTime: timestamppb.New(a.UpdateTime),
 		})
@@ -89,6 +91,7 @@ func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Articl
 	if err != nil {
 		return nil, err
 	}
+	c := ar.getCate(ctx, a.CategoryId)
 	attrs, err := ar.getAttrs(ctx, id)
 	if err != nil {
 		return nil, err
@@ -103,10 +106,28 @@ func (ar *articleRepo) GetArticle(ctx context.Context, name string) (*biz.Articl
 		Content:    a.Content,
 		CategoryId: a.CategoryId,
 		UserId:     a.UserId,
+		Category:   c,
 		Attributes: attrs,
 		Tags:       tags,
 		UpdateTime: timestamppb.New(a.UpdateTime),
 	}, nil
+}
+
+// getCate, err not treat as return,
+// because just a category err should not break the article list.
+// there just mark it as categoryId
+func (ar *articleRepo) getCate(ctx context.Context, categoryId int) *biz.Category {
+	c, err := ar.data.DBClient.DatabaseClient.QueryCategory().Where(
+		[4]string{"id", "=", strconv.Itoa(categoryId)}).First(ctx)
+	if err != nil {
+		c.Code = strconv.Itoa(c.Id)
+		c.Name = strconv.Itoa(c.Id)
+	}
+	return &biz.Category{
+		CategoryId:   categoryId,
+		CategoryCode: c.Code,
+		CategoryName: c.Name,
+	}
 }
 
 func (ar *articleRepo) getAttrs(ctx context.Context, articleId string) (*biz.Attributes, error) {
@@ -201,11 +222,13 @@ func (ar *articleRepo) SearchArticles(ctx context.Context, name string) (*biz.Ar
 	}
 	bizas := &biz.Articles{Collection: []*biz.Article{}}
 	for _, a := range as.Collection {
+		c := ar.getCate(ctx, a.CategoryId)
 		bizas.Collection = append(bizas.Collection, &biz.Article{
 			ArticleId:  a.Id,
 			Title:      a.Title,
 			Content:    a.Content,
 			CategoryId: a.CategoryId,
+			Category:   c,
 			UserId:     a.UserId,
 			UpdateTime: timestamppb.New(a.UpdateTime),
 		})

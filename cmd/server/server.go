@@ -50,7 +50,7 @@ func main() {
 		select {
 		case sig := <-sigs:
 			fmt.Println()
-			log.Printf("signal caught: %s, ready to quit...", sig.String())
+			glog.Infof("signal caught: %s, ready to quit...", sig.String())
 			cancel()
 		case <-ctx.Done():
 			return ctx.Err()

@@ -6,6 +6,9 @@ import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
+import "api/articles/v1/hfcms-categories.proto";
+import "api/articles/v1/hfcms-tags.proto";
+import "api/articles/v1/hfcms-attributes.proto";
 
 option go_package = "github.com/hi20160616/hfcms-articles/api/articles/v1;v1";
 
@@ -104,5 +107,7 @@ message Article{
   google.protobuf.Timestamp update_time = 5;
   int32 category_id = 6;
   int32 user_id = 7;
-  repeated string tag_ids = 8;
+  repeated Category categories = 8;
+  repeated Tag tags = 9;
+  repeated Attribute attributes = 10;
 }

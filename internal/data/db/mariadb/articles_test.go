@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-var id = "211229113754.21500200001"
+var id = "220104181701.65442600123"
 
 func TestPrepareQuery(t *testing.T) {
 	qc := &ArticleQuery{query: "SELECT * FROM articles"}
@@ -137,9 +137,11 @@ func TestUpdateArticle(t *testing.T) {
 		t.Fatal(err)
 	}
 	article := &Article{
-		Id:      id,
-		Title:   "Test title update",
-		Content: "Test content update",
+		Id:         id,
+		Title:      "Test title update",
+		Content:    "Test content update",
+		CategoryId: 5,
+		UserId:     2,
 	}
 	if err := c.DatabaseClient.UpdateArticle(context.Background(), article); err != nil {
 		t.Error(err)

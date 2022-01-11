@@ -11,6 +11,7 @@ import (
 type Article struct {
 	CategoryId, UserId        int
 	ArticleId, Title, Content string
+	Category                  *Category
 	UpdateTime                *timestamppb.Timestamp
 	Tags                      *Tags
 	Attributes                *Attributes
