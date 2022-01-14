@@ -18,11 +18,19 @@ MARIADB\_ROOT\_PASSWORD=`my-secret-pw`
 
 ## 1.2 mariadb
 
-1.Change root password:
+1. Change root password:
 ```
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '[newpassword]';
 ```
-2.Create tables:
+2. Creating database dumps
+```
+$ docker exec hfcms-mariadb sh -c 'exec mysqldump -uroot -p"$MARIADB_ROOT_PASSWORD" hfcms_articles' > ./hfcms_articles.sql
+```
+3. Restoring data from dump files
+```
+$ docker exec -i hfcms-mariadb sh -c 'exec mysql -uroot -p"$MARIADB_ROOT_PASSWORD" hfcms_articles' < ./hfcms_articles.sql
+```
+4. Create tables:  
 Database
 ```
 CREATE database hfcms_articles;
